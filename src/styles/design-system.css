@@ -1,0 +1,89 @@
+/* COLOR */
+
+:root {
+  /* Gray Scale */
+  --gray-60: #000000;
+  --gray-50: #515151;
+  --gray-40: #818181;
+  --gray-30: #CFCFCF;
+  --gray-20: #F9F9F9;
+  --gray-10: #FFFFFF;
+
+  /* Brown */
+  --brown-50: #341909;
+  --brown-40: #542F1A;
+  --brown-30: #C7BBB5;
+  --brown-20: #E4D5C9;
+  --brown-10: #F5F1EE;
+
+  /* Blue */
+  --blue: #1877F2;
+
+  /* Yellow */
+  --yellow: #FEE500;
+
+  /* Red */
+  --red: #B93333;
+
+  /* Shadow */
+  --shadow-1: 0 4px 4px #8C8C8C40;
+  --shadow-2: 0 4px 4px #00000040;
+  --shadow-3: 0 4px 4px #3030309E;
+}
+
+/* FONT BASE                     */
+body {
+  font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui,
+    Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR",
+    "Malgun Gothic", sans-serif;
+  color: var(--gray-60);
+}
+
+/* TYPOGRAPHY STYLES             */
+  .h1 {
+  font-size: 40px;
+  line-height: 1;
+}
+
+.h2 {
+  font-size: 32px;
+  line-height: 1;
+}
+
+.h3 {
+  font-size: 24px;
+  line-height: 1;
+}
+
+.body1 {
+  font-size: 20px;
+  line-height: 25px;
+}
+
+.body2 {
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.body3 {
+  font-size: 16px;
+  line-height: 22px;
+}
+
+.caption1 {
+  font-size: 14px;
+  line-height: 18px;
+}
+
+/* Font Weight */
+.regular {
+  font-weight: 400;
+}
+
+.medium {
+  font-weight: 500;
+}
+
+.bold {
+  font-weight: 600;
+}
