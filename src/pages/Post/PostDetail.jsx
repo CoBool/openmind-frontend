@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { useParams } from 'react-router';
+=======
+import { useCallback, useState, useEffect } from 'react'
+>>>>>>> a2c1f6f (feat: API 레이어 설계)
 
 import { useSubject } from './hooks/useSubject';
 import { useQuestionList } from './hooks/useQuestionList';
@@ -14,14 +18,30 @@ import {
 
 import shared from './Post.shared.module.css';
 
+import { getSubjects } from '@/services/subjects_api'
+
 export default function PostDetail() {
   const { subjectId } = useParams();
 
+<<<<<<< HEAD
   const {
     subject,
     loading: subjectLoading,
     error: subjectError,
   } = useSubject(subjectId);
+=======
+  useEffect(() => {
+    const fetchSubjects = async () => {
+      const data = await getSubjects()
+      console.log(data)
+    }
+    fetchSubjects()
+  }, [])
+
+  const { ref, isFetching } = useInfiniteScroll(
+    useCallback(async () => {
+      await new Promise(resolve => setTimeout(resolve, 5000))
+>>>>>>> a2c1f6f (feat: API 레이어 설계)
 
   const isQuestionListEnabled = !subjectLoading && !subjectError;
 
