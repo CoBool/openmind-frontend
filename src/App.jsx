@@ -1,17 +1,14 @@
-import Dropdown from "./common/Dropdown/Dropdown"
-import MoreMenu from "./common/Editmenu/Moremenu"
-import Reaction from "./common/Reaction/Reaction"
-import Toast from "./common/Toast/Toast"
-
+import List from './pages/List/ListPage'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 function App() {
   return (
-    <>
-      <Dropdown />
-      <MoreMenu />
-      <Reaction />
-      <Toast />
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<List />} />
+        <Route path="/post/:id/answer" element={<>Answer Page</>} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 
