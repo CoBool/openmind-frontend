@@ -2,7 +2,7 @@ import { useCallback, useState, useEffect } from 'react'
 
 import { useInfiniteScroll } from '@/hooks/useInfiniteScroll'
 
-import { getSubjects } from '@/services/subjects_api'
+import { getSubjects } from '@/services/subjectsApi'
 
 export default function PostDetail() {
   const [posts, setPosts] = useState(
