@@ -1,16 +1,11 @@
-import styles from './Badges.module.css';
+import styles from './Badges.module.css'
 
-function Badges({ isAnswered}) {
+function Badges({ children, className = '', ...props }) {
   return (
-    <>
-      <div
-      className={`${styles.badgeBase}
-      ${isAnswered ? styles.badgeComplete : styles.badgePending}
-      caption1 medium`}>
-        {isAnswered ? '답변 완료' : '미답변'}
-      </div>
-    </>
-  );
+    <span className={`${styles.badgeBase} ${className}`} {...props}>
+      {children}
+    </span>
+  )
 }
 
-export default Badges;
+export default Badges
