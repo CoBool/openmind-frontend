@@ -1,0 +1,57 @@
+/* 버튼 공통 스타일 */
+.button {
+  background-color: #542f1a;
+  color: #ffffff;
+  border-radius: 200px;
+  border: none;
+  font-weight: 400px;
+  line-height: 25px;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25); /* X, Y, Bulr, Spread ,( Color + 투명도) */
+  /* 위치 고정 */
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+}
+/* 질문 작성하기 버튼 전용 */
+.write {
+  /* PC , 태블릿 동일 */
+  padding: 14.5px 49.5px;
+  font-size: 20px;
+}
+
+/* write 버튼에 마우스 올렸을 때 (disabled 아닐 때만)*/
+.write:hover:not(:disabled) {
+  border: 2px solid #341909;
+}
+/* write 버튼에 마우스 클릭 했을 때(disabled 아닐 때만)*/
+.write:active:not(:disabled) {
+  background-color: #341909;
+}
+/* 삭제하기 버튼 전용 */
+.delete {
+  padding: 5px 24px;
+  font-size: 15px;
+}
+/* delete 버튼에 마우스 올렸을 때 (disabled 아닐 때만)*/
+.delete:hover:not(:disabled) {
+  border: 2px solid #341909;
+}
+/* delete 버튼에 마우스 클릭 했을 때(disabled 아닐 때만)*/
+.delete:active:not(:disabled) {
+  background-color: #341909;
+}
+
+/* === 모바일 === */
+@media (max-width: 767px) {
+  .write {
+    padding: 14.5px 24px;
+  }
+  /* 질문 작성 '하기' 텍스트 없애기 */
+  .extraText {
+    display: none;
+  }
+  .delete {
+    padding: 0 17.5px 0 17.5px;
+    font-size: 10px;
+  }
+}
