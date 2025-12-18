@@ -18,7 +18,7 @@ import {
 
 import shared from './Post.shared.module.css';
 
-import { getSubjects } from '@/services/subjects_api'
+import { getSubjects } from '@/services/subjectsApi'
 
 export default function PostDetail() {
   const { subjectId } = useParams();
