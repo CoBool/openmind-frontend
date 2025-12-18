@@ -6,7 +6,7 @@ function FloatingButton({ onClick, children, type = 'write' }) {
   return (
     <button className={`${styles.button} ${typeClass}`} onClick={onClick}>
       {children}
-      {type == 'write' && <span className={`${styles.extraText}`}>하기</span>}
+      {type === 'write' && <span className={`${styles.extraText}`}>하기</span>}
     </button>
   )
 }
