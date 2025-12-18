@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -80,19 +78,6 @@ function Home() {
       </div>
     </Container>
   );
-=======
-import BoxButton from '../../components/Button/BoxButton'
-import FloatingButton from '../../components/Button/FloatingButton'
-
-=======
->>>>>>> 454b220 (fix: 미디어 쿼리 (모바일,태플릿) 수정(375px,768px) 및 테스트 코드 정리)
-export default function Home() {
-  return (
-    <div>
-      <h1>home</h1>
-    </div>
-  )
->>>>>>> f0d7b2e (feat: 공통 버튼 컴포넌트 추가)
 }
 
 export default Home;
