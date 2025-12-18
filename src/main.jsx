@@ -37,6 +37,5 @@ createRoot(document.getElementById('root')).render(
       <RouterProvider router={router} />
       <Toaster />
     </AuthProvider>
-    <RouterProvider router={router} />
   </StrictMode>
 );
