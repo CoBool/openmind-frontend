@@ -1,6 +1,8 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useState, useEffect } from 'react'
 
 import { useInfiniteScroll } from '@/hooks/useInfiniteScroll'
+
+import { getSubjects } from '@/services/subjects_api'
 
 export default function PostDetail() {
   const [posts, setPosts] = useState(
@@ -10,6 +12,14 @@ export default function PostDetail() {
       content: `Content of post ${index}`,
     }))
   )
+
+  useEffect(() => {
+    const fetchSubjects = async () => {
+      const data = await getSubjects()
+      console.log(data)
+    }
+    fetchSubjects()
+  }, [])
 
   const { ref, isFetching } = useInfiniteScroll(
     useCallback(async () => {
