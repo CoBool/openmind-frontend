@@ -11,6 +11,12 @@ export function useInfiniteScroll(callback) {
   const [isFetching, setIsFetching] = useState(false)
   const ref = useRef(null)
 
+  /**
+   * 관찰자 핸들러
+   *
+   * @param {IntersectionObserverEntry[]} entries - 관찰자 핸들러
+   * @returns {void}
+   */
   const handleObserver = useCallback(
     async entries => {
       const target = entries[0]
@@ -34,7 +40,7 @@ export function useInfiniteScroll(callback) {
     if (!ref.current) return
 
     const observer = new IntersectionObserver(handleObserver, {
-      threshold: 0.8,
+      threshold: 1,
     })
 
     observer.observe(ref.current)
