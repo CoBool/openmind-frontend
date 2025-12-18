@@ -3,11 +3,6 @@
 /*  기본 브라우저 스타일 초기화  */
 /* ---------------------------- */
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
 
 html,
 body {
@@ -42,17 +37,6 @@ canvas,
 svg {
   display: block;
   max-width: 100%;
-}
-
-button,
-input,
-textarea,
-select {
-  font: inherit;
-  background: none;
-  border: none;
-  outline: none;
-  color: inherit;
 }
 
 button {
