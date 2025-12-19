@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import Logo from '../../assets/images/logo.png';
 import Dropdown from '../../components/Dropdown/Dropdown';
 import Pagination from './Pagination';
@@ -9,19 +8,6 @@ import ListItem from './ListItems';
 import { useSubjects } from './hooks/subjectApi';
 import Button from '../../components/Button/Button';
 import arrowImg from '../../assets/Icon/arrowRightBrown.svg';
-=======
-import Logo from '../../assets/images/logo.png'
-import Dropdown from '../../components/dropdown/Dropdown'
-import Pagination from './pagination'
-import styles from './ListPage.module.css'
-import { useNavigate } from 'react-router-dom'
-import BoxButton from '../../components/Button/BoxButton'
-import { useEffect, useMemo, useState } from 'react'
-import { instance } from '../../services/instance'
-import ListItem from './ListItems'
-
-const LIMIT = 8
->>>>>>> 183cee8 (질문페이지)
 
 function List() {
   const navigate = useNavigate();
@@ -133,7 +119,6 @@ function List() {
           onClick={() => navigate('/')}
         />
         <div className={styles.listButton}>
-<<<<<<< HEAD
           <Button onClick={goToAnswer} className={styles.AnsBtn}>
             <span>답변하러 가기</span>
             <img
@@ -165,26 +150,6 @@ function List() {
         setPage={setPage}
         limit={limit}
       />
-=======
-          <BoxButton color="beige" size="sizeMain" isArrow>
-            답변하러 가기
-          </BoxButton>
-        </div>
-      </header>
-      <h1 className={styles.listTitle}>누구에게 질문할까요?</h1>
-      <Dropdown
-        value={sortType}
-        onChange={value => {
-          setSortType(value)
-          setPage(1)
-        }}
-      />
-      <div className={styles.listContainer}>
-        {visibleList.map(item => (
-          <ListItem key={item.id} item={item} />
-        ))}
-      </div>
->>>>>>> 183cee8 (질문페이지)
     </div>
   );
 }
