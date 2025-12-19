@@ -92,14 +92,14 @@
 }
 
 /* === 반응형: 태블릿 === */
-@media (max-width: 1199px) {
+@media (max-width: 768px) {
   .sizeWide {
     padding: 12px 244px;
   }
 }
 
 /* === 반응형: 모바일 구간 === */
-@media (max-width: 767px) {
+@media (max-width: 375px) {
   .sizeMain {
     padding: 8px 12px; /* 베이지 버튼 모바일 */
     gap: 4px;

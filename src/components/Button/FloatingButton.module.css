@@ -42,7 +42,7 @@
 }
 
 /* === 모바일 === */
-@media (max-width: 767px) {
+@media (max-width: 375px) {
   .write {
     padding: 14.5px 24px;
   }
