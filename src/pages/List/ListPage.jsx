@@ -20,7 +20,7 @@ function List() {
   useEffect(() => {
     const fetchAllItems = async () => {
       try {
-        const response = await instance(`subjects/?limit=1000`, {
+        const response = await instance(`subjects/?limit=100`, {
           method: 'GET',
         })
 
@@ -74,6 +74,7 @@ function List() {
           <ListItem key={item.id} item={item} />
         ))}
       </div>
+      <Pagination totalCount={list.length} page={page} setPage={setPage} />
     </div>
   )
 }

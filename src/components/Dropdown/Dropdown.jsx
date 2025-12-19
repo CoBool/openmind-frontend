@@ -56,9 +56,9 @@ function Dropdown({ value, onChange, disabled = false }) {
         <ul className={styles.dropdownMenu}>
           {options.map(option => (
             <li
-              key={option.value} // ✅ 핵심
+              key={option.value}
               onClick={() => {
-                onChange(option.value) // 부모로 전달
+                onChange(option.value)
                 setOpen(false)
               }}
             >

@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Actor&display=swap');
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16.5px;
+  margin: 20px 0;
+  font-family: 'Actor', sans-serif;
+  margin-top: 46px;
+}
+
+.pageButton,
+.pageButtonLeft,
+.pageButtonRight {
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #818181;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Actor', sans-serif;
+  line-height: 1;
+  font-weight: 400;
+}
+
+.active {
+  color: #541f1a;
+  font-weight: 400;
+}
+
+.pageButtonLeft,
+.pageButtonRight {
+  padding: 0;
+  background: none;
+  border: none;
+  color: #818181;
+}
