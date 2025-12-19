@@ -83,7 +83,7 @@ function List() {
   useEffect(() => {
     const fetchAllItems = async () => {
       try {
-        const response = await instance(`subjects/?limit=1000`, {
+        const response = await instance(`subjects/?limit=100`, {
           method: 'GET',
         })
 
@@ -144,12 +144,16 @@ function List() {
           <ListItem key={item.id} item={item} className={styles.card} />
         ))}
       </div>
+<<<<<<< HEAD
       <Pagination
         totalCount={totalCount}
         page={page}
         setPage={setPage}
         limit={limit}
       />
+=======
+      <Pagination totalCount={list.length} page={page} setPage={setPage} />
+>>>>>>> f0933cc (페이지네이션)
     </div>
   );
 }
