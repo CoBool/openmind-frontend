@@ -1,0 +1,20 @@
+.badgeBase{
+  height: 26px;
+  padding: 4px 12px;
+  border-radius: 8px;
+  background-color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.badgeComplete{
+  border: 1px solid #542f1a;
+  color: #542f1a;
+}
+
+.badgePending{
+  border: 1px solid #818181;
+  color: #818181;
+}

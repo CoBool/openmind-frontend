@@ -1,0 +1,118 @@
+/* 버튼 공통 스타일 */
+.button {
+  border-radius: 8px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 400;
+}
+
+.icon {
+  width: 18px;
+  height: 18px;
+}
+
+/* === color: brown === */
+.brown {
+  background-color: #542f1a;
+  color: #ffffff;
+  border: 2px solid transparent;
+}
+
+/* brown 버튼에 마우스 올렸을 때 disabled 아닐 때만)*/
+.brown:hover:not(:disabled) {
+  border: 2px solid #341909;
+}
+
+.brown:active:not(:disabled) {
+  background-color: #341909;
+}
+
+/* brown 버튼 비활성화 */
+.brown:disabled {
+  background-color: #c7bbb5;
+  cursor: not-allowed; /*  마우스 금지 커서 */
+}
+
+/* === color: beige === */
+.beige {
+  background-color: #f5f1ee;
+  color: #542f1a;
+  border: 1px solid #542f1a;
+}
+
+/* beige 버튼에 마우스 올렸을 때 (disabled 아닐 때만)*/
+.beige:hover:not(:disabled) {
+  border: 2px solid #542f1a;
+}
+
+/* beige 버튼 클릭했을 때 */
+.beige:active:not(:disabled) {
+  background-color: #e4d5c9;
+}
+
+/* beige 버튼 비활성화 */
+.beige:disabled {
+  background-color: #f5f1ee;
+  border-color: #c7bbb5;
+  color: #c7bbb5;
+  cursor: not-allowed;
+}
+
+/* ==== 페이지별 버튼 사이즈 대응 ==== */
+
+/* 1. 메인 및 목록 페이지용 (베이지: 질문하러 가기) */
+.sizeMain {
+  padding: 12px 24px;
+  gap: 8px;
+  font-size: 16px;
+  line-height: 22px;
+}
+
+/* 2. 메인 페이지 전용 (갈색: 질문받기)*/
+.sizeMainBrown {
+  padding: 12px 138px;
+  font-size: 16px;
+  line-height: 22px;
+}
+
+/* 3. 모달창 페이지용 (질문 보내기) */
+.sizeModal {
+  padding: 12px 229px;
+  font-size: 16px;
+  line-height: 22px;
+}
+
+/* 4. 답변하기 페이지용 (갈색: 답변 완료) */
+.sizeWide {
+  padding: 12px 250px;
+  font-size: 16px;
+  line-height: 22px;
+}
+
+/* === 반응형: 태블릿 === */
+@media (max-width: 1199px) {
+  .sizeWide {
+    padding: 12px 244px;
+  }
+}
+
+/* === 반응형: 모바일 구간 === */
+@media (max-width: 767px) {
+  .sizeMain {
+    padding: 8px 12px; /* 베이지 버튼 모바일 */
+    gap: 4px;
+    font-size: 14px;
+    line-height: 18px;
+  }
+  .sizeMainBrown {
+    padding: 12px 98.5px; /* 갈색 버튼 모바일 */
+  }
+  .sizeModal {
+    padding: 12px 102.5px; /* 갈색: 모달 버튼의 모바일 */
+  }
+  .sizeWide {
+    padding: 12px 71.5px; /* 갈색: 답변 완료 버튼의 모바일 */
+  }
+}
