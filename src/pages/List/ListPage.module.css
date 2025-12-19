@@ -1,0 +1,46 @@
+body {
+  background-color: var(--gray-20);
+}
+
+.listPage {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.logo {
+  width: 146px;
+  height: 57px;
+  margin-top: 40px;
+  cursor: pointer;
+  margin-left: 130px;
+}
+
+.listheader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0;
+}
+
+.listTitle {
+  font: 'pretendard';
+  font-size: 40px;
+  font-weight: 400;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.listButton {
+  margin-right: 130px;
+  margin-top: 44px;
+}
+
+.listContainer {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(187px, 220px));
+  gap: 20px;
+  justify-content: center;
+  margin: 26px 0 auto;
+}

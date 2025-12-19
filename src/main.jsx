@@ -8,6 +8,7 @@ import Home from './pages/Home/index.jsx'
 import PostDetail from './pages/Post/PostDetail.jsx'
 
 import './index.css'
+import List from './pages/list/ListPage.jsx'
 
 const router = createBrowserRouter([
   {
@@ -21,10 +22,13 @@ const router = createBrowserRouter([
         path: 'post/:subjectId',
         Component: PostDetail,
       },
+      {
+        path: 'list', // List 페이지 경로
+        Component: List,
+      },
     ],
   },
 ])
-
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <RouterProvider router={router} />

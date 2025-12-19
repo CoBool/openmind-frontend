@@ -1,0 +1,80 @@
+.reactionBox {
+  display: flex;
+  gap: 16px;
+  padding: 16px 16px;
+  border-radius: 8px;
+  background: var(--gray-10);
+  width: fit-content;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: none;
+  padding: 6px 12px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #818181;
+  cursor: pointer;
+}
+
+.item span {
+  color: inherit;
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+  filter: brightness(0) saturate(100%) invert(20%) sepia(0%) saturate(0%)
+    hue-rotate(0deg) contrast(20%);
+}
+
+.item:hover {
+  background: var(--gray-10);
+  color: #333333;
+}
+
+.item:hover .icon {
+  filter: brightness(0) saturate(100%) invert(10%) sepia(0%) saturate(0%)
+    hue-rotate(0deg) contrast(50%);
+}
+
+.active {
+  color: #1877f2;
+  font-weight: 500;
+}
+
+.active .icon {
+  filter: brightness(0) saturate(100%) invert(39%) sepia(96%) saturate(2416%)
+    hue-rotate(203deg) brightness(95%) contrast(101%);
+}
+
+.active:hover {
+  background: var(--gray-10);
+  color: #1877f2;
+}
+
+.active:hover .icon {
+  filter: brightness(0) saturate(100%) invert(39%) sepia(96%) saturate(2416%)
+    hue-rotate(203deg) brightness(95%) contrast(101%);
+}
+
+.inactive {
+  color: #818181;
+}
+
+.inactive .icon {
+  filter: brightness(0) saturate(100%) invert(48%) sepia(0%) saturate(0%)
+    hue-rotate(178deg) brightness(80%) contrast(83%);
+}
+
+.inactive:hover {
+  background: transparent;
+  color: #818181;
+}
+
+.item:active {
+  color: inherit;
+}
