@@ -1,86 +1,87 @@
-import { useCallback, useState, useEffect, useRef } from 'react'
-import { useParams } from 'react-router'
+import { useCallback, useState, useEffect, useRef } from 'react';
+import { useParams } from 'react-router';
 
-import { useInfiniteScroll } from '@/hooks/useInfiniteScroll'
+import { useInfiniteScroll } from '@/hooks/useInfiniteScroll';
 
-import { getSubject } from '@/services/subjectsApi'
-import { getSubjectQuestions, reactToQuestion } from '@/services/questionsApi'
-import { getTimeAgo } from '@/utils/date'
+import { getSubject } from '@/services/subjectsApi';
+import { getSubjectQuestions, reactToQuestion } from '@/services/questionsApi';
+import { getTimeAgo } from '@/utils/date';
 
 export default function PostDetail() {
-  const { subjectId } = useParams()
-  const [subject, setSubject] = useState({})
-  const [questions, setQuestions] = useState({})
-  const [offset, setOffset] = useState(null)
+  const { subjectId } = useParams();
+  const [subject, setSubject] = useState({});
+  const [questions, setQuestions] = useState({});
+  const [offset, setOffset] = useState(null);
 
-  const reactionLoding = useRef(false)
+  const reactionLoding = useRef(false);
 
   useEffect(() => {
     const fetchSubject = async () => {
       try {
-        const data = await getSubject(subjectId)
-        setSubject(data)
+        const data = await getSubject(subjectId);
+        setSubject(data);
       } catch {
-        console.error('404 Not Found')
+        console.error('404 Not Found');
       }
-    }
+    };
     const fetchQuestions = async () => {
       try {
-        const data = await getSubjectQuestions(subjectId)
-        setQuestions(data)
+        const data = await getSubjectQuestions(subjectId);
+        setQuestions(data);
 
-        console.log(data)
-
-        const url = data.next
+        const url = data.next;
 
         if (url !== null) {
-          const nextOffset = new URL(url).searchParams.get('offset')
-          setOffset(nextOffset)
+          const nextOffset = new URL(url).searchParams.get('offset');
+          setOffset(nextOffset);
         } else {
-          setOffset(null)
+          setOffset(null);
         }
       } catch {
-        console.error('404 Not Found')
+        console.error('404 Not Found');
       }
-    }
-    fetchSubject()
-    fetchQuestions()
-  }, [subjectId])
+    };
+    fetchSubject();
+    fetchQuestions();
+  }, [subjectId]);
 
   const fetchMoreQuestions = useCallback(async () => {
-    if (offset === 0 || offset === null) return
+    if (offset === null || offset === '0' || offset === 0) {
+      return;
+    }
 
     try {
       const data = await getSubjectQuestions(subjectId, {
         offset: offset,
-      })
+      });
+
       setQuestions(prev => ({
         ...prev,
         results: [...prev.results, ...data.results],
-      }))
+      }));
 
-      const url = data.next
+      const url = data.next;
 
       if (url !== null) {
-        const nextOffset = new URL(url).searchParams.get('offset')
-        setOffset(nextOffset)
+        const nextOffset = new URL(url).searchParams.get('offset');
+        setOffset(nextOffset);
       } else {
-        setOffset(null)
+        setOffset(null);
       }
     } catch {
-      console.error('404 Not Found')
+      console.error('404 Not Found');
     }
-  }, [subjectId, offset])
+  }, [subjectId, offset]);
 
-  const { ref, isFetching } = useInfiniteScroll(fetchMoreQuestions)
+  const { ref, isFetching } = useInfiniteScroll(fetchMoreQuestions);
 
   const handleReaction = async (questionId, reactionType) => {
     // 1. 중복 클릭 방지
-    if (reactionLoding.current) return
-    reactionLoding.current = true
+    if (reactionLoding.current) return;
+    reactionLoding.current = true;
 
     // 2. 롤백을 위해 이전 상태 저장 (Snapshot)
-    const previousQuestions = questions
+    const previousQuestions = questions;
 
     // 3. 낙관적 업데이트 (화면 먼저 변경)
     setQuestions(prev => ({
@@ -90,30 +91,30 @@ export default function PostDetail() {
           return {
             ...question,
             [reactionType]: question[reactionType] + 1,
-          }
+          };
         }
-        return question
+        return question;
       }),
-    }))
+    }));
 
     try {
       await reactToQuestion(questionId, {
         type: reactionType,
-      })
+      });
     } catch (error) {
-      console.error('Failed to react to question:', error)
-      setQuestions(previousQuestions)
+      console.error('Failed to react to question:', error);
+      setQuestions(previousQuestions);
     } finally {
-      reactionLoding.current = false
+      reactionLoding.current = false;
     }
-  }
+  };
 
   return (
     <main>
       <article>
         <h1>Post Detail</h1>
       </article>
-      <section>
+      <section style={{ overflow: 'hidden' }}>
         <div>
           <p>질문 받는 사람 정보</p>
           <p>
@@ -191,5 +192,5 @@ export default function PostDetail() {
         )}
       </section>
     </main>
-  )
+  );
 }
