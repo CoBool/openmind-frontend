@@ -16,6 +16,7 @@
   font-size: 14px;
   color: #8c8c8c;
   cursor: pointer;
+  font-family: 'pretendard';
 }
 
 .dropdownArrow {
@@ -27,7 +28,7 @@
 
 .dropdownOpen .button {
   border-color: #818181;
-  color: #333333;
+  color: #000000;
 }
 
 .dropdownOpen .dropdownArrow {
@@ -61,10 +62,11 @@
   padding: 4px 0;
   font-size: 14px;
   z-index: 10;
+  font-family: 'Pretendard';
 }
 
 .dropdownMenu li {
-  padding: 6px 16px;
+  padding: 4px 16px;
   cursor: pointer;
 }
 

@@ -12,6 +12,7 @@ body {
   height: 57px;
   margin-top: 40px;
   cursor: pointer;
+  margin-left: 130px;
 }
 
 .listheader {
@@ -28,5 +29,18 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
+}
+
+.listButton {
+  margin-right: 130px;
+  margin-top: 44px;
+}
+
+.listContainer {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(187px, 220px));
+  gap: 20px;
+  justify-content: center;
+  margin: 26px 0 auto;
 }

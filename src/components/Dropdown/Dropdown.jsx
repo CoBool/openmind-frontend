@@ -3,13 +3,16 @@ import ArrowDown from '../../assets/Icon/Arrow-down.svg'
 import ArrowUp from '../../assets/Icon/Arrow-up.svg'
 import styles from '../Dropdown/Dropdown.module.css'
 
-function Dropdown({ disabled = false }) {
+function Dropdown({ value, onChange, disabled = false }) {
   const [open, setOpen] = useState(false)
-  const [select, setSelect] = useState('이름순')
-
   const dropdownRef = useRef(null)
 
-  const option = ['이름순', '최신순']
+  const options = [
+    { label: '최신순', value: 'latest' },
+    { label: '이름순', value: 'name' },
+  ]
+
+  const selectedOption = options.find(opt => opt.value === value)
 
   useEffect(() => {
     const handleClick = e => {
@@ -24,6 +27,7 @@ function Dropdown({ disabled = false }) {
 
   return (
     <div
+      ref={dropdownRef}
       className={[
         styles.dropdown,
         open && styles.dropdownOpen,
@@ -31,36 +35,34 @@ function Dropdown({ disabled = false }) {
       ]
         .filter(Boolean)
         .join(' ')}
-      ref={dropdownRef}
     >
       <button
         className={styles.button}
-        onClick={() => {
-          if (disabled) return
-          setOpen(prev => !prev)
-        }}
         type="button"
         disabled={disabled}
+        onClick={() => {
+          if (!disabled) setOpen(prev => !prev)
+        }}
       >
-        <span>{select}</span>
+        <span>{selectedOption?.label}</span>
         <img
           src={open ? ArrowUp : ArrowDown}
-          alt="화살표 모양"
+          alt="화살표"
           className={styles.dropdownArrow}
         />
       </button>
 
       {open && !disabled && (
         <ul className={styles.dropdownMenu}>
-          {option.map(option => (
+          {options.map(option => (
             <li
-              key={option}
+              key={option.value} // ✅ 핵심
               onClick={() => {
-                setSelect(option)
+                onChange(option.value) // 부모로 전달
                 setOpen(false)
               }}
             >
-              {option}
+              {option.label}
             </li>
           ))}
         </ul>
