@@ -16,6 +16,22 @@ import shared from './Post.shared.module.css';
 
 import { getSubjects } from '@/services/subjects_api'
 
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+} from '@/components/Card';
+
+import Messages from '@/assets/Icon/Messages.svg';
+import ThumbsUp from '@/assets/Icon/thumbs-up.svg';
+import ThumbsDown from '@/assets/Icon/thumbs-down.svg';
+import styles from './PostDetail.module.css';
+
+const TRIGGER_POINT = 2;
+
 export default function PostDetail() {
   const { subjectId } = useParams();
 
