@@ -5,11 +5,11 @@ import { createBrowserRouter } from 'react-router';
 import { RouterProvider } from 'react-router/dom';
 
 import Home from './pages/Home/index.jsx';
+import List from './pages/List/ListPage.jsx';
 import PostDetail from './pages/Post/PostDetail.jsx';
 import Answer from './pages/Answer/index.jsx';
 
 import './index.css';
-import List from './pages/list/ListPage.jsx';
 
 const router = createBrowserRouter([
   {
@@ -20,7 +20,7 @@ const router = createBrowserRouter([
         Component: Home,
       },
       {
-        path: 'list', // List 페이지 경로
+        path: 'list',
         Component: List,
       },
       {
