@@ -288,10 +288,10 @@ TypeScript를 사용하지 않으므로,
 
 ```js
 // ❌ 잘못된 예
-user.profile.name
+user.profile.name;
 
 // ⭕ 올바른 예
-user?.profile?.name
+user?.profile?.name;
 ```
 
 #### Default Value 처리
@@ -300,10 +300,10 @@ user?.profile?.name
 
 ```js
 // ❌ 잘못된 예
-list.map(item => item.name)
+list.map(item => item.name);
 
 // ⭕ 올바른 예
-;(list || []).map(item => item.name)
+(list || []).map(item => item.name);
 ```
 
 > 데이터는 항상 **`undefined` / `null` 일 수 있다는 전제**로 코드를 작성합니다.
@@ -341,7 +341,7 @@ fetchPostList;
 - **props:** `on + 동사`
 
 ```js
-const handleSubmit = () => {}
+const handleSubmit = () => {};
 
 <Form onSubmit={handleSubmit} />;
 ```
