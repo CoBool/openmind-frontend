@@ -1,0 +1,87 @@
+.background {
+  height: 100vh;
+  background-image: url('../../assets/images/bannerImage1.png');
+  background-repeat: no-repeat;
+  background-position: bottom;
+  padding: 45px 130px 0;
+  background-size: contain;
+  background-color: #f7f7f7;
+}
+
+.contentsWrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  position: relative;
+}
+
+.askBtn {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.logo {
+  margin-top: 89px;
+}
+
+.formBox {
+  border-radius: 16px;
+  background-color: var(--gray-10);
+  padding: 32px;
+  width: 400px;
+}
+
+.formWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.nameInput {
+  border: 1px solid var(--gray-40);
+  border-radius: 8px;
+  padding: 12px 16px;
+  height: 46px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .background {
+    padding: 44px 50px 0;
+  }
+}
+
+@media (max-width: 375px) {
+  .background {
+    height: 100vh;
+    padding: 80px 64px 0 63px;
+  }
+
+  .askBtn {
+    top: 115px;
+    transform: translateX(-50%);
+  }
+
+  .contentsWrap {
+    gap: 82px;
+  }
+
+  .logo {
+    margin-top: 0;
+  }
+
+  .formBox {
+    width: 305px;
+    padding: 24px;
+  }
+
+  .nameInput {
+    width: 100%;
+  }
+}
