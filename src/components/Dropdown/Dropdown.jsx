@@ -7,13 +7,16 @@ function Dropdown({ value, onChange, disabled = false }) {
   const [open, setOpen] = useState(false)
   const dropdownRef = useRef(null)
 
+  // 옵션 목록
   const options = [
     { label: '최신순', value: 'latest' },
     { label: '이름순', value: 'name' },
   ]
 
+  // 현재 선택한 옵션 표시
   const selectedOption = options.find(opt => opt.value === value)
 
+  // 드롭다운 외부 클릭 시 닫기
   useEffect(() => {
     const handleClick = e => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
@@ -21,6 +24,7 @@ function Dropdown({ value, onChange, disabled = false }) {
       }
     }
 
+    // 이벤트 리스너
     document.addEventListener('mousedown', handleClick)
     return () => document.removeEventListener('mousedown', handleClick)
   }, [])
@@ -52,6 +56,7 @@ function Dropdown({ value, onChange, disabled = false }) {
         />
       </button>
 
+      {/* 드롭다운 메뉴 */}
       {open && !disabled && (
         <ul className={styles.dropdownMenu}>
           {options.map(option => (

@@ -10,6 +10,7 @@
   margin-top: 46px;
 }
 
+/* 페이지 버튼 스타일 */
 .pageButton,
 .pageButtonLeft,
 .pageButtonRight {
@@ -19,17 +20,16 @@
   background: none;
   font-size: 20px;
   cursor: pointer;
-  color: #818181;
+  color: var(--gray-40);
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: 'Actor', sans-serif;
-  line-height: 1;
   font-weight: 400;
 }
 
 .active {
-  color: #541f1a;
+  color: var(--brown-40);
   font-weight: 400;
 }
 
@@ -38,5 +38,5 @@
   padding: 0;
   background: none;
   border: none;
-  color: #818181;
+  color: var(--gray-40);
 }
