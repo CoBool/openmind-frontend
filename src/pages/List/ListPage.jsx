@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import Logo from '../../assets/images/logo.png';
 import Dropdown from '../../components/Dropdown/Dropdown';
 import Pagination from './Pagination';
@@ -8,6 +9,20 @@ import ListItem from './ListItems';
 import { useSubjects } from './hooks/subjectApi';
 import Button from '../../components/Button/Button';
 import arrowImg from '../../assets/Icon/arrowRightBrown.svg';
+=======
+import Logo from '../../assets/images/logo.png'
+import Dropdown from '../../components/Dropdown/Dropdown'
+import Pagination from './Pagination'
+import styles from './ListPage.module.css'
+import { useNavigate } from 'react-router-dom'
+import BoxButton from '../../components/Button/BoxButton'
+import { useEffect, useMemo, useState } from 'react'
+import { instance } from '../../services/instance'
+import ListItem from './ListItems'
+
+// 한 페이지에 표시할 아이템 갯수
+const LIMIT = 8
+>>>>>>> f079dd5 (list 페이지)
 
 function List() {
   const navigate = useNavigate();
@@ -78,11 +93,16 @@ function List() {
 
   const [list, setList] = useState([])
   const [page, setPage] = useState(1)
+
+  // 기본 정렬 타입 -> 최신순
   const [sortType, setSortType] = useState('latest')
 
+  // 아이템 불러오기 함수
   useEffect(() => {
     const fetchAllItems = async () => {
       try {
+        // 전체 아이템 요청 100개 한도
+        // 추후 변동 가능
         const response = await instance(`subjects/?limit=100`, {
           method: 'GET',
         })
@@ -97,6 +117,7 @@ function List() {
     fetchAllItems()
   }, [])
 
+  // 현재 페이지에 표시할 아이템 계산 (정렬 + 페이징)
   const visibleList = useMemo(() => {
     const sorted = [...list].sort((a, b) => {
       if (sortType === 'name') {
@@ -158,4 +179,10 @@ function List() {
   );
 }
 
+<<<<<<< HEAD
 export default List;
+=======
+export default List
+
+// 데이터 클릭시 개별피드 데이터로 이동
+>>>>>>> f079dd5 (list 페이지)
