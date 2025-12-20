@@ -1,50 +1,50 @@
-import Logo from '../../assets/images/logo.png'
-import Dropdown from '../../components/dropdown/Dropdown'
-import Pagination from './pagination'
-import styles from './ListPage.module.css'
-import { useNavigate } from 'react-router-dom'
-import BoxButton from '../../components/Button/BoxButton'
-import { useEffect, useMemo, useState } from 'react'
-import { instance } from '../../services/instance'
-import ListItem from './ListItems'
+import Logo from '../../assets/images/logo.png';
+import Dropdown from '../../components/dropdown/Dropdown';
+import Pagination from './pagination';
+import styles from './ListPage.module.css';
+import { useNavigate } from 'react-router';
+import BoxButton from '../../components/Button/BoxButton';
+import { useEffect, useMemo, useState } from 'react';
+import { instance } from '../../services/instance';
+import ListItem from './ListItems';
 
-const LIMIT = 8
+const LIMIT = 8;
 
 function List() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const [list, setList] = useState([])
-  const [page, setPage] = useState(1)
-  const [sortType, setSortType] = useState('latest')
+  const [list, setList] = useState([]);
+  const [page, setPage] = useState(1);
+  const [sortType, setSortType] = useState('latest');
 
   useEffect(() => {
     const fetchAllItems = async () => {
       try {
         const response = await instance(`subjects/?limit=1000`, {
           method: 'GET',
-        })
+        });
 
-        const data = await response.json()
-        setList(data.results)
+        const data = await response.json();
+        setList(data.results);
       } catch (e) {
-        console.error(e)
+        console.error(e);
       }
-    }
+    };
 
-    fetchAllItems()
-  }, [])
+    fetchAllItems();
+  }, []);
 
   const visibleList = useMemo(() => {
     const sorted = [...list].sort((a, b) => {
       if (sortType === 'name') {
-        return a.name.localeCompare(b.name, 'en', { numeric: true })
+        return a.name.localeCompare(b.name, 'en', { numeric: true });
       }
-      return new Date(b.createdAt) - new Date(a.createdAt)
-    })
+      return new Date(b.createdAt) - new Date(a.createdAt);
+    });
 
-    const start = (page - 1) * LIMIT
-    return sorted.slice(start, start + LIMIT)
-  }, [list, page, sortType])
+    const start = (page - 1) * LIMIT;
+    return sorted.slice(start, start + LIMIT);
+  }, [list, page, sortType]);
 
   return (
     <div className={styles.listPage}>
@@ -65,8 +65,8 @@ function List() {
       <Dropdown
         value={sortType}
         onChange={value => {
-          setSortType(value)
-          setPage(1)
+          setSortType(value);
+          setPage(1);
         }}
       />
       <div className={styles.listContainer}>
@@ -75,7 +75,7 @@ function List() {
         ))}
       </div>
     </div>
-  )
+  );
 }
 
-export default List
+export default List;

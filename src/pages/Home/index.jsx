@@ -1,9 +1,9 @@
-import { Link } from 'react-router'
+import { Link } from 'react-router';
 
 export default function Home() {
   return (
     <div>
       <Link to="/list">List</Link>
     </div>
-  )
+  );
 }
