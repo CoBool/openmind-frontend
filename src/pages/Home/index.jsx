@@ -7,5 +7,5 @@ export default function Home() {
       <Link to="/list">List</Link>
       <MainPage />
     </div>
-  )
+  );
 }

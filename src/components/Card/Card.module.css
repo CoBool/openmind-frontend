@@ -1,0 +1,63 @@
+/* 컴포넌트 내부 스코프 변수 (색상/간격 등) */
+.card {
+  --card-bg: #ffffff;
+  --card-border: #e2e8f0;
+  --card-radius: 0.5rem;
+  --card-shadow: var(--shadow-1);
+
+  --card-fg: #020817;
+  --card-muted-fg: #64748b;
+
+  --card-padding: 1.5rem;
+  --card-header-gap: 0.375rem;
+}
+
+.card {
+  background-color: var(--card-bg);
+  color: var(--card-fg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.card[data-size='sm'] {
+  --card-padding: 1rem;
+}
+
+.cardHeader {
+  display: flex;
+  flex-direction: column;
+  gap: var(--card-header-gap);
+  padding: var(--card-padding);
+}
+
+.cardTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.025em;
+  margin: 0;
+}
+
+.cardDescription {
+  font-size: 0.875rem;
+  color: var(--card-muted-fg);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.cardContent {
+  padding: var(--card-padding);
+  padding-top: 0;
+}
+
+.cardFooter {
+  display: flex;
+  align-items: center;
+  padding: var(--card-padding);
+  padding-top: 0;
+}
