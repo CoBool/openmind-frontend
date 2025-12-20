@@ -72,9 +72,10 @@
 
 /* 2. 메인 페이지 전용 (갈색: 질문받기)*/
 .sizeMainBrown {
-  padding: 12px 138px;
+  padding: 12px 24px;
   font-size: 16px;
   line-height: 22px;
+  width: 100%;
 }
 
 /* 3. 모달창 페이지용 (질문 보내기) */
@@ -107,7 +108,7 @@
     line-height: 18px;
   }
   .sizeMainBrown {
-    padding: 12px 98.5px; /* 갈색 버튼 모바일 */
+    padding: 12px 24px; /* 갈색 버튼 모바일 */
   }
   .sizeModal {
     padding: 12px 102.5px; /* 갈색: 모달 버튼의 모바일 */
