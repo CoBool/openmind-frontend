@@ -1,7 +1,9 @@
+import { Link } from 'react-router';
+
 export default function Home() {
   return (
     <div>
-      <h1>home</h1>
+      <Link to="/list">List</Link>
     </div>
-  )
+  );
 }
