@@ -40,3 +40,9 @@
   border: none;
   color: var(--gray-40);
 }
+
+@media (max-width: 1199px) {
+}
+
+@media (max-width: 767px) {
+}
