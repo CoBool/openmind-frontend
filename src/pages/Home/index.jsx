@@ -1,31 +1,31 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import BoxButton from '../../components/Button/BoxButton'
-import { createSubject } from '../../services/subjectsApi'
-import styles from './index.module.css'
-import Logo from '../../assets/images/logo.png'
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import BoxButton from '../../components/Button/BoxButton';
+import { createSubject } from '../../services/subjectsApi';
+import styles from './index.module.css';
+import Logo from '../../assets/images/logo.png';
 
 export default function Home() {
-  const [name, setName] = useState('')
-  const navigate = useNavigate()
+  const [name, setName] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = async e => {
-    e.preventDefault()
+    e.preventDefault();
 
-    if (!name.trim()) return
+    if (!name.trim()) return;
 
     try {
-      const data = await createSubject({ name })
-      navigate(`/post/${data.id}/answer`)
+      const data = await createSubject({ name });
+      navigate(`/post/${data.id}/answer`);
     } catch (error) {
-      console.error(error)
-      alert('피드 생성을 실패했습니다.')
+      console.error(error);
+      alert('피드 생성을 실패했습니다.');
     }
-  }
+  };
 
-  const goToAsk = () => navigate('/questions')
+  const goToAsk = () => navigate('/questions');
 
-  const handleNameChange = e => setName(e.target.value)
+  const handleNameChange = e => setName(e.target.value);
 
   return (
     <div className={styles.background}>
@@ -52,5 +52,5 @@ export default function Home() {
         </div>
       </div>
     </div>
-  )
+  );
 }
