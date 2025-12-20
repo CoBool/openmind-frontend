@@ -124,3 +124,15 @@ body {
     grid-template-columns: repeat(2, minmax(155.5px, 168px));
   }
 }
+
+@media screen and (max-width: 1200px) {
+  .listContainer {
+    grid-template-columns: repeat(3, minmax(187px, 206.5px));
+  }
+}
+
+@media screen and ((min-width: 375px) and (max-width: 767px)) {
+  .listContainer {
+    grid-template-columns: repeat(2, minmax(155.5px, 168px));
+  }
+}
