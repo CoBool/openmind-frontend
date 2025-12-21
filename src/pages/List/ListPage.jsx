@@ -89,7 +89,8 @@ function List() {
   function getLimitWidth() {
     if (typeof window === 'undefined') return 8
     const width = window.innerWidth
-    if (width >= 1200) return 8
+    if (width >= 885) return 8
+    if (width >= 768) return 6
     return 6
   }
 
