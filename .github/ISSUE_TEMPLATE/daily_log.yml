@@ -1,0 +1,39 @@
+name: 📓 Daily Log
+description: 오늘 한 작업 정리 및 간단 회고
+title: '[Daily] YYYY-MM-DD'
+labels: ['daily']
+body:
+  - type: textarea
+    id: today
+    attributes:
+      label: 오늘 한 일
+      description: 오늘 진행한 작업을 나열
+      placeholder: |
+        - 이슈 템플릿 구성
+        - 익명 닉네임 유틸 구현
+        - PR 리뷰
+    validations:
+      required: true
+
+  - type: textarea
+    id: learn
+    attributes:
+      label: 배운 점 / 고민한 점
+      description: 새로 알게 된 것, 고민한 설계 포인트
+      placeholder: |
+        - 닉네임 유니크에 집착할 필요 없음
+        - 이슈를 커뮤니티처럼 쓰는 게 더 효율적
+    validations:
+      required: false
+
+  - type: textarea
+    id: retrospect
+    attributes:
+      label: 회고
+      description: 잘한 점, 아쉬운 점, 내일 할 것
+      placeholder: |
+        👍 잘한 점:
+        👎 아쉬운 점:
+        👉 내일 할 일:
+    validations:
+      required: false

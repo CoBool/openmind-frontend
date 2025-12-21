@@ -1,6 +1,6 @@
-import MessagesIcon from '../../assets/Icon/Messages.svg'
-import ProfileImg from '../../assets/images/profile.png'
-import styles from './ListItems.module.css'
+import MessagesIcon from '../../assets/Icon/Messages.svg';
+import ProfileImg from '../../assets/images/profile.png';
+import styles from './ListItems.module.css';
 
 // 리스트 아이템 컴포넌트
 function ListItem({ item }) {
@@ -19,7 +19,7 @@ function ListItem({ item }) {
         <span className={styles.questionCount}>{item.questionCount}개</span>
       </div>
     </div>
-  )
+  );
 }
 
-export default ListItem
+export default ListItem;

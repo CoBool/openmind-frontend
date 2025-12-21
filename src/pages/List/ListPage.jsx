@@ -9,7 +9,7 @@ import { instance } from '../../services/instance'
 import ListItem from './ListItems'
 
 function List() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [list, setList] = useState([])
   const [page, setPage] = useState(1)
@@ -46,17 +46,17 @@ function List() {
         // 추후 변동 가능
         const response = await instance(`subjects/?limit=100`, {
           method: 'GET',
-        })
+        });
 
-        const data = await response.json()
-        setList(data.results)
+        const data = await response.json();
+        setList(data.results);
       } catch (e) {
-        console.error(e)
+        console.error(e);
       }
-    }
+    };
 
-    fetchAllItems()
-  }, [])
+    fetchAllItems();
+  }, []);
 
   const totalPage = Math.ceil(list.length / limit)
 
@@ -67,10 +67,10 @@ function List() {
   const visibleList = useMemo(() => {
     const sorted = [...list].sort((a, b) => {
       if (sortType === 'name') {
-        return a.name.localeCompare(b.name, 'en', { numeric: true })
+        return a.name.localeCompare(b.name, 'en', { numeric: true });
       }
-      return new Date(b.createdAt) - new Date(a.createdAt)
-    })
+      return new Date(b.createdAt) - new Date(a.createdAt);
+    });
 
     // 페이징 처리
     const start = (safePage - 1) * limit
@@ -115,7 +115,7 @@ function List() {
         limit={limit}
       />
     </div>
-  )
+  );
 }
 
 export default List
