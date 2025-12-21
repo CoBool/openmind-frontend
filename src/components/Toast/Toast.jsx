@@ -1,19 +1,20 @@
-import { useState } from "react"
-import LinkImg from "../../assets/Icon/Link.svg"
-import KakaoImg from "../../assets/Icon/kakao.svg"
-import FacebookImg from "../../assets/Icon/facebook.svg"
-import styles from "./Toast.module.css"
+import { useState } from 'react'
+import LinkImg from '../../assets/Icon/Link.svg'
+import KakaoImg from '../../assets/Icon/kakao.svg'
+import FacebookImg from '../../assets/Icon/facebook.svg'
+import styles from './Toast.module.css'
 
-function Toast () {
-  const [toast, setToast] = useState(false);
+function Toast() {
+  const [toast, setToast] = useState(false)
 
   const handleClick = () => {
-    setToast(true);
+    setToast(true)
 
+    // 5초 후에 토스트 메시지 숨기기
     setTimeout(() => {
       setToast(false)
-    }, 5000);
-  };
+    }, 5000)
+  }
 
   return (
     <div className={styles.Toast}>
@@ -29,11 +30,10 @@ function Toast () {
       {toast && (
         <div className={styles.ToastText}>
           <span className={styles.text}>URL이 복사되었습니다</span>
-        </div> 
+        </div>
       )}
-      
     </div>
   )
 }
 
-export default Toast;
+export default Toast

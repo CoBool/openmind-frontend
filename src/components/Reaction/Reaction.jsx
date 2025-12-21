@@ -6,10 +6,12 @@ import styles from './Reaction.module.css'
 function Reaction() {
   const [reaction, setReaction] = useState(null)
 
+  // 좋아요 처리
   const handleLike = () => {
     setReaction(prev => (prev === 'like' ? null : 'like'))
   }
 
+  // 싫어요 처리
   const handleDislike = () => {
     setReaction(prev => (prev === 'dislike' ? null : 'dislike'))
   }
