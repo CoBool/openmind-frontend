@@ -1,5 +1,5 @@
-import styles from './BoxButton.module.css'
-import arrowBrown from '../../assets/Icon/arrowRightBrown.svg'
+import styles from './BoxButton.module.css';
+import arrowBrown from '../../assets/Icon/arrowRightBrown.svg';
 
 const buttonVariants = {
   // 색상종류
@@ -11,8 +11,9 @@ const buttonVariants = {
   size: {
     sm: styles.sm,
     md: styles.md,
+    mdFixed: styles.mdFixed,
   },
-}
+};
 /**
  * 박스형 버튼 컴포넌트
  * @param {React.ReactNode} children - 버튼 안에 표시될 내용 (텍스트 등)
@@ -32,11 +33,11 @@ function BoxButton({
   ...restProps
 }) {
   const variantClass =
-    buttonVariants.variant[variant] ?? buttonVariants.variant.brown
+    buttonVariants.variant[variant] ?? buttonVariants.variant.brown;
 
-  const sizeClass = buttonVariants.size[size] ?? buttonVariants.size.md
+  const sizeClass = buttonVariants.size[size] ?? buttonVariants.size.md;
 
-  const ClassNames = `${styles.button} ${variantClass} ${sizeClass} ${className}`
+  const ClassNames = `${styles.button} ${variantClass} ${sizeClass} ${className}`;
 
   return (
     // 클래스 3개 적용: 공통 + 색상 + 크기
@@ -50,7 +51,7 @@ function BoxButton({
         <img src={arrowBrown} alt="화살표 이미지" className={styles.icon} />
       )}
     </button>
-  )
+  );
 }
 
-export default BoxButton
+export default BoxButton;
