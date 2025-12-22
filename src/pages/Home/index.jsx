@@ -1,10 +1,9 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import BoxButton from '../../components/Button/BoxButton';
 import { createSubject } from '../../services/subjectsApi';
 import styles from './index.module.css';
 import Logo from '../../assets/images/logo.png';
-
 export default function Home() {
   const [name, setName] = useState('');
   const navigate = useNavigate();
@@ -23,7 +22,7 @@ export default function Home() {
     }
   };
 
-  const goToAsk = () => navigate('/questions');
+  const goToAsk = () => navigate('/list');
 
   const handleNameChange = e => setName(e.target.value);
 
@@ -34,6 +33,7 @@ export default function Home() {
           <BoxButton isArrow color="beige" onClick={goToAsk}>
             질문하러 가기
           </BoxButton>
+          <Link to="/list"></Link>
         </div>
 
         <img src={Logo} className={styles.logo} alt="logo" />

@@ -1,23 +1,37 @@
-import { useEffect, useRef, useState } from 'react'
-import MoreIcon from '../../assets/Icon/More.svg?react'
-import EditMenu from './Editmenu'
-import styles from './MoreMenu.module.css'
+import { useEffect, useRef, useState } from 'react';
+import MoreIcon from '../../assets/Icon/More.svg';
+import EditMenu from './Editmenu';
+import styles from './Moremenu.module.css';
 
 // 드롭다운 기능 겹쳐 추후 재사용 가능하도록 수정
 function MoreMenu({ disabled = false, onEdit, onDelete }) {
-  const [open, setOpen] = useState(false)
-  const ref = useRef(null)
+  const [open, setOpen] = useState(false);
+  const ref = useRef(null);
 
   useEffect(() => {
     const handleClickOutside = e => {
       if (ref.current && !ref.current.contains(e.target)) {
-        setOpen(false)
+        setOpen(false);
       }
-    }
+    };
 
-    document.addEventListener('mousedown', handleClickOutside)
-    return () => document.removeEventListener('mousedown', handleClickOutside)
-  }, [])
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const handleToggle = () => {
+    if (disabled) return;
+    setOpen(prev => !prev);
+  };
+
+  const closeMenu = () => {
+    setOpen(false);
+  };
+
+  const createMenu = callback => () => {
+    callback?.();
+    closeMenu();
+  };
 
   return (
     <div className={styles.moreMenuWrapper} ref={ref}>
@@ -25,26 +39,20 @@ function MoreMenu({ disabled = false, onEdit, onDelete }) {
         type="button"
         className={styles.moreButton}
         disabled={disabled}
-        onClick={() => setOpen(prev => !prev)}
+        onClick={handleToggle}
       >
-        <MoreIcon className={styles.moreIcon} />
+        <img src={MoreIcon} className={styles.moreIcon} />
       </button>
 
       {open && (
         <EditMenu
           disabled={disabled}
-          onEdit={() => {
-            onEdit?.()
-            setOpen(false)
-          }}
-          onDelete={() => {
-            onDelete?.()
-            setOpen(false)
-          }}
+          onEdit={createMenu(onEdit)}
+          onDelete={createMenu(onDelete)}
         />
       )}
     </div>
-  )
+  );
 }
 
-export default MoreMenu
+export default MoreMenu;
