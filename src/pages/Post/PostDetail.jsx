@@ -28,6 +28,7 @@ import {
 import Messages from '@/assets/Icon/Messages.svg';
 import ThumbsUp from '@/assets/Icon/thumbs-up.svg';
 import ThumbsDown from '@/assets/Icon/thumbs-down.svg';
+
 import styles from './PostDetail.module.css';
 
 const TRIGGER_POINT = 2;
