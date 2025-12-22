@@ -1,42 +1,42 @@
-import Logo from '../../assets/images/logo.png'
-import Dropdown from '../../components/Dropdown/Dropdown'
-import Pagination from './Pagination'
-import styles from './ListPage.module.css'
-import { useNavigate } from 'react-router-dom'
-import BoxButton from '../../components/Button/BoxButton'
-import { useEffect, useMemo, useState } from 'react'
-import { instance } from '../../services/instance'
-import ListItem from './ListItems'
+import Logo from '../../assets/images/logo.png';
+import Dropdown from '../../components/Dropdown/Dropdown';
+import Pagination from './Pagination';
+import styles from './ListPage.module.css';
+import { useNavigate } from 'react-router-dom';
+import BoxButton from '../../components/Button/BoxButton';
+import { useEffect, useMemo, useState } from 'react';
+import { instance } from '../../services/instance';
+import ListItem from './ListItems';
 
 function List() {
   const navigate = useNavigate();
 
-  const [list, setList] = useState([])
-  const [page, setPage] = useState(1)
+  const [list, setList] = useState([]);
+  const [page, setPage] = useState(1);
 
-  const [limit, setLimit] = useState(getLimitWidth())
+  const [limit, setLimit] = useState(getLimitWidth());
 
   // 기본 정렬 타입 -> 최신순
-  const [sortType, setSortType] = useState('latest')
+  const [sortType, setSortType] = useState('latest');
 
   // 반응형 변경에 따른 데이터 갯수
   function getLimitWidth() {
-    if (typeof window === 'undefined') return 8
-    const width = window.innerWidth
-    if (width >= 885) return 8
-    if (width >= 768) return 6
-    return 6
+    if (typeof window === 'undefined') return 8;
+    const width = window.innerWidth;
+    if (width >= 885) return 8;
+    if (width >= 768) return 6;
+    return 6;
   }
 
   // 창 크기 변경시 limit 재설정
   useEffect(() => {
     const handleResize = () => {
-      const newlimit = getLimitWidth()
-      setLimit(prev => (prev === newlimit ? prev : newlimit))
-    }
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
-  }, [])
+      const newlimit = getLimitWidth();
+      setLimit(prev => (prev === newlimit ? prev : newlimit));
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   // 아이템 불러오기 함수
   useEffect(() => {
@@ -58,10 +58,10 @@ function List() {
     fetchAllItems();
   }, []);
 
-  const totalPage = Math.ceil(list.length / limit)
+  const totalPage = Math.ceil(list.length / limit);
 
   // page 계산
-  const safePage = Math.min(page, totalPage || 1)
+  const safePage = Math.min(page, totalPage || 1);
 
   // 현재 페이지에 표시할 아이템 계산 (정렬 + 페이징)
   const visibleList = useMemo(() => {
@@ -73,10 +73,10 @@ function List() {
     });
 
     // 페이징 처리
-    const start = (safePage - 1) * limit
+    const start = (safePage - 1) * limit;
     // 잘라서 반환
-    return sorted.slice(start, start + limit)
-  }, [list, safePage, sortType, limit])
+    return sorted.slice(start, start + limit);
+  }, [list, safePage, sortType, limit]);
 
   return (
     <div className={styles.listPage}>
@@ -98,8 +98,8 @@ function List() {
         <Dropdown
           value={sortType}
           onChange={value => {
-            setSortType(value)
-            setPage(1)
+            setSortType(value);
+            setPage(1);
           }}
         />
       </div>
@@ -118,6 +118,6 @@ function List() {
   );
 }
 
-export default List
+export default List;
 
 // 데이터 클릭시 개별피드 데이터로 이동
