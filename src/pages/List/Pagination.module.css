@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Actor&display=swap');
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16.5px;
+  margin: 20px 0;
+  font-family: 'Actor', sans-serif;
+  margin-top: 46px;
+}
+
+/* 페이지 버튼 스타일 */
+.pageButton,
+.pageButtonLeft,
+.pageButtonRight {
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: var(--gray-40);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Actor', sans-serif;
+  font-weight: 400;
+}
+
+.active {
+  color: var(--brown-40);
+  font-weight: 400;
+}
+
+.pageButtonLeft,
+.pageButtonRight {
+  padding: 0;
+  background: none;
+  border: none;
+  color: var(--gray-40);
+}
+
+@media (max-width: 1199px) {
+}
+
+@media (max-width: 767px) {
+}

@@ -2,6 +2,7 @@ import MessagesIcon from '../../assets/Icon/Messages.svg';
 import ProfileImg from '../../assets/images/profile.png';
 import styles from './ListItems.module.css';
 
+// 리스트 아이템 컴포넌트
 function ListItem({ item }) {
   return (
     <div className={styles.listItem}>

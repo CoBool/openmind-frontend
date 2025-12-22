@@ -1,0 +1,17 @@
+name: 📝 Free Issue
+description: 형식 없이 자유롭게 작성
+title: '[Issue] '
+labels: ['discussion']
+body:
+  - type: textarea
+    id: content
+    attributes:
+      label: 내용
+      description: 형식 없음. 하고 싶은 말 쓰세요.
+      placeholder: |
+        - 아이디어
+        - 질문
+        - 고민
+        - 메모
+    validations:
+      required: true

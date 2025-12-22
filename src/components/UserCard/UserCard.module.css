@@ -5,7 +5,7 @@
   justify-content: space-between;
   width: 220px;
   height: 187px;
-  border: 1px solid #818181;
+  border: 1px solid var(--gray-40);
   padding: 20px;
   border-radius: 16px;
   cursor: pointer;
@@ -22,7 +22,7 @@
 .userImg {
   width: 60px;
   height: 60px;
-  border-radius: 9999px;
+  border-radius: 50%;
   background-image: url('../../assets/images/profile.png');
   background-size: contain;
   background-repeat: no-repeat;
@@ -33,7 +33,7 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  color: #818181;
+  color: var(--gray-40);
 }
 
 .receivedQuestion {
