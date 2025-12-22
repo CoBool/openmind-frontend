@@ -5,9 +5,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  border: none;
   font-weight: 400;
-  gap: 8px;
-  width: 100%;
 }
 
 .icon {
@@ -16,16 +15,40 @@
 }
 
 /* ========================================
+  타입: box (박스형 버튼)
+   ======================================== */
+.box {
+  gap: 8px;
+}
+
+/* ========================================
+  타입: floating (플로팅 버튼)
+   ======================================== */
+.floating {
+  border-radius: 200px;
+  box-shadow: var(--shadow-2);
+  background-color: var(--brown-40);
+  color: var(--gray-10);
+}
+
+/* ========================================
   색상: brown (갈색 버튼)
-  주요 액션에 사용 (질문받기, 답변 완료 등)
+  (질문받기, 답변 완료 등)
    ======================================== */
 .brown {
   background-color: var(--brown-40);
   color: var(--gray-10);
   border: 2px solid transparent;
 }
+/* floating hover 상태 (마우스 올렸을 때) */
+.floating:hover:not(:disabled) {
+  border: 2px solid var(--brown-50);
+}
 
-/* brown 버튼에 마우스 올렸을 때 disabled 아닐 때만)*/
+.floating:active:not(:disabled) {
+  background-color: var(--brown-50);
+}
+/* brown 버튼에 마우스 올렸을 때*/
 .brown:hover:not(:disabled) {
   border: 2px solid var(--brown-50);
 }
@@ -70,21 +93,35 @@
 
 /* ========================================
   크기: sm (작은 버튼)
-  기존 .sizeMain 모바일 기준
    ======================================== */
 
 .sm {
-  padding: 8px 12px; /* 기존 모바일 sizeMain 값 */
-  font-size: 14px; /* 기존 모바일 폰트 크기 */
+  /* floating 타입 기본값 */
+  padding: 5px 24px;
+  font-size: 15px;
+  line-height: 25px;
+}
+
+.box.sm {
+  /* .box이면서 동시에 .md */
+  padding: 8px 12px;
+  font-size: 14px;
   line-height: 18px;
   gap: 4px;
 }
 
 /* ========================================
   크기: md (중간 버튼, 기본값)
-  기존 .sizeMain PC/태블릿 기준
    ======================================== */
 .md {
+  /* floating 타입 기본값 */
+  padding: 14.5px 49.5px;
+  font-size: 20px;
+  line-height: 25px;
+}
+
+/* box 타입이면서 md일 때 */
+.box.md {
   padding: 12px 24px;
   font-size: 16px;
   line-height: 22px;
@@ -92,11 +129,22 @@
 
 /* ========================================
   반응형: 모바일 (375px 이하)
-  md 버튼이 모바일에서 작아짐
    ======================================== */
 
 @media (max-width: 375px) {
+  /* floating sm */
+  .sm {
+    padding: 0 17.5px;
+    font-size: 10px;
+  }
+
+  /* floating md */
   .md {
+    padding: 14.5px 24px;
+  }
+
+  /* box && md */
+  .box.md {
     padding: 8px 12px;
     gap: 4px;
     font-size: 14px;
