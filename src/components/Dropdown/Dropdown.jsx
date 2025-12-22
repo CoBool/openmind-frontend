@@ -1,33 +1,43 @@
-import { useEffect, useRef, useState } from 'react'
-import ArrowDown from '../../assets/Icon/Arrow-down.svg'
-import ArrowUp from '../../assets/Icon/Arrow-up.svg'
-import styles from '../Dropdown/Dropdown.module.css'
+import { useEffect, useRef, useState } from 'react';
+import ArrowDown from '../../assets/Icon/Arrow-down.svg';
+import ArrowUp from '../../assets/Icon/Arrow-up.svg';
+import styles from '../Dropdown/Dropdown.module.css';
 
 function Dropdown({ value, onChange, disabled = false }) {
-  const [open, setOpen] = useState(false)
-  const dropdownRef = useRef(null)
+  const [open, setOpen] = useState(false);
+  const dropdownRef = useRef(null);
 
   // 옵션 목록
   const options = [
     { label: '최신순', value: 'latest' },
     { label: '이름순', value: 'name' },
-  ]
+  ];
 
   // 현재 선택한 옵션 표시
-  const selectedOption = options.find(opt => opt.value === value)
+  const selectedOption = options.find(opt => opt.value === value);
 
   // 드롭다운 외부 클릭 시 닫기
   useEffect(() => {
     const handleClick = e => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
-        setOpen(false)
+        setOpen(false);
       }
-    }
+    };
 
     // 이벤트 리스너
-    document.addEventListener('mousedown', handleClick)
-    return () => document.removeEventListener('mousedown', handleClick)
-  }, [])
+    document.addEventListener('mousedown', handleClick);
+    return () => document.removeEventListener('mousedown', handleClick);
+  }, []);
+
+  const handleClick = () => {
+    if (disabled) return;
+    setOpen(prev => !prev);
+  };
+
+  const handleOptionClick = value => {
+    onChange(value);
+    setOpen(false);
+  };
 
   return (
     <div
@@ -44,9 +54,7 @@ function Dropdown({ value, onChange, disabled = false }) {
         className={styles.button}
         type="button"
         disabled={disabled}
-        onClick={() => {
-          if (!disabled) setOpen(prev => !prev)
-        }}
+        onClick={handleClick}
       >
         <span>{selectedOption?.label}</span>
         <img
@@ -62,10 +70,7 @@ function Dropdown({ value, onChange, disabled = false }) {
           {options.map(option => (
             <li
               key={option.value}
-              onClick={() => {
-                onChange(option.value)
-                setOpen(false)
-              }}
+              onClick={() => handleOptionClick(option.value)}
             >
               {option.label}
             </li>
@@ -73,7 +78,7 @@ function Dropdown({ value, onChange, disabled = false }) {
         </ul>
       )}
     </div>
-  )
+  );
 }
 
-export default Dropdown
+export default Dropdown;
