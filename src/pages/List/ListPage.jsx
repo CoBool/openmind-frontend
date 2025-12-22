@@ -7,6 +7,8 @@ import BoxButton from '../../components/Button/BoxButton';
 import { useEffect, useMemo, useState } from 'react';
 import { instance } from '../../services/instance';
 import ListItem from './ListItems';
+import MoreMenu from '../../components/Editmenu/Moremenu';
+import Reaction from '../../components/Reaction/Reaction';
 
 function List() {
   const navigate = useNavigate();

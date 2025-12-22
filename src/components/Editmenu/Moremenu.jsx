@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
-import MoreIcon from '../../assets/Icon/More.svg?react';
+import MoreIcon from '../../assets/Icon/More.svg';
 import EditMenu from './Editmenu';
-import styles from './MoreMenu.module.css';
+import styles from './Moremenu.module.css';
 
 // 드롭다운 기능 겹쳐 추후 재사용 가능하도록 수정
 function MoreMenu({ disabled = false, onEdit, onDelete }) {
@@ -41,14 +41,14 @@ function MoreMenu({ disabled = false, onEdit, onDelete }) {
         disabled={disabled}
         onClick={handleToggle}
       >
-        <MoreIcon className={styles.moreIcon} />
+        <img src={MoreIcon} className={styles.moreIcon} />
       </button>
 
       {open && (
         <EditMenu
           disabled={disabled}
           onEdit={createMenu(onEdit)}
-          onDelete={closeMenu(onDelete)}
+          onDelete={createMenu(onDelete)}
         />
       )}
     </div>
