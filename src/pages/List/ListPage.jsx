@@ -7,6 +7,8 @@ import BoxButton from '../../components/Button/BoxButton';
 import { useEffect, useMemo, useState } from 'react';
 import { instance } from '../../services/instance';
 import ListItem from './ListItems';
+import MoreMenu from '../../components/Editmenu/Moremenu';
+import Reaction from '../../components/Reaction/Reaction';
 
 // 한 페이지에 표시할 아이템 갯수
 const LIMIT = 8
