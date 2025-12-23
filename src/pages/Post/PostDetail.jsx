@@ -30,7 +30,7 @@ import ThumbsUp from '@/assets/Icon/thumbs-up.svg';
 import ThumbsDown from '@/assets/Icon/thumbs-down.svg';
 import styles from './PostDetail.module.css';
 
-const TRIGGER_POINT = 2;
+import styles from './Post.shared.module.css';
 
 export default function PostDetail() {
   const { subjectId } = useParams();
@@ -64,7 +64,9 @@ export default function PostDetail() {
     return null;
   }
 
-  const isEmpty = questions?.results?.length === 0;
+  if (loading && !questions) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <main>
