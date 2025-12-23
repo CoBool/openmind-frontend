@@ -1,4 +1,4 @@
-import styles from './EditMenu.module.css';
+import styles from './Editmenu.module.css';
 import EditIcon from '../../assets/Icon/Edit.svg';
 import CloseIcon from '../../assets/Icon/Close.svg';
 
