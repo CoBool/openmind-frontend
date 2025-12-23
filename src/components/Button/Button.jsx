@@ -3,12 +3,11 @@ import styles from './Button.module.css';
 const buttonSizes = {
   sm: styles.sm,
   md: styles.md,
-  mdFixed: styles.mdFixed,
 };
 /**
  * 박스형 버튼 컴포넌트
  * @param {React.ReactNode} children - 버튼 안에 표시될 내용
- * @param {'sm' | 'md'| 'mdFixed'} size - 버튼 크기 (기본: md)
+ * @param {'sm' | 'md'} size - 버튼 크기 (기본: md)
  * @param {boolean} disabled - 버튼 비활성화 여부 (기본: false)
  * @param {string} className - 외부에서 추가할 스타일
  */
