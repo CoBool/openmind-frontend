@@ -59,6 +59,13 @@ export default function PostDetail() {
     return <div className={shared.pageFallback}>로딩 중...</div>;
   }
 
+  if (error) {
+    navigate('/');
+    return null;
+  }
+
+  const isEmpty = questions?.results?.length === 0;
+
   return (
     <main>
       <PostHeader subject={subject} />
