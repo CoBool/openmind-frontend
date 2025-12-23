@@ -11,6 +11,7 @@ const buttonVariants = {
   size: {
     sm: styles.sm,
     md: styles.md,
+    mdFixed: styles.mdFixed,
   },
 };
 /**

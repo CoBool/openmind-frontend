@@ -4,14 +4,18 @@ import BoxButton from '../../components/Button/BoxButton';
 import { createSubject } from '../../services/subjectsApi';
 import styles from './index.module.css';
 import Logo from '../../assets/images/logo.png';
-export default function Home() {
+
+function Home() {
   const [name, setName] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = async e => {
     e.preventDefault();
 
-    if (!name.trim()) return;
+    if (!name.trim()) {
+      alert('이름을 입력해주세요.');
+      return;
+    }
 
     try {
       const data = await createSubject({ name });
@@ -29,14 +33,16 @@ export default function Home() {
   return (
     <div className={styles.background}>
       <div className={styles.contentsWrap}>
+        <div className={styles.logoWrap}>
+          <img src={Logo} className={styles.logo} alt="logo" />
+        </div>
+
         <div className={styles.askBtn}>
-          <BoxButton isArrow color="beige" onClick={goToAsk}>
+          <BoxButton isArrow variant="beige" onClick={goToAsk}>
             질문하러 가기
           </BoxButton>
           <Link to="/list"></Link>
         </div>
-
-        <img src={Logo} className={styles.logo} alt="logo" />
 
         <div className={styles.formBox}>
           <form className={styles.formWrap} onSubmit={handleSubmit}>
@@ -47,10 +53,14 @@ export default function Home() {
               value={name}
               onChange={handleNameChange}
             />
-            <BoxButton size={'sizeMainBrown'}>질문받기</BoxButton>
+            <BoxButton variant="brown" size="mdFixed">
+              질문받기
+            </BoxButton>
           </form>
         </div>
       </div>
     </div>
   );
 }
+
+export default Home;
