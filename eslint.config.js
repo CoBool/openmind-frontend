@@ -1,3 +1,4 @@
+import path from 'path';
 import js from '@eslint/js';
 import globals from 'globals';
 import reactHooks from 'eslint-plugin-react-hooks';
@@ -31,17 +32,20 @@ export default defineConfig([
     settings: {
       'import/resolver': {
         node: {
-          extensions: ['.js', '.jsx'],
+          extensions: ['.js', '.jsx', '.svg'],
         },
         alias: {
-          map: [['@', './src']],
-          extensions: ['.js', '.jsx'],
+          map: [['@', path.resolve('./src')]],
+          extensions: ['.js', '.jsx', '.svg'],
         },
       },
     },
     rules: {
       'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
-      'import/no-unresolved': ['error', { caseSensitive: true }],
+      'import/no-unresolved': [
+        'error',
+        { caseSensitive: true, caseSensitiveStrict: true },
+      ],
     },
   },
 ]);

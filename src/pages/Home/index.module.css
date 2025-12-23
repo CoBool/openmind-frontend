@@ -60,18 +60,19 @@
 @media (max-width: 375px) {
   .background {
     height: 100vh;
-    padding: 80px 64px 0 63px;
+    padding: 80px 35px 0;
   }
 
   .askBtn {
-    top: 115px;
-    transform: translateX(-50%);
+    position: static;
   }
 
   .contentsWrap {
-    gap: 82px;
+    gap: 24px;
   }
-
+  .logoWrap {
+    padding: 0 28px;
+  }
   .logo {
     margin-top: 0;
   }
@@ -79,6 +80,7 @@
   .formBox {
     width: 305px;
     padding: 24px;
+    box-sizing: border-box;
   }
 
   .nameInput {

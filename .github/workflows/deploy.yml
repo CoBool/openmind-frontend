@@ -27,19 +27,28 @@ jobs:
       - name: Connect to Tailscale VPN
         uses: tailscale/github-action@v2
         with:
-          authkey: ${{ secrets.TAILSCALE_AUTHKEY }}
-          version: 1.42.0
+          oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
+          oauth-secret: ${{ secrets.TS_OAUTH_CLIENT_SECRET }}
+          tags: tag:ci
 
       # 3. 기존 파일 깔끔하게 비우기
       - name: Clean up target directory
         uses: appleboy/ssh-action@v1.0.0
         with:
           host: ${{ secrets.SERVER_IP }}
-          username: ${{ secrets.SSH_USER }}
+          username: saokm1
           key: ${{ secrets.SSH_KEY }}
+          port: 22
+          command_timeout: 30m
           script: |
+            # 디버깅: 현재 접속 계정 확인
+            echo "Current User: $(whoami)"
+
+            # 폴더 초기화 (삭제 후 재생성)
             rm -rf /home/${{ secrets.SSH_USER }}/www/openmind
             mkdir -p /home/${{ secrets.SSH_USER }}/www/openmind
+
+            echo "✅ 청소 완료"
 
       # 4. 빌드된 결과물을 서버로 전송 (SCP)
       - name: Deploy Files to Nginx
