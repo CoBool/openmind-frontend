@@ -52,12 +52,7 @@ function Button({
   const classNames = `${styles.button} ${typeClass} ${variantClass} ${sizeClass} ${className}`;
 
   return (
-    <button
-      className={classNames}
-      disabled={disabled}
-      {...restProps}
-      variant="brown"
-    >
+    <button className={classNames} disabled={disabled} {...restProps}>
       {children}
       {isArrow && type === 'box' && (
         <img src={arrowBrown} alt="화살표 이미지" />
