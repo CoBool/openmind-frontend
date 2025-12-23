@@ -1,0 +1,32 @@
+.detailCard {
+  display: flex;
+  max-width: 750px;
+  margin: 0 auto;
+  flex-direction: column;
+  border-radius: 16px;
+  background-color: var(--brown-10);
+  border: 1px solid var(--brown-30);
+  padding-bottom: 16px;
+  box-sizing: border-box;
+}
+
+.detailCardHeader {
+  padding: 16px;
+}
+
+.detailCardTitle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  text-align: center;
+  gap: 8px;
+}
+
+.detailCardContent {
+  padding: 0 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-sizing: border-box;
+}

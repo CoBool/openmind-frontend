@@ -1,26 +1,15 @@
 import { useCallback, useState, useEffect, useRef } from 'react';
-import { useParams } from 'react-router';
+import { useParams, useNavigate } from 'react-router';
 
 import { useInfiniteScroll } from '@/hooks/useInfiniteScroll';
 
 import { getSubject } from '@/services/subjectsApi';
 import { getSubjectQuestions, reactToQuestion } from '@/services/questionsApi';
-import { getTimeAgo } from '@/utils/date';
 
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-  CardFooter,
-} from '@/components/Card';
+import { Card, CardContent } from '@/components/Card';
 
-import Messages from '@/assets/Icon/Messages.svg';
-import ThumbsUp from '@/assets/Icon/thumbs-up.svg';
-import ThumbsDown from '@/assets/Icon/thumbs-down.svg';
-
-import styles from './PostDetail.module.css';
+import { QuestionHeader, QuestionCard, QuestionEmpty } from './components';
+import styles from './Post.shared.module.css';
 
 const TRIGGER_POINT = 2;
 
@@ -29,6 +18,8 @@ export default function PostDetail() {
   const [subject, setSubject] = useState({});
   const [questions, setQuestions] = useState({});
   const [offset, setOffset] = useState(null);
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   const reactionLoding = useRef(false);
 
@@ -38,7 +29,7 @@ export default function PostDetail() {
         const data = await getSubject(subjectId);
         setSubject(data);
       } catch {
-        console.error('404 Not Found');
+        setError(true);
       }
     };
     const fetchQuestions = async () => {
@@ -55,7 +46,7 @@ export default function PostDetail() {
           setOffset(null);
         }
       } catch {
-        console.error('404 Not Found');
+        setError(true);
       }
     };
     fetchSubject();
@@ -124,99 +115,37 @@ export default function PostDetail() {
     }
   };
 
+  if (error) {
+    navigate('/');
+    return null;
+  }
+
+  const isEmpty = questions?.results?.length === 0;
+
   return (
     <main>
       <Card className={styles.detailCard}>
-        <CardHeader className={styles.detailCardHeader}>
-          <CardTitle className={styles.detailCardTitle}>
-            <img src={Messages} />
-            {questions.count}개의 질문이 있습니다
-          </CardTitle>
-        </CardHeader>
+        <QuestionHeader questions={questions} />
 
         <CardContent className={styles.detailCardContent}>
-          {questions &&
+          {isEmpty ? (
+            <QuestionEmpty />
+          ) : (
+            questions &&
             questions.results?.map((question, index) => {
               const isTriggerPoint =
                 index === questions.results.length - TRIGGER_POINT;
 
               return (
-                <Card
+                <QuestionCard
                   key={question.id}
-                  className={styles.detailItem}
+                  question={question}
+                  onReaction={handleReaction}
                   ref={isTriggerPoint ? ref : null}
-                >
-                  <CardHeader className={styles.detailItemHeader}>
-                    <span
-                      className={`${styles.detailItemBadge} ${question.answer ? styles.badgeComplete : styles.badgePending}`}
-                    >
-                      {question.answer ? '답변 완료' : '미답변'}
-                    </span>
-                    <CardDescription className={styles.detailItemQuestion}>
-                      <h2 className={styles.detailItemQuestionCreatedAt}>
-                        질문 · {getTimeAgo(question.createdAt)}
-                      </h2>
-                      <h1 className={styles.detailItemQuestionTitle}>
-                        {question.content}
-                      </h1>
-                    </CardDescription>
-                  </CardHeader>
-
-                  {question?.answer && (
-                    <CardContent className={styles.detailItemAnswer}>
-                      <div className={styles.detailItemAnswerThumbnail}>
-                        <img
-                          className={styles.detailItemAnswerThumbnailImage}
-                          src={subject.imageSource}
-                          alt={subject.name}
-                        />
-                      </div>
-                      <div className={styles.detailItemAnswerContent}>
-                        <div className={styles.detailItemAnswerAuthor}>
-                          <span className={styles.detailItemAnswerAuthorName}>
-                            {subject.name}
-                          </span>
-                          <span
-                            className={styles.detailItemAnswerAuthorCreatedAt}
-                          >
-                            {getTimeAgo(question.answer?.createdAt)}
-                          </span>
-                        </div>
-                        <div className={styles.detailItemAnswerDescription}>
-                          {question.answer?.content}
-                        </div>
-                      </div>
-                    </CardContent>
-                  )}
-                  <CardFooter className={styles.detailItemFooter}>
-                    <div className={styles.detailItemFooterReactions}>
-                      <button
-                        className={styles.detailItemFooterReactionsButton}
-                        onClick={() => handleReaction(question.id, 'like')}
-                      >
-                        <img src={ThumbsUp} />
-                        <span
-                          className={styles.detailItemFooterReactionsButtonText}
-                        >
-                          좋아요 {question.like}
-                        </span>
-                      </button>
-                      <button
-                        className={styles.detailItemFooterReactionsButton}
-                        onClick={() => handleReaction(question.id, 'dislike')}
-                      >
-                        <img src={ThumbsDown} />
-                        <span
-                          className={styles.detailItemFooterReactionsButtonText}
-                        >
-                          싫어요 {question.dislike}
-                        </span>
-                      </button>
-                    </div>
-                  </CardFooter>
-                </Card>
+                />
               );
-            })}
+            })
+          )}
         </CardContent>
       </Card>
     </main>

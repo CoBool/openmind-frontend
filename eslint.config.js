@@ -45,6 +45,7 @@ export default defineConfig([
       'import/no-unresolved': [
         'error',
         { caseSensitive: true, caseSensitiveStrict: true },
+        { ignore: ['\\.svg\\?react$'] },
       ],
     },
   },
