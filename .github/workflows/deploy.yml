@@ -29,16 +29,9 @@ jobs:
       - name: Connect to Tailscale VPN
         uses: tailscale/github-action@v2
         with:
-<<<<<<< HEAD
           oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
           oauth-secret: ${{ secrets.TS_OAUTH_CLIENT_SECRET }}
           tags: tag:ci
-=======
-          oauth-client-id: ${{ secrets.TAILSCALE_OAUTH_CLIENT_ID }}
-          oauth-secret: ${{ secrets.TAILSCALE_OAUTH_SECRET }}
-          # tags: tag:ci
-          version: 1.42.0
->>>>>>> b74503b (Comment out tags line in deploy.yml)
 
       # 3. 기존 파일 정리
       - name: Clean up target directory
