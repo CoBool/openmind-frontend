@@ -7,8 +7,6 @@ import BoxButton from '../../components/Button/BoxButton';
 import { useEffect, useMemo, useState } from 'react';
 import { instance } from '../../services/instance';
 import ListItem from './ListItems';
-import MoreMenu from '../../components/Editmenu/Moremenu';
-import Reaction from '../../components/Reaction/Reaction';
 
 function List() {
   const navigate = useNavigate();
@@ -103,7 +101,7 @@ function List() {
         />
         <div className={styles.listButton}>
           <BoxButton isArrow variant="beige" onClick={goToAnswer}>
-            질문하러 가기
+            답변하러 가기
           </BoxButton>
         </div>
       </header>
