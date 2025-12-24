@@ -1,0 +1,156 @@
+/* QuestionModal.module.css */
+
+/* 배경 오버레이 */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--gray-20);
+  backdrop-filter: blur(20px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* 모달 박스*/
+.modal {
+  background: var(--gray-10);
+  width: 612px;
+  border-radius: 24px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ========================================
+  헤더 (질문을 작성하세요 + X버튼)
+   ======================================== */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.titleWrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.icon {
+  width: 28px;
+  height: 28px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 30px;
+  margin: 0;
+  color: var(--gray-60, #000);
+}
+
+/* X 버튼 - 28x28 */
+.closeButton {
+  width: 28px;
+  height: 28px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: var(--gray-40);
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+}
+
+.closeButton:hover {
+  color: var(--gray-60, #000);
+}
+
+/* ========================================
+  받는 사람 (To. 아초는고양이)
+   ======================================== */
+.recipient {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 28px;
+  margin-bottom: 12px;
+}
+
+.toLabel {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+  color: var(--gray-60);
+}
+
+.avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.recipientName {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+  color: var(--gray-60);
+}
+
+/* ========================================
+  입력 영역
+   ======================================== */
+.textarea {
+  width: 100%;
+  height: 180px;
+  padding: 16px;
+  background-color: var(--gray-30);
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  line-height: 22px;
+  resize: none;
+  color: var(--gray-60);
+  box-sizing: border-box;
+}
+
+.textarea::placeholder {
+  color: var(--gray-40);
+}
+
+.textarea:focus {
+  outline: none;
+  border-color: var(--brown-40);
+}
+
+/* ========================================
+  제출 버튼 - Button 컴포넌트 
+   ======================================== */
+.submitButton {
+  width: 100% !important;
+}
+
+/* ========================================
+  반응형
+   ======================================== */
+@media (max-width: 768px) {
+  .modal {
+    width: 90%;
+    padding: 24px;
+  }
+
+  .textarea,
+  .submitButton {
+    width: 100% !important;
+  }
+}
