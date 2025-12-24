@@ -128,18 +128,3 @@
   cursor: pointer;
   padding: 4px 0;
 }
-
-/* Aliases for component in src/components/Answer/AnswerCard/AnswerCard.jsx */
-.meta { margin-bottom: 12px; }
-.questionTitle { font-size: 16px; font-weight: 700; color: #222; margin: 0 0 12px; line-height: 1.4; }
-
-.primaryButton { composes: primaryBtn; }
-.secondaryButton { composes: reactionBtn; }
-
-/* Fallback if CSS Modules 'composes' isn't supported by tooling */
-.primaryButton { width: 100%; border: none; border-radius: 12px; padding: 12px 14px; font-weight: 700; cursor: pointer; background: #3b82f6; color: #fff; }
-.primaryButton:disabled { opacity: 0.6; cursor: not-allowed; }
-.secondaryButton { border: 1px solid #e6e6e6; background: #fff; border-radius: 10px; padding: 8px 12px; cursor: pointer; }
-
-
-.textareaWrap { width: 100%; }
