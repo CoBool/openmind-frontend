@@ -7,7 +7,7 @@ import { RouterProvider } from 'react-router/dom';
 import Home from './pages/Home/index.jsx';
 import List from './pages/List/ListPage.jsx';
 import PostDetail from './pages/Post/PostDetail.jsx';
-import Answer from './pages/Answer/index.jsx';
+import PostAnswer from './pages/Post/PostAnswer.jsx';
 import Layout from './components/layout/Layout.jsx';
 
 import './index.css';
@@ -34,7 +34,7 @@ const router = createBrowserRouter([
           },
           {
             path: ':subjectId/answer',
-            Component: Answer,
+            Component: PostAnswer,
           },
         ],
       },
