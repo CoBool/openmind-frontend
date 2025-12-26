@@ -48,8 +48,6 @@ export default function PostDetail() {
           />
         </CardContent>
       </Card>
-
-      <button>테스트 질문 작성하기.</button>
     </main>
   );
 }
