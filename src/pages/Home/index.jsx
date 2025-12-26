@@ -17,6 +17,7 @@ import ArrowRight from '@/assets/Icon/Arrow-right.svg?react';
 
 function Home() {
   const [name, setName] = useState('');
+  const [showAlert, setShowAlert] = useState(false);
   const navigate = useNavigate();
   const { showToast } = useToast();
   const { onLogin } = useAuth();
