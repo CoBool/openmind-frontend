@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import Modal from '../Modal/Modal';
 import Button from '../Button/Button';
+import TextArea from '../TextArea/TextArea';
+import QuestionTarget from './QuestionTarget';
+import ModalHeader from './ModalHeader';
 import { createQuestion } from '@/services/questionsApi';
 import styles from './QuestionModal.module.css';
-import Messages from '@/assets/Icon/Messages.svg';
-import Close from '@/assets/Icon/Close.svg';
 
 /**
  * 질문 작성 모달 컴포넌트 (API 연동 완료)
@@ -43,10 +44,12 @@ function QuestionModal({ isOpen, onClose, recipient, subjectId, onSuccess }) {
       // 성공 시 처리
       setContent(''); // 입력창 비우기
       onClose(); // 모달 닫기
+
       onSuccess(newQuestion); // 부모에게 새 질문 데이터 전달
       console.log('onSuccess  성공내역 ', newQuestion);
     } catch (error) {
       // 실패 시 에러 처리
+
       console.error('질문 등록 실패:', error);
       alert('질문 등록에 실패했습니다. 다시 시도해주세요.');
     } finally {
@@ -59,58 +62,21 @@ function QuestionModal({ isOpen, onClose, recipient, subjectId, onSuccess }) {
   return (
     <Modal isOpen={isOpen} onClose={handleClose}>
       <div className={styles.content}>
-        {/* ========================================
-            헤더: 제목 + 닫기 버튼
-            ======================================== */}
-        <div className={styles.header}>
-          {/* 제목 영역 */}
-          <div className={styles.titleWrapper}>
-            <img className={styles.icon} src={Messages} alt="메시지 아이콘" />
-            <h2 className={styles.title}>질문을 작성하세요</h2>
-          </div>
+        {/* 헤더: 제목 + 닫기  X 버튼 */}
+        <ModalHeader onClose={handleClose} />
+        {/* 받는 사람 정보*/}
+        <QuestionTarget target={recipient} />
 
-          {/* 닫기 버튼 (X 버튼) */}
-          <button
-            className={styles.closeButton}
-            onClick={handleClose}
-            type="button"
-          >
-            {/* 닫기 */}
-            <img src={Close} alt="닫기" />
-          </button>
-        </div>
-
-        {/* ========================================
-            받는 사람 정보 표시
-            ======================================== */}
-        <div className={styles.recipient}>
-          <span className={styles.toLabel}>To.</span>
-
-          {/* 프로필 이미지 */}
-          <img
-            className={styles.profileImg}
-            src={recipient.imageSource}
-            alt=""
-          />
-
-          {/* 받는 사람 이름 */}
-          <span className={styles.recipientName}>{recipient.name}</span>
-        </div>
-
-        {/* =================
-            질문 입력 영역
-            ================= */}
-        <textarea
-          className={styles.textarea}
+        {/* 질문 입력창 */}
+        <TextArea
           placeholder="질문을 입력해주세요"
           value={content}
           onChange={e => setContent(e.target.value)}
           disabled={isSubmitting}
+          className={styles.textarea}
         />
 
-        {/* =================
-            제출 버튼
-            ================= */}
+        {/* 제출 버튼 */}
         <Button
           className={styles.submitButton}
           onClick={handleSubmit} // 클릭하면 질문 전송
