@@ -1,8 +1,11 @@
-import { QuestionCard, QuestionEmpty } from '../';
+import { CardContent } from '@/components/Card';
+
+import { QuestionCard, QuestionEmpty, QuestionAnswer } from '../';
 
 const TRIGGER_POINT = 2;
 
 export default function QuestionList({
+  subject,
   questions,
   handleReaction,
   triggerRef,
@@ -27,7 +30,11 @@ export default function QuestionList({
             onReaction={handleReaction}
             // 트리거 포인트에만 ref 연결
             ref={isTriggerPoint ? triggerRef : null}
-          />
+          >
+            {question.answer && (
+              <QuestionAnswer answer={question.answer} subject={subject} />
+            )}
+          </QuestionCard>
         );
       })}
     </>

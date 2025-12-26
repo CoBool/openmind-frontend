@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router';
 
 import { useSubject } from './hooks/useSubject';
@@ -13,18 +14,23 @@ export default function PostDetail() {
   const { subjectId } = useParams();
   const navigate = useNavigate();
 
-  const { subject } = useSubject(subjectId);
+  const { subject, error } = useSubject(subjectId);
 
-  const { questions, loading, error, triggerRef, handleReaction } =
+  const { questions, loading, triggerRef, handleReaction } =
     useQuestionList(subjectId);
 
-  if (error) {
-    navigate('/');
-    return null;
+  useEffect(() => {
+    if (error) {
+      navigate('/list', { replace: true });
+    }
+  }, [error, navigate]);
+
+  if (loading) {
+    return <div className={styles.pageFallback}>로딩 중...</div>;
   }
 
-  if (loading && !questions) {
-    return <div>Loading...</div>;
+  if (error) {
+    return null;
   }
 
   return (
@@ -35,6 +41,7 @@ export default function PostDetail() {
 
         <CardContent className={styles.detailCardContent}>
           <QuestionList
+            subject={subject}
             questions={questions}
             handleReaction={handleReaction}
             triggerRef={triggerRef}

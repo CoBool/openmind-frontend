@@ -1,11 +1,10 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState, useRef, useEffect } from 'react';
 
 const AvatarContext = createContext();
 
 import styles from './Avatar.module.css';
 
 const AVATAR_STATUS = {
-  IDLE: 'idle',
   LOADING: 'loading',
   LOADED: 'loaded',
   ERROR: 'error',
@@ -20,7 +19,7 @@ const useAvatar = () => {
 };
 
 function Avatar({ className = '', children, ...props }) {
-  const [status, setStatus] = useState(AVATAR_STATUS.IDLE);
+  const [status, setStatus] = useState(AVATAR_STATUS.LOADING);
   // 👇 구조 제약은 ref로 관리
   const imageRegisteredRef = useRef(false);
 
@@ -33,8 +32,8 @@ function Avatar({ className = '', children, ...props }) {
   );
 }
 
-function AvatarImage({ className, src, alt, ...props }) {
-  const { setStatus, imageRegisteredRef } = useAvatar();
+function AvatarImage({ className = '', src, alt, ...props }) {
+  const { status, setStatus, imageRegisteredRef } = useAvatar();
 
   useEffect(() => {
     if (imageRegisteredRef.current) {
@@ -43,25 +42,45 @@ function AvatarImage({ className, src, alt, ...props }) {
     }
 
     imageRegisteredRef.current = true;
-
     return () => {
       imageRegisteredRef.current = false;
     };
   }, []);
+
+  useEffect(() => {
+    let cancelled = false;
+    const img = new Image();
+
+    img.onload = () => {
+      if (!cancelled) setStatus(AVATAR_STATUS.LOADED);
+    };
+
+    img.onerror = () => {
+      if (!cancelled) setStatus(AVATAR_STATUS.ERROR);
+    };
+
+    img.src = src;
+
+    return () => {
+      cancelled = true;
+    };
+  }, [src, setStatus]);
+
+  if (status !== AVATAR_STATUS.LOADED) {
+    return null;
+  }
 
   return (
     <img
       className={`${styles.avatarImage} ${className}`}
       src={src}
       alt={alt}
-      onLoad={() => setStatus(AVATAR_STATUS.LOADED)}
-      onError={() => setStatus(AVATAR_STATUS.ERROR)}
       {...props}
     />
   );
 }
 
-function AvatarFallback({ className, ...props }) {
+function AvatarFallback({ className = '', ...props }) {
   const { status } = useAvatar();
 
   if (status === AVATAR_STATUS.LOADED) return null;
