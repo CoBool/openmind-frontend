@@ -49,50 +49,50 @@ body {
 }
 
 /* TYPOGRAPHY STYLES             */
-.h1 {
+.font-h1 {
   font-size: 40px;
   line-height: 1;
 }
 
-.h2 {
+.font-h2 {
   font-size: 32px;
   line-height: 1;
 }
 
-.h3 {
+.font-h3 {
   font-size: 24px;
   line-height: 1;
 }
 
-.body1 {
+.font-body1 {
   font-size: 20px;
   line-height: 25px;
 }
 
-.body2 {
+.font-body2 {
   font-size: 18px;
   line-height: 24px;
 }
 
-.body3 {
+.font-body3 {
   font-size: 16px;
   line-height: 22px;
 }
 
-.caption1 {
+.font-caption1 {
   font-size: 14px;
   line-height: 18px;
 }
 
 /* Font Weight */
-.regular {
+.font-regular {
   font-weight: 400;
 }
 
-.medium {
+.font-medium {
   font-weight: 500;
 }
 
-.bold {
+.font-bold {
   font-weight: 600;
 }
