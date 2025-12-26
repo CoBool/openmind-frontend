@@ -8,10 +8,13 @@ import Logo from '@/assets/images/logo.png';
 import InputField from '@/components/InputField/InputField';
 import PersonIcon from '@/assets/Icon/Person.svg?react';
 
+import { useAuth } from '@/provider/AuthPrivder';
+
 function Home() {
   const [name, setName] = useState('');
   const navigate = useNavigate();
   const { showToast } = useToast();
+  const { onLogin } = useAuth();
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -23,6 +26,12 @@ function Home() {
 
     try {
       const data = await createSubject({ name });
+
+      onLogin({
+        name: data.name,
+        id: data.id,
+      });
+
       navigate(`/post/${data.id}/answer`);
     } catch (error) {
       console.error(error);

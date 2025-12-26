@@ -4,6 +4,8 @@ import { createRoot } from 'react-dom/client';
 import { createBrowserRouter } from 'react-router';
 import { RouterProvider } from 'react-router/dom';
 
+import { AuthProvider } from './provider/AuthPrivder.jsx';
+
 import Home from './pages/Home/index.jsx';
 import List from './pages/List/ListPage.jsx';
 import PostDetail from './pages/Post/PostDetail.jsx';
@@ -44,8 +46,10 @@ const router = createBrowserRouter([
 ]);
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <ToastProvider>
-      <RouterProvider router={router} />
-    </ToastProvider>
+    <AuthProvider>
+      <ToastProvider>
+        <RouterProvider router={router} />
+      </ToastProvider>
+    </AuthProvider>
   </StrictMode>
 );
