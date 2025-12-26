@@ -1,8 +1,8 @@
 import { createContext, useContext, useState, useRef, useEffect } from 'react';
 
-const AvatarContext = createContext();
-
 import styles from './Avatar.module.css';
+
+const AvatarContext = createContext(null);
 
 const AVATAR_STATUS = {
   LOADING: 'loading',
@@ -45,7 +45,7 @@ function AvatarImage({ className = '', src, alt, ...props }) {
     return () => {
       imageRegisteredRef.current = false;
     };
-  }, []);
+  }, [imageRegisteredRef]);
 
   useEffect(() => {
     let cancelled = false;

@@ -3,17 +3,26 @@ import { CardContent } from '@/components/Card';
 
 import { getTimeAgo } from '@/utils/date';
 
+import styles from './QuestionAnswer.module.css';
+
 export default function QuestionAnswer({ answer, subject }) {
+  console.log(answer);
   return (
-    <CardContent>
-      <Avatar>
+    <CardContent className={styles.answerCard}>
+      <Avatar className={styles.avatar}>
         <Avatar.Image src={subject.imageSource} alt={subject.name} />
         <Avatar.Fallback>테스트</Avatar.Fallback>
       </Avatar>
-      <span>
-        {subject.name} || {getTimeAgo(answer.createdAt)}
-      </span>
-      <p>{answer.content}</p>
+      <div className={styles.answerContent}>
+        <header className={styles.answerHeader}>
+          <span className={styles.authorName}>{subject.name}</span>
+          <span className={styles.divider}>·</span>
+          <span className={styles.createdAt}>
+            {getTimeAgo(answer.createdAt)}
+          </span>
+        </header>
+        <p className={styles.answerContentText}>{answer.content}</p>
+      </div>
     </CardContent>
   );
 }
