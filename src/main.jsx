@@ -11,6 +11,7 @@ import PostAnswer from './pages/Post/PostAnswer.jsx';
 import Layout from './components/layout/Layout.jsx';
 
 import './index.css';
+import { ToastProvider } from './contexts/Toast/ToastCopy.jsx';
 
 const router = createBrowserRouter([
   {
@@ -43,6 +44,8 @@ const router = createBrowserRouter([
 ]);
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <ToastProvider>
+      <RouterProvider router={router} />
+    </ToastProvider>
   </StrictMode>
 );

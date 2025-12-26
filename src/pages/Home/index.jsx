@@ -1,26 +1,23 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { createSubject } from '../../services/subjectsApi';
+import { createSubject } from '@/services/subjectsApi';
+import { useToast } from '@/contexts/Toast/ToastCopy';
 import styles from './index.module.css';
-import BoxButton from '../../components/Button/BoxButton';
-import Logo from '../../assets/images/logo.png';
-import InputField from '../../components/InputField/InputField';
-import PersonIcon from '../../assets/Icon/Person.svg?react';
+import BoxButton from '@/components/Button/BoxButton';
+import Logo from '@/assets/images/logo.png';
+import InputField from '@/components/InputField/InputField';
+import PersonIcon from '@/assets/Icon/Person.svg?react';
 
 function Home() {
   const [name, setName] = useState('');
-  const [showAlert, setShowAlert] = useState(false);
   const navigate = useNavigate();
+  const { showToast } = useToast();
 
   const handleSubmit = async e => {
     e.preventDefault();
 
     if (!name.trim()) {
-      setShowAlert(true);
-
-      setTimeout(() => {
-        setShowAlert(false);
-      }, 2000);
+      showToast('이름을 입력해주세요');
       return;
     }
 
@@ -39,12 +36,6 @@ function Home() {
 
   return (
     <div className={styles.background}>
-      {showAlert && (
-        // 토스트
-        <div className={styles.alertWrap}>
-          <span className={`font-body2`}>이름을 입력해주세요</span>
-        </div>
-      )}
       <div className={styles.contentsWrap}>
         <div className={styles.logoWrap}>
           <img src={Logo} className={styles.logo} alt="logo" />
