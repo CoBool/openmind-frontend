@@ -30,3 +30,15 @@
   gap: 20px;
   box-sizing: border-box;
 }
+
+.modalTrigger {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.modalContent {
+  position: fixed;
+  top: 50px;
+  left: 0;
+}

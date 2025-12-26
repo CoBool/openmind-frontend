@@ -10,6 +10,11 @@ import { QuestionHeader, QuestionList } from './components';
 
 import styles from './Post.shared.module.css';
 
+import { Modal } from '@/components/ModalProvider/ModalProvider';
+import { TestModal } from './components/TestModal/TestModal';
+
+import { createQuestion } from '@/services/questionsApi';
+
 export default function PostDetail() {
   const { subjectId } = useParams();
   const navigate = useNavigate();
@@ -33,6 +38,11 @@ export default function PostDetail() {
     return null;
   }
 
+  const handleSubmit = async text => {
+    const newQuestion = await createQuestion(subjectId, { content: text });
+    console.log('newQuestion', newQuestion);
+  };
+
   return (
     <main>
       <Card className={styles.detailCard}>
@@ -48,6 +58,15 @@ export default function PostDetail() {
           />
         </CardContent>
       </Card>
+
+      <Modal>
+        <Modal.Trigger className={styles.modalTrigger}>
+          고오급진 모달 컴포넌트 트리거
+        </Modal.Trigger>
+        <Modal.Content className={styles.modalContent}>
+          <TestModal callback={handleSubmit} />
+        </Modal.Content>
+      </Modal>
     </main>
   );
 }
