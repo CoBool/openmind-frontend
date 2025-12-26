@@ -15,6 +15,8 @@ import { TestModal } from './components/TestModal/TestModal';
 
 import { createQuestion } from '@/services/questionsApi';
 
+import { Skeleton } from '@/components/Skeleton/Skeleton';
+
 export default function PostDetail() {
   const { subjectId } = useParams();
   const navigate = useNavigate();
