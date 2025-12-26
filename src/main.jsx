@@ -25,6 +25,10 @@ const router = createBrowserRouter([
       { index: true, Component: Home },
       { path: 'list', Component: List },
       {
+        path: '/ModalTest',
+        element: <ModalTest />,
+      },
+      {
         path: 'post',
         children: [
           { path: ':subjectId', Component: PostDetail },
