@@ -1,5 +1,3 @@
-import { CardContent } from '@/components/Card';
-
 import { QuestionCard, QuestionEmpty, QuestionAnswer } from '../';
 
 const TRIGGER_POINT = 2;

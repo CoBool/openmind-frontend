@@ -10,18 +10,26 @@ export default function QuestionAnswer({ answer, subject }) {
   return (
     <CardContent className={styles.answerCard}>
       <Avatar className={styles.avatar}>
-        <Avatar.Image src={subject.imageSource} alt={subject.name} />
-        <Avatar.Fallback>테스트</Avatar.Fallback>
+        <Avatar.Image src={subject?.imageSource + '/sss'} alt={subject?.name} />
+        <Avatar.Fallback>{subject?.name}</Avatar.Fallback>
       </Avatar>
       <div className={styles.answerContent}>
         <header className={styles.answerHeader}>
-          <span className={styles.authorName}>{subject.name}</span>
+          <span className={styles.authorName}>{subject?.name}</span>
           <span className={styles.divider}>·</span>
           <span className={styles.createdAt}>
             {getTimeAgo(answer.createdAt)}
           </span>
         </header>
-        <p className={styles.answerContentText}>{answer.content}</p>
+        {answer.isRejected ? (
+          <p
+            className={`${styles.answerContentText} ${styles.answerContentTextRejected}`}
+          >
+            답변 거절
+          </p>
+        ) : (
+          <p className={styles.answerContentText}>{answer.content}</p>
+        )}
       </div>
     </CardContent>
   );
