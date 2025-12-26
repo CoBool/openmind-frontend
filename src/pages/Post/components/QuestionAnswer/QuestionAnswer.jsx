@@ -10,7 +10,7 @@ export default function QuestionAnswer({ answer, subject }) {
   return (
     <CardContent className={styles.answerCard}>
       <Avatar className={styles.avatar}>
-        <Avatar.Image src={subject?.imageSource + '/sss'} alt={subject?.name} />
+        <Avatar.Image src={subject?.imageSource} alt={subject?.name} />
         <Avatar.Fallback>{subject?.name}</Avatar.Fallback>
       </Avatar>
       <div className={styles.answerContent}>
