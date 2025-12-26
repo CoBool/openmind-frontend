@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { getSubject } from '@/services/subjectsApi';
 
 export const useSubject = subjectId => {
-  const [subject, setSubject] = useState({});
+  const [subject, setSubject] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
