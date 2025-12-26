@@ -32,6 +32,11 @@ import styles from './PostDetail.module.css';
 
 import styles from './Post.shared.module.css';
 
+import { Modal } from '@/components/ModalProvider/ModalProvider';
+import { TestModal } from './components/TestModal/TestModal';
+
+import { createQuestion } from '@/services/questionsApi';
+
 export default function PostDetail() {
   const { subjectId } = useParams();
 
@@ -72,6 +77,11 @@ export default function PostDetail() {
   if (error) {
     return null;
   }
+
+  const handleSubmit = async text => {
+    const newQuestion = await createQuestion(subjectId, { content: text });
+    console.log('newQuestion', newQuestion);
+  };
 
   return (
     <main>
