@@ -9,7 +9,7 @@ import List from './pages/List/ListPage.jsx';
 import PostDetail from './pages/Post/PostDetail.jsx';
 import Answer from './pages/Answer/index.jsx';
 import Layout from './components/layout/Layout.jsx';
-
+import ModalTest from './components/Modal/ModalTest.jsx';
 import './index.css';
 
 const router = createBrowserRouter([
@@ -24,6 +24,10 @@ const router = createBrowserRouter([
       {
         path: 'list',
         Component: List,
+      },
+      {
+        path: '/ModalTest',
+        element: <ModalTest />,
       },
       {
         path: 'post',
