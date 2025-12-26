@@ -59,13 +59,18 @@ export default function PostDetail() {
     return <div className={shared.pageFallback}>로딩 중...</div>;
   }
 
-  if (error) {
-    navigate('/');
-    return null;
+  useEffect(() => {
+    if (error) {
+      navigate('/list', { replace: true });
+    }
+  }, [error, navigate]);
+
+  if (loading) {
+    return <div className={styles.pageFallback}>로딩 중...</div>;
   }
 
-  if (loading && !questions) {
-    return <div>Loading...</div>;
+  if (error) {
+    return null;
   }
 
   return (
