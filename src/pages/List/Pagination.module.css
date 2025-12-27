@@ -4,9 +4,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  /*1*/
-  gap: 16.5px;
-  margin: 20px 0;
+  gap: 7.5px;
   font-family: 'Actor', sans-serif;
   margin-top: 46px;
 }

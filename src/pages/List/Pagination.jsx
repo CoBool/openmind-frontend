@@ -1,6 +1,6 @@
 import ArrowLeft from '../../assets/Icon/Pagination-left.svg';
 import ArrowRight from '../../assets/Icon/Pagination-right.svg';
-import { getPagination } from '../../utils/pagination';
+import { getPagination } from './hooks/pagination';
 import styles from './Pagination.module.css';
 
 // 한 그룹당 페이지 수
@@ -12,12 +12,12 @@ function Pagination({ totalCount, page, setPage, limit }) {
       limit,
     });
 
-  if (totalPage <= 1) return null;
+  if (totalPage === 0) return null;
 
   // 이전 페이지 이동
   const handlePrev = () => {
     if (isFirstPage) return;
-    setPage(perv => perv - 1);
+    setPage(prev => prev - 1);
   };
 
   // 다음 페이지 이동
