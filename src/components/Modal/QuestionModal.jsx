@@ -1,33 +1,25 @@
 import { useState } from 'react';
-import Modal from '../Modal/Modal';
-import Button from '../Button/Button';
-import TextArea from '../TextArea/TextArea';
-import QuestionTarget from './QuestionTarget';
-import ModalHeader from './ModalHeader';
-import { createQuestion } from '@/services/questionsApi';
+import Modal from '@/components/Modal/Modal';
+import Button from '@/components/Button/Button';
+import TextArea from '@/components/TextArea/TextArea';
+import QuestionTarget from '@/components/Modal/QuestionTarget';
+import ModalHeader from '@/components/Modal/ModalHeader';
+import { useToast } from '@/contexts/Toast/ToastCopy';
 import styles from './QuestionModal.module.css';
 
 /**
- * 질문 작성 모달 컴포넌트 (API 연동 완료)
- *
- * 질문을 작성하고 서버에 전송
+ * 질문 작성 모달 컴포넌트
  *
  * @param {boolean} isOpen - 모달 열림/닫힘 (true/false)
  * @param {function} onClose - 모달 닫기 함수
  * @param {object} recipient - 받는 사람 정보 { name, imageSource }
- * @param {number} subjectId - 질문 받을 사람의 ID (서버 전송 시 필요)
- * @param {function} onSuccess - 질문 등록 성공 시 실행할 함수
+ * @param {function} onSuccess - 질문 제출 시 실행할 콜백 함수 (content를 인자로 받음)
  */
-function QuestionModal({ isOpen, onClose, recipient, subjectId, onSuccess }) {
-  // 질문 내용 상태
-  // 사용자가 textarea에 입력하는 내용을 저장
+function QuestionModal({ isOpen, onClose, recipient, onSuccess }) {
+  // 입력 내용 상태
   const [content, setContent] = useState('');
-
-  // 전송 중 상태
-  // true: API 호출 중 (버튼 비활성화, 중복 클릭 방지)
-  // false: 대기 중
   const [isSubmitting, setIsSubmitting] = useState(false);
-
+  const { showToast } = useToast();
   // 모달 닫았을 시 내용 삭제
   const handleClose = () => {
     setContent('');
@@ -38,19 +30,17 @@ function QuestionModal({ isOpen, onClose, recipient, subjectId, onSuccess }) {
     setIsSubmitting(true);
 
     try {
-      // API 호출
-      const newQuestion = await createQuestion(subjectId, { content });
+      // 부모가 전달한 callback 실행 (content만 전달)
+      await onSuccess(content);
 
       // 성공 시 처리
-      setContent(''); // 입력창 비우기
-      onClose(); // 모달 닫기
-      alert('질문 등록 성공했습니다.!');
-      onSuccess(newQuestion); // 부모에게 새 질문 데이터 전달
-      console.log('onSuccess  성공내역 ', newQuestion);
+      setContent('');
+      onClose();
+      showToast('질문이 등록되었습니다');
     } catch (error) {
       // 실패 시 에러 처리
       console.error('질문 등록 실패:', error);
-      alert('질문 등록에 실패했습니다. 다시 시도해주세요.');
+      showToast('질문 등록에 실패했습니다');
     } finally {
       setIsSubmitting(false); // 버튼 보이게
     }
