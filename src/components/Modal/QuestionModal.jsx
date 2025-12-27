@@ -44,17 +44,14 @@ function QuestionModal({ isOpen, onClose, recipient, subjectId, onSuccess }) {
       // 성공 시 처리
       setContent(''); // 입력창 비우기
       onClose(); // 모달 닫기
-
+      alert('질문 등록 성공했습니다.!');
       onSuccess(newQuestion); // 부모에게 새 질문 데이터 전달
       console.log('onSuccess  성공내역 ', newQuestion);
     } catch (error) {
       // 실패 시 에러 처리
-
       console.error('질문 등록 실패:', error);
       alert('질문 등록에 실패했습니다. 다시 시도해주세요.');
     } finally {
-      // 전송 종료
-      alert('질문 등록 성공했습니다.!');
       setIsSubmitting(false); // 버튼 보이게
     }
   };
