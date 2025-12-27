@@ -4,6 +4,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  /*1*/
   gap: 16.5px;
   margin: 20px 0;
   font-family: 'Actor', sans-serif;

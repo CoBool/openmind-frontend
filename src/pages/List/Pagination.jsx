@@ -32,6 +32,8 @@ function Pagination({ totalCount, page, setPage, limit }) {
     setPage(targetPage);
   };
 
+  // 2
+
   return (
     <div className={styles.pagination}>
       <button
