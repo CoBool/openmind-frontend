@@ -1,24 +1,37 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import BoxButton from '../../components/Button/BoxButton';
-import { createSubject } from '../../services/subjectsApi';
+import { createSubject } from '@/services/subjectsApi';
+import { useToast } from '@/contexts/Toast/ToastCopy';
 import styles from './index.module.css';
-import Logo from '../../assets/images/logo.png';
+import BoxButton from '@/components/Button/BoxButton';
+import Logo from '@/assets/images/logo.png';
+import InputField from '@/components/InputField/InputField';
+import PersonIcon from '@/assets/Icon/Person.svg?react';
+
+import { useAuth } from '@/provider/AuthPrivder';
 
 function Home() {
   const [name, setName] = useState('');
   const navigate = useNavigate();
+  const { showToast } = useToast();
+  const { onLogin } = useAuth();
 
   const handleSubmit = async e => {
     e.preventDefault();
 
     if (!name.trim()) {
-      alert('이름을 입력해주세요.');
+      showToast('이름을 입력해주세요');
       return;
     }
 
     try {
       const data = await createSubject({ name });
+
+      onLogin({
+        name: data.name,
+        id: data.id,
+      });
+
       navigate(`/post/${data.id}/answer`);
     } catch (error) {
       console.error(error);
@@ -46,15 +59,15 @@ function Home() {
 
         <div className={styles.formBox}>
           <form className={styles.formWrap} onSubmit={handleSubmit}>
-            <input
-              type="text"
-              placeholder="이름을 입력하세요"
-              className={styles.nameInput}
+            <InputField
+              id="name"
+              placeholder="이름을 입력하세요."
               value={name}
               onChange={handleNameChange}
+              icon={PersonIcon}
             />
             <BoxButton variant="brown" size="mdFixed">
-              질문받기
+              질문 받기
             </BoxButton>
           </form>
         </div>
