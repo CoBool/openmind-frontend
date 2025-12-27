@@ -1,9 +1,11 @@
-import js from '@eslint/js'
-import globals from 'globals'
-import reactHooks from 'eslint-plugin-react-hooks'
-import reactRefresh from 'eslint-plugin-react-refresh'
-import prettier from 'eslint-config-prettier'
-import { defineConfig, globalIgnores } from 'eslint/config'
+import path from 'path';
+import js from '@eslint/js';
+import globals from 'globals';
+import reactHooks from 'eslint-plugin-react-hooks';
+import reactRefresh from 'eslint-plugin-react-refresh';
+import prettier from 'eslint-config-prettier';
+import importPlugin from 'eslint-plugin-import';
+import { defineConfig, globalIgnores } from 'eslint/config';
 
 export default defineConfig([
   globalIgnores(['dist']),
@@ -24,8 +26,27 @@ export default defineConfig([
         sourceType: 'module',
       },
     },
+    plugins: {
+      import: importPlugin,
+    },
+    settings: {
+      'import/resolver': {
+        node: {
+          extensions: ['.js', '.jsx', '.svg'],
+        },
+        alias: {
+          map: [['@', path.resolve('./src')]],
+          extensions: ['.js', '.jsx', '.svg'],
+        },
+      },
+    },
     rules: {
       'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
+      'import/no-unresolved': [
+        'error',
+        { caseSensitive: true, caseSensitiveStrict: true },
+        { ignore: ['\\.svg\\?react$'] },
+      ],
     },
   },
-])
+]);

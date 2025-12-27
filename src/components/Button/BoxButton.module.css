@@ -90,6 +90,12 @@
   line-height: 22px;
 }
 
+.mdFixed {
+  padding: 12px 24px;
+  font-size: 16px;
+  line-height: 22px;
+}
+
 /* ========================================
   반응형: 모바일 (375px 이하)
   md 버튼이 모바일에서 작아짐

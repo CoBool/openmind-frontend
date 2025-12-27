@@ -1,34 +1,49 @@
-import styles from './EditMenu.module.css';
-import EditIcon from '../../assets/Icon/Edit.svg';
-import CloseIcon from '../../assets/Icon/Close.svg';
+// src/components/common/Editmenu/Editmenu.jsx
+import { useEffect, useRef, useState } from 'react';
+import styles from './Editmenu.module.css';
 
-function EditMenu({ disabled = false, onEdit, onDelete }) {
-  const handleEdit = () => {
-    if (disabled) return;
+export default function Editmenu({ onEdit, onDelete }) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef(null);
+
+  const handleToggleMenu = () => setOpen((v) => !v);
+
+  const handleClickEdit = () => {
+    setOpen(false);
     onEdit?.();
   };
 
-  const handleDelete = () => {
-    if (disabled) return;
+  const handleClickDelete = () => {
+    setOpen(false);
     onDelete?.();
   };
 
-  return (
-    <ul className={`${styles.editMenu} ${disabled ? styles.disabled : ''}`}>
-      <li className={styles.menuItem} onClick={handleEdit}>
-        <img src={EditIcon} className={styles.icon} />
-        <span>수정하기</span>
-      </li>
+  useEffect(() => {
+    const handler = (e) => {
+      if (!ref.current) return;
+      if (!ref.current.contains(e.target)) setOpen(false);
+    };
 
-      <li
-        className={`${styles.menuItem} ${styles.delete}`}
-        onClick={handleDelete}
-      >
-        <img src={CloseIcon} className={styles.icon} />
-        <span>삭제하기</span>
-      </li>
-    </ul>
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, []);
+
+  return (
+    <div className={styles.wrap} ref={ref}>
+      <button type="button" className={styles.kebab} onClick={handleToggleMenu}>
+        ...
+      </button>
+
+      {open && (
+        <div className={styles.menu}>
+          <button type="button" className={styles.item} onClick={handleClickEdit}>
+            수정하기
+          </button>
+          <button type="button" className={styles.itemDanger} onClick={handleClickDelete}>
+            삭제하기
+          </button>
+        </div>
+      )}
+    </div>
   );
 }
-
-export default EditMenu;

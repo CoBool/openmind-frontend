@@ -2,10 +2,18 @@ import MessagesIcon from '../../assets/Icon/Messages.svg';
 import ProfileImg from '../../assets/images/profile.png';
 import styles from './ListItems.module.css';
 
+import { useNavigate } from 'react-router-dom';
+
 // 리스트 아이템 컴포넌트
 function ListItem({ item }) {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/post/${item.id}`);
+  };
+
   return (
-    <div className={styles.listItem}>
+    <div className={styles.listItem} onClick={handleClick}>
       <img src={ProfileImg} alt="프로필 이미지" className={styles.profile} />
 
       <div className={styles.name}>{item.name}</div>
