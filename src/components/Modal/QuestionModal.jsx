@@ -39,7 +39,6 @@ function QuestionModal({ isOpen, onClose, recipient, onSuccess }) {
       showToast('질문이 등록되었습니다');
     } catch (error) {
       // 실패 시 에러 처리
-
       console.error('질문 등록 실패:', error);
       showToast('질문 등록에 실패했습니다');
     } finally {
