@@ -32,13 +32,6 @@ import styles from './PostDetail.module.css';
 
 import styles from './Post.shared.module.css';
 
-import { Modal } from '@/components/ModalProvider/ModalProvider';
-import { TestModal } from './components/TestModal/TestModal';
-
-import { createQuestion } from '@/services/questionsApi';
-
-import { Skeleton } from '@/components/Skeleton/Skeleton';
-
 export default function PostDetail() {
   const { subjectId } = useParams();
 
@@ -66,24 +59,13 @@ export default function PostDetail() {
     return <div className={shared.pageFallback}>로딩 중...</div>;
   }
 
-  useEffect(() => {
-    if (error) {
-      navigate('/list', { replace: true });
-    }
-  }, [error, navigate]);
+  if (subjectError) {
+    return <PostDetailError />;
+  }
 
-  if (loading) {
+  if (subjectLoading || questionListLoading) {
     return <div className={styles.pageFallback}>로딩 중...</div>;
   }
-
-  if (error) {
-    return null;
-  }
-
-  const handleSubmit = async text => {
-    const newQuestion = await createQuestion(subjectId, { content: text });
-    console.log('newQuestion', newQuestion);
-  };
 
   return (
     <main>
