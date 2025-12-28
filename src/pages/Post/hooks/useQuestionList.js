@@ -13,7 +13,9 @@ const getNextOffset = url => {
   return new URL(url).searchParams.get('offset');
 };
 
-export const useQuestionList = subjectId => {
+export const useQuestionList = (subjectId, options = {}) => {
+  const { enabled = false } = options;
+
   const [questions, setQuestions] = useState({});
   const [offset, setOffset] = useState(null);
   const [error, setError] = useState(null);
@@ -35,10 +37,14 @@ export const useQuestionList = subjectId => {
       }
     };
 
-    if (subjectId) {
+    if (subjectId && enabled) {
       fetchQuestions();
+    } else if (!enabled) {
+      setLoading(true);
+    } else {
+      setLoading(false);
     }
-  }, [subjectId]);
+  }, [subjectId, enabled]);
 
   const fetchMoreQuestions = useCallback(async () => {
     if (!offset) return;
