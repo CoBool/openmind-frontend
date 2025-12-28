@@ -1,12 +1,17 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 
+<<<<<<< HEAD
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import { AuthProvider } from './provider/AuthPrivder.jsx';
 import { Toaster } from './components/Toast/Toaster.jsx';
 
 import { AuthProvider } from './provider/AuthPrivder.jsx';
+=======
+import { createBrowserRouter } from 'react-router';
+import { RouterProvider } from 'react-router/dom';
+>>>>>>> ca8b2ea (fix: main.jsx 복구 (빌드 필수 파일))
 
 import { AuthProvider } from './provider/AuthPrivder.jsx';
 
