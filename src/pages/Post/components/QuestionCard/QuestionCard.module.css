@@ -69,15 +69,24 @@
   gap: 6px;
 }
 
-.reactionButton:hover {
+.reactionButton:hover:not([disabled]) {
   color: var(--blue);
 }
 
-.reactionButton:hover .reactionButtonIcon {
+.reactionButton:hover:not([disabled]) .reactionButtonIcon {
   filter: brightness(0) saturate(100%) invert(39%) sepia(96%) saturate(2416%)
     hue-rotate(203deg) brightness(95%) contrast(101%);
 }
 
 .reactionButtonText {
   font-size: 16px;
+}
+
+.reactionButton.active {
+  color: var(--blue);
+}
+
+.reactionButton.active .reactionButtonIcon {
+  filter: brightness(0) saturate(100%) invert(39%) sepia(96%) saturate(2416%)
+    hue-rotate(203deg) brightness(95%) contrast(101%);
 }
