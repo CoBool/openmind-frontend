@@ -5,15 +5,12 @@ import styles from './ListPage.module.css';
 import { useNavigate } from 'react-router-dom';
 import BoxButton from '../../components/Button/BoxButton';
 import { useEffect, useMemo, useState } from 'react';
-import { instance } from '../../services/instance';
 import ListItem from './ListItems';
-import MoreMenu from '../../components/Editmenu/Moremenu';
-import Reaction from '../../components/Reaction/Reaction';
+import { useSubjects } from './hooks/subjectApi';
 
 function List() {
   const navigate = useNavigate();
 
-  const [list, setList] = useState([]);
   const [page, setPage] = useState(1);
 
   const [limit, setLimit] = useState(getLimitWidth());
@@ -30,6 +27,12 @@ function List() {
     return 6;
   }
 
+  const { list, totalCount } = useSubjects({
+    page,
+    limit,
+    sort: sortType === 'name' ? 'name' : 'time',
+  });
+
   // 창 크기 변경시 limit 재설정
   useEffect(() => {
     const handleResize = () => {
@@ -38,26 +41,6 @@ function List() {
     };
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  // 아이템 불러오기 함수
-  useEffect(() => {
-    const fetchAllItems = async () => {
-      try {
-        // 전체 아이템 요청 100개 한도
-        // 추후 변동 가능
-        const response = await instance(`subjects/?limit=100`, {
-          method: 'GET',
-        });
-
-        const data = await response.json();
-        setList(data.results);
-      } catch (e) {
-        console.error(e);
-      }
-    };
-
-    fetchAllItems();
   }, []);
 
   const totalPage = Math.ceil(list.length / limit);
@@ -103,7 +86,7 @@ function List() {
         />
         <div className={styles.listButton}>
           <BoxButton isArrow variant="beige" onClick={goToAnswer}>
-            질문하러 가기
+            답변하러 가기
           </BoxButton>
         </div>
       </header>
@@ -123,8 +106,8 @@ function List() {
         ))}
       </div>
       <Pagination
-        totalCount={list.length}
-        page={safePage}
+        totalCount={totalCount}
+        page={page}
         setPage={setPage}
         limit={limit}
       />
@@ -133,5 +116,3 @@ function List() {
 }
 
 export default List;
-
-// 데이터 클릭시 개별피드 데이터로 이동

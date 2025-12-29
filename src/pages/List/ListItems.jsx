@@ -1,5 +1,6 @@
 import MessagesIcon from '../../assets/Icon/Messages.svg';
 import ProfileImg from '../../assets/images/profile.png';
+import { Avatar } from '../../components/Avatar';
 import styles from './ListItems.module.css';
 
 import { useNavigate } from 'react-router-dom';
@@ -14,7 +15,10 @@ function ListItem({ item }) {
 
   return (
     <div className={styles.listItem} onClick={handleClick}>
-      <img src={ProfileImg} alt="프로필 이미지" className={styles.profile} />
+      <Avatar className={styles.profile}>
+        <Avatar.Image src={item.imageSource} alt={`${item.name} 프로필`} />
+        <Avatar.Fallback />
+      </Avatar>
 
       <div className={styles.name}>{item.name}</div>
       <div className={styles.question}>
