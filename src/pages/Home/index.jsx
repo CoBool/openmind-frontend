@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { createSubject } from '@/services/subjectsApi';
 import { useToast } from '@/contexts/Toast/Toast';
 import styles from './index.module.css';
+import Container from '@/components/Container/Container';
 import Button from '@/components/Button/Button';
 import Logo from '@/assets/images/logo.png';
 import InputField from '@/components/InputField/InputField';
@@ -46,31 +47,31 @@ function Home() {
 
   return (
     <div className={styles.background}>
-      <div className={styles.contentsWrap}>
-        <div className={styles.logoWrap}>
-          <img src={Logo} className={styles.logo} alt="logo" />
+      <Container>
+        <div className={styles.contentsWrap}>
+          <div className={styles.logoWrap}>
+            <img src={Logo} className={styles.logo} alt="logo" />
+          </div>
+          <div className={styles.askBtnWrap}>
+            <Button onClick={goToAsk} className={styles.askBtn}>
+              질문하러 가기
+              <ArrowRight className={styles.arrowIcon} />
+            </Button>
+          </div>
+          <div className={styles.formBox}>
+            <form className={styles.formWrap} onSubmit={handleSubmit}>
+              <InputField
+                id="name"
+                placeholder="이름을 입력하세요."
+                value={name}
+                onChange={handleNameChange}
+                icon={PersonIcon}
+              />
+              <Button className={styles.getQuestionBtn}>질문 받기</Button>
+            </form>
+          </div>
         </div>
-
-        <div className={styles.askBtnWrap}>
-          <Button onClick={goToAsk} className={styles.askBtn}>
-            질문하러 가기
-            <ArrowRight className={styles.arrowIcon} />
-          </Button>
-        </div>
-
-        <div className={styles.formBox}>
-          <form className={styles.formWrap} onSubmit={handleSubmit}>
-            <InputField
-              id="name"
-              placeholder="이름을 입력하세요."
-              value={name}
-              onChange={handleNameChange}
-              icon={PersonIcon}
-            />
-            <Button className={styles.getQuestionBtn}>질문 받기</Button>
-          </form>
-        </div>
-      </div>
+      </Container>
     </div>
   );
 }

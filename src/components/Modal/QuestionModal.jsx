@@ -4,7 +4,7 @@ import Button from '@/components/Button/Button';
 import TextArea from '@/components/TextArea/TextArea';
 import QuestionTarget from '@/components/Modal/QuestionTarget';
 import ModalHeader from '@/components/Modal/ModalHeader';
-import { useToast } from '@/contexts/Toast/ToastCopy';
+import { useToast } from '@/contexts/Toast/Toast';
 import styles from './QuestionModal.module.css';
 
 /**
