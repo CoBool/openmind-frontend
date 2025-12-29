@@ -36,6 +36,7 @@ export const createSubject = async subject => {
  * @param {number} params.offset 건너뛸 질문 대상 수
  * @param {'time'|'name'} params.sort 정렬 기준
  *
+ * @returns {Promise<any>} 서버 응답을 Promise 형태로 반환
  * @returns {Object} 질문 대상 목록과 메타 데이터
  * @returns {number} returns.count 전체 질문 대상 수
  * @returns {string|null} returns.next 다음 페이지 URL
@@ -43,6 +44,7 @@ export const createSubject = async subject => {
  * @returns {Object[]} returns.results 질문 대상 객체 배열
  *
  * @throws {Error} 질문 대상 목록 조회에 실패한 경우
+ *
  */
 export const getSubjects = async ({
   limit = 8,

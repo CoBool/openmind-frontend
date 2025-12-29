@@ -1,5 +1,4 @@
 import MessagesIcon from '../../assets/Icon/Messages.svg';
-import ProfileImg from '../../assets/images/profile.png';
 import { Avatar } from '../../components/Avatar';
 import styles from './ListItems.module.css';
 

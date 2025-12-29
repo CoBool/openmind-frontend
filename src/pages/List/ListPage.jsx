@@ -155,6 +155,7 @@ function List() {
           onClick={() => navigate('/')}
         />
         <div className={styles.listButton}>
+<<<<<<< HEAD
           <Button onClick={goToAnswer} className={styles.AnsBtn}>
             <span>답변하러 가기</span>
             <img
@@ -163,6 +164,9 @@ function List() {
               className={styles.ButtonImg}
             />
           </Button>
+=======
+          <Button></Button>
+>>>>>>> f9bc7e1 (.)
         </div>
       </header>
       <div className={styles.titleArea}>
