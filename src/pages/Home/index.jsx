@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { createSubject } from '@/services/subjectsApi';
-import { useToast } from '@/contexts/Toast/ToastCopy';
+import { useToast } from '@/contexts/Toast/Toast';
 import styles from './index.module.css';
 import Button from '@/components/Button/Button';
 import Logo from '@/assets/images/logo.png';
