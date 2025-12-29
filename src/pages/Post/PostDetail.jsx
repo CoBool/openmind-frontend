@@ -1,4 +1,4 @@
-import { useParams } from 'react-router';
+import { useParams, Link } from 'react-router';
 
 import { useSubject } from './hooks/useSubject';
 import { useQuestionList } from './hooks/useQuestionList';
@@ -25,6 +25,7 @@ export default function PostDetail() {
     loading: questionListLoading,
     triggerRef,
     handleReaction,
+    reactedQuestions,
   } = useQuestionList(subjectId, { enabled: isQuestionListEnabled });
 
   if (subjectError) {
@@ -45,6 +46,7 @@ export default function PostDetail() {
             subject={subject}
             questions={questions}
             handleReaction={handleReaction}
+            reactedQuestions={reactedQuestions}
             triggerRef={triggerRef}
           />
         </CardContent>

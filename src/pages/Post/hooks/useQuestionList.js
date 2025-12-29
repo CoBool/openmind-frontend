@@ -33,29 +33,9 @@ const getReactionStorage = subjectId => {
  * @param {'like'|'dislike'} reaction.type - 리액션 타입
  */
 const updateReactionStorage = (subjectId, reaction) => {
-  const storage = getReactionStorage(subjectId);
-  storage[reaction.id] = {
-    type: reaction.type,
-    createdAt: new Date().toISOString(),
-  };
   localStorage.setItem(
     REACTION_STORAGE_PREFIX + subjectId,
-    JSON.stringify(storage)
-  );
-};
-
-/**
- * @description 리액션 저장소에서 질문에 대한 리액션을 제거합니다.
- * @param {number} subjectId - 질문 대상의 고유 식별자
- * @param {number} questionId - 질문의 고유 식별자
- */
-const removeReactionStorage = (subjectId, questionId) => {
-  const storage = getReactionStorage(subjectId);
-  delete storage[questionId];
-
-  localStorage.setItem(
-    REACTION_STORAGE_PREFIX + subjectId,
-    JSON.stringify(storage)
+    JSON.stringify(reaction)
   );
 };
 
@@ -74,6 +54,8 @@ export const useQuestionList = (subjectId, options = {}) => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  const reactedQuestionsRef = useRef(new Map());
+
   useEffect(() => {
     if (!subjectId || !enabled) return;
     const fetchQuestions = async () => {
@@ -82,6 +64,12 @@ export const useQuestionList = (subjectId, options = {}) => {
         const data = await getSubjectQuestions(subjectId);
         setQuestions(data);
         setOffset(getNextOffset(data?.next));
+
+        const storage = getReactionStorage(subjectId);
+
+        reactedQuestionsRef.current = new Map(
+          Object.entries(storage).map(([key, value]) => [Number(key), value])
+        );
       } catch (error) {
         setError(error);
       } finally {
@@ -123,27 +111,44 @@ export const useQuestionList = (subjectId, options = {}) => {
   };
 
   const handleReaction = async (questionId, reactionType) => {
+    const id = Number(questionId);
     // 1. 중복 클릭 방지
-    const currentReaction = getReactionStorage(subjectId);
-    if (currentReaction[questionId]) return;
+    if (reactedQuestionsRef.current.has(id)) {
+      return;
+    }
 
-    const reaction = {
-      id: questionId,
+    // 2. 메모리(Ref) 업데이트 (중복 방지)
+    const newReaction = {
+      id,
       type: reactionType,
+      createdAt: new Date().toISOString(),
     };
+    reactedQuestionsRef.current.set(id, newReaction);
 
-    // 2. 낙관적 업데이트 (화면 먼저 변경)
-    updateReactionCount(questionId, reactionType, +1);
-    updateReactionStorage(subjectId, reaction);
+    // 3. 낙관적 업데이트 (화면 먼저 변경)
+    updateReactionCount(id, reactionType, +1);
+    const currentData = Object.fromEntries(reactedQuestionsRef.current);
+    updateReactionStorage(subjectId, currentData);
 
     try {
-      await reactToQuestion(questionId, { type: reactionType });
+      await reactToQuestion(id, { type: reactionType });
     } catch (error) {
       console.error('Failed to react to question:', error);
-      updateReactionCount(questionId, reactionType, -1);
-      removeReactionStorage(subjectId, questionId);
+      updateReactionCount(id, reactionType, -1);
+      reactedQuestionsRef.current.delete(id);
+
+      const rollbackData = Object.fromEntries(reactedQuestionsRef.current);
+      updateReactionStorage(subjectId, rollbackData);
     }
   };
 
-  return { questions, loading, error, triggerRef, isFetching, handleReaction };
+  return {
+    questions,
+    loading,
+    error,
+    triggerRef,
+    isFetching,
+    reactedQuestions: reactedQuestionsRef.current,
+    handleReaction,
+  };
 };
