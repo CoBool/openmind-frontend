@@ -4,8 +4,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 16.5px;
-  margin: 20px 0;
+  gap: 7.5px;
   font-family: 'Actor', sans-serif;
   margin-top: 46px;
 }
@@ -39,10 +38,4 @@
   background: none;
   border: none;
   color: var(--gray-40);
-}
-
-@media (max-width: 1199px) {
-}
-
-@media (max-width: 767px) {
 }

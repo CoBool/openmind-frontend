@@ -1,21 +1,39 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import BoxButton from '../../components/Button/BoxButton';
-import { createSubject } from '../../services/subjectsApi';
+import { Link, useNavigate } from 'react-router-dom';
+import { createSubject } from '@/services/subjectsApi';
+import { useToast } from '@/contexts/Toast/Toast';
 import styles from './index.module.css';
-import Logo from '../../assets/images/logo.png';
+import Container from '@/components/Container/Container';
+import Button from '@/components/Button/Button';
+import Logo from '@/assets/images/logo.png';
+import InputField from '@/components/InputField/InputField';
+import PersonIcon from '@/assets/Icon/Person.svg?react';
+import ArrowRight from '@/assets/Icon/Arrow-right.svg?react';
 
-export default function Home() {
+import { useAuth } from '@/provider/AuthPrivder';
+
+function Home() {
   const [name, setName] = useState('');
   const navigate = useNavigate();
+  const { showToast } = useToast();
+  const { onLogin } = useAuth();
 
   const handleSubmit = async e => {
     e.preventDefault();
 
-    if (!name.trim()) return;
+    if (!name.trim()) {
+      showToast('이름을 입력해주세요');
+      return;
+    }
 
     try {
       const data = await createSubject({ name });
+
+      onLogin({
+        name: data.name,
+        id: data.id,
+      });
+
       navigate(`/post/${data.id}/answer`);
     } catch (error) {
       console.error(error);
@@ -23,34 +41,39 @@ export default function Home() {
     }
   };
 
-  const goToAsk = () => navigate('/questions');
+  const goToAsk = () => navigate('/list');
 
   const handleNameChange = e => setName(e.target.value);
 
   return (
-    <div className={styles.background}>
-      <div className={styles.contentsWrap}>
-        <div className={styles.askBtn}>
-          <BoxButton isArrow color="beige" onClick={goToAsk}>
-            질문하러 가기
-          </BoxButton>
-        </div>
-
-        <img src={Logo} className={styles.logo} alt="logo" />
-
-        <div className={styles.formBox}>
-          <form className={styles.formWrap} onSubmit={handleSubmit}>
-            <input
-              type="text"
-              placeholder="이름을 입력하세요"
-              className={styles.nameInput}
-              value={name}
-              onChange={handleNameChange}
-            />
-            <BoxButton size={'sizeMainBrown'}>질문받기</BoxButton>
-          </form>
+    <Container>
+      <div className={styles.background}>
+        <div className={styles.contentsWrap}>
+          <div className={styles.logoWrap}>
+            <img src={Logo} className={styles.logo} alt="logo" />
+          </div>
+          <div className={styles.askBtnWrap}>
+            <Button onClick={goToAsk} className={styles.askBtn}>
+              질문하러 가기
+              <ArrowRight className={styles.arrowIcon} />
+            </Button>
+          </div>
+          <div className={styles.formBox}>
+            <form className={styles.formWrap} onSubmit={handleSubmit}>
+              <InputField
+                id="name"
+                placeholder="이름을 입력하세요."
+                value={name}
+                onChange={handleNameChange}
+                icon={PersonIcon}
+              />
+              <Button className={styles.getQuestionBtn}>질문 받기</Button>
+            </form>
+          </div>
         </div>
       </div>
-    </div>
+    </Container>
   );
 }
+
+export default Home;

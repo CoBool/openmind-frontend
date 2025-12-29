@@ -1,4 +1,4 @@
-import { instance } from './instance'
+import { instance } from './instance';
 
 /**
  * @description URL 파라미터 `subjectId`에 해당하는 질문 대상에게 질문을 생성합니다.
@@ -22,14 +22,14 @@ export const createQuestion = async (subjectId, question) => {
   const response = await instance(`subjects/${subjectId}/questions/`, {
     method: 'POST',
     body: JSON.stringify(question),
-  })
+  });
 
   if (!response.ok) {
-    throw new Error('Failed to create question')
+    throw new Error('Failed to create question');
   }
 
-  return response.json()
-}
+  return response.json();
+};
 
 /**
  * @description URL 파라미터 `subjectId`에 해당하는 질문 대상의 질문 목록을 조회합니다.
@@ -56,14 +56,14 @@ export const getSubjectQuestions = async (
     {
       method: 'GET',
     }
-  )
+  );
 
   if (!response.ok) {
-    throw new Error('Failed to fetch questions')
+    throw new Error('Failed to fetch questions');
   }
 
-  return response.json()
-}
+  return response.json();
+};
 
 /**
  * @description URL 파라미터 `questionId`에 해당하는 질문 정보를 조회합니다.
@@ -84,14 +84,14 @@ export const getSubjectQuestions = async (
 export const getQuestion = async questionId => {
   const response = await instance(`questions/${questionId}/`, {
     method: 'GET',
-  })
+  });
 
   if (!response.ok) {
-    throw new Error('Failed to fetch question')
+    throw new Error('Failed to fetch question');
   }
 
-  return response.json()
-}
+  return response.json();
+};
 
 /**
  * @description URL 파라미터 `questionId`에 해당하는 질문 객체를 삭제합니다.
@@ -105,14 +105,14 @@ export const getQuestion = async questionId => {
 export const deleteQuestion = async questionId => {
   const response = await instance(`questions/${questionId}/`, {
     method: 'DELETE',
-  })
+  });
 
   if (!response.ok) {
-    throw new Error('Failed to delete question')
+    throw new Error('Failed to delete question');
   }
 
-  return null
-}
+  return null;
+};
 
 /**
  * @description URL 파라미터 `questionId`에 해당하는 질문에 리액션을 추가합니다.
@@ -129,11 +129,11 @@ export const reactToQuestion = async (questionId, reaction) => {
   const response = await instance(`questions/${questionId}/reaction/`, {
     method: 'POST',
     body: JSON.stringify(reaction),
-  })
+  });
 
   if (!response.ok) {
-    throw new Error('Failed to react to question')
+    throw new Error('Failed to react to question');
   }
 
-  return response.json()
-}
+  return response.json();
+};

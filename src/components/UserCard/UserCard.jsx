@@ -1,5 +1,5 @@
-import styles from './UserCard.module.css'
-import questionIcon from '../../assets/Icon/Messages.svg'
+import styles from './UserCard.module.css';
+import QuestionIcon from '../../assets/Icon/Messages.svg?react';
 
 function UserCard({ name = '이름 없음', questionCount = 0 }) {
   return (
@@ -7,24 +7,22 @@ function UserCard({ name = '이름 없음', questionCount = 0 }) {
       <div className={styles.userCardWrap}>
         <div className={styles.userProfileWrap}>
           <div className={styles.userImg}></div>
-          <div className={`body1 ${styles.body1Mobile}`}>{name}</div>
+          <div className={`font-body1 ${styles.body1Mobile}`}>{name}</div>
         </div>
         <div className={styles.questionWrap}>
           <div
-            className={`${styles.receivedQuestion} body3 ${styles.body3Mobile}`}
+            className={`${styles.receivedQuestion} font-body3 ${styles.body3Mobile}`}
           >
-            <img
-              src={questionIcon}
-              alt="questionIcon"
-              className={styles.questionIcon}
-            />
+            <QuestionIcon className={styles.questionIcon} />
             받은 질문
           </div>
-          <div className={`body3 ${styles.body3Mobile}`}>{questionCount}개</div>
+          <div className={`font-body3 ${styles.body3Mobile}`}>
+            {questionCount}개
+          </div>
         </div>
       </div>
     </>
-  )
+  );
 }
 
-export default UserCard
+export default UserCard;

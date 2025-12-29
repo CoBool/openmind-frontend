@@ -1,29 +1,45 @@
-import ArrowLeft from '../../assets/Icon/pagination-left.svg'
-import ArrowRight from '../../assets/Icon/pagination-right.svg'
-import styles from './Pagination.module.css'
+import ArrowLeft from '../../assets/Icon/Pagination-left.svg';
+import ArrowRight from '../../assets/Icon/Pagination-right.svg';
+import { getPagination } from './hooks/pagination';
+import styles from './Pagination.module.css';
 
 // 한 그룹당 페이지 수
-const SIZE_PER_PAGE_GROUP = 5
-
 function Pagination({ totalCount, page, setPage, limit }) {
-  const totalPage = Math.ceil(totalCount / limit)
-  if (totalPage <= 1) return null
+  const { totalPage, startPage, endPage, isFirstPage, isLastPage } =
+    getPagination({
+      totalCount,
+      page,
+      limit,
+    });
 
-  // 현재 페이지 그룹 계산
-  const groupedPages = Math.floor((page - 1) / SIZE_PER_PAGE_GROUP)
-  const startPage = groupedPages * SIZE_PER_PAGE_GROUP + 1
-  const endPage = Math.min(startPage + SIZE_PER_PAGE_GROUP - 1, totalPage)
+  if (totalPage === 0) return null;
 
-  // 페이지 이동 함수
-  const handlePrev = () => setPage(prev => Math.max(prev - 1, 1))
-  const handleNext = () => setPage(prev => Math.min(prev + 1, totalPage))
+  // 이전 페이지 이동
+  const handlePrev = () => {
+    if (isFirstPage) return;
+    setPage(prev => prev - 1);
+  };
+
+  // 다음 페이지 이동
+  const handleNext = () => {
+    if (isLastPage) return;
+    setPage(prev => prev + 1);
+  };
+
+  // 특정 페이지 이동
+  const handleMove = targetPage => {
+    if (targetPage === page) return;
+    setPage(targetPage);
+  };
+
+  // 2
 
   return (
     <div className={styles.pagination}>
       <button
         className={styles.pageButtonLeft}
         onClick={handlePrev}
-        disabled={page === 1}
+        disabled={isFirstPage}
       >
         <img src={ArrowLeft} alt="이전 페이지" />
       </button>
@@ -36,7 +52,7 @@ function Pagination({ totalCount, page, setPage, limit }) {
         <button
           key={p}
           className={`${styles.pageButton} ${p === page ? styles.active : ''}`}
-          onClick={() => setPage(p)}
+          onClick={() => handleMove(p)}
         >
           {p}
         </button>
@@ -45,12 +61,12 @@ function Pagination({ totalCount, page, setPage, limit }) {
       <button
         className={styles.pageButtonRight}
         onClick={handleNext}
-        disabled={page === totalPage}
+        disabled={isLastPage}
       >
         <img src={ArrowRight} alt="다음 페이지" />
       </button>
     </div>
-  )
+  );
 }
 
-export default Pagination
+export default Pagination;

@@ -8,6 +8,7 @@
   background-color: #ffffff;
   box-sizing: border-box;
   height: 187px;
+  cursor: pointer;
 }
 
 .profile {
@@ -45,10 +46,4 @@
   font-size: 16px;
   color: var(--gray-40);
   margin-left: auto;
-}
-
-@media (max-width: 1199px) {
-}
-
-@media (max-width: 767px) {
 }

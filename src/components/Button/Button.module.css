@@ -1,0 +1,46 @@
+/* 버튼 공통 스타일 */
+.button {
+  border-radius: 8px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 400;
+  font-size: 16px;
+  width: 100%;
+  border: none;
+  /* 기본 색상 (기존 brown) */
+  background-color: var(--brown-40);
+  color: var(--gray-10);
+}
+
+.button:disabled {
+  cursor: not-allowed;
+  background-color: var(--brown-30);
+}
+
+/* ========================================
+  크기: sm (작은 버튼)
+   ======================================== */
+
+.sm {
+  padding: 8px 12px;
+}
+
+/* ========================================
+  크기: md (중간 버튼, 기본값 - 반응형)
+   ======================================== */
+.md {
+  padding: 12px 24px;
+}
+
+/* ========================================
+  반응형: 모바일 (375px 이하)
+  md만 작아짐
+   ======================================== */
+
+@media (max-width: 375px) {
+  .md {
+    padding: 8px 12px;
+  }
+}
