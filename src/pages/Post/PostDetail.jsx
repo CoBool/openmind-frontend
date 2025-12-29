@@ -3,6 +3,7 @@ import { useParams } from 'react-router';
 import { useSubject } from './hooks/useSubject';
 import { useQuestionList } from './hooks/useQuestionList';
 
+import { Avatar } from '@/components/Avatar';
 import { Card, CardContent } from '@/components/Card';
 import { Dialog, DialogTrigger, DialogContent } from '@/components/Dialog';
 import {
