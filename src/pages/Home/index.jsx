@@ -3,10 +3,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import { createSubject } from '@/services/subjectsApi';
 import { useToast } from '@/contexts/Toast/ToastCopy';
 import styles from './index.module.css';
-import BoxButton from '@/components/Button/BoxButton';
+import Button from '@/components/Button/Button';
 import Logo from '@/assets/images/logo.png';
 import InputField from '@/components/InputField/InputField';
 import PersonIcon from '@/assets/Icon/Person.svg?react';
+import ArrowRight from '@/assets/Icon/Arrow-right.svg?react';
 
 import { useAuth } from '@/provider/AuthPrivder';
 
@@ -50,11 +51,11 @@ function Home() {
           <img src={Logo} className={styles.logo} alt="logo" />
         </div>
 
-        <div className={styles.askBtn}>
-          <BoxButton isArrow variant="beige" onClick={goToAsk}>
+        <div className={styles.askBtnWrap}>
+          <Button onClick={goToAsk} className={styles.askBtn}>
             질문하러 가기
-          </BoxButton>
-          <Link to="/list"></Link>
+            <ArrowRight className={styles.arrowIcon} />
+          </Button>
         </div>
 
         <div className={styles.formBox}>
@@ -66,9 +67,7 @@ function Home() {
               onChange={handleNameChange}
               icon={PersonIcon}
             />
-            <BoxButton variant="brown" size="mdFixed">
-              질문 받기
-            </BoxButton>
+            <Button className={styles.getQuestionBtn}>질문 받기</Button>
           </form>
         </div>
       </div>
