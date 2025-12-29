@@ -11,7 +11,7 @@ import List from './pages/List/ListPage.jsx';
 import PostDetail from './pages/Post/PostDetail.jsx';
 import PostAnswer from './pages/Post/PostAnswer.jsx';
 import Layout from './components/layout/Layout.jsx';
-
+import ModalTest from './components/Modal/ModalTest.jsx';
 import './index.css';
 import { ToastProvider } from './contexts/Toast/ToastCopy.jsx';
 
@@ -27,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: 'list',
         Component: List,
+      },
+      {
+        path: '/ModalTest',
+        element: <ModalTest />,
       },
       {
         path: 'post',
