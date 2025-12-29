@@ -3,10 +3,11 @@ import Dropdown from '../../components/Dropdown/Dropdown';
 import Pagination from './Pagination';
 import styles from './ListPage.module.css';
 import { useNavigate } from 'react-router-dom';
-import BoxButton from '../../components/Button/BoxButton';
 import { useEffect, useMemo, useState } from 'react';
 import ListItem from './ListItems';
 import { useSubjects } from './hooks/subjectApi';
+import arrowBrown from '../../assets/Icon/arrowRightBrown.svg';
+import Button from '../../components/Button/Button';
 
 function List() {
   const navigate = useNavigate();
@@ -85,9 +86,7 @@ function List() {
           onClick={() => navigate('/')}
         />
         <div className={styles.listButton}>
-          <BoxButton isArrow variant="beige" onClick={goToAnswer}>
-            답변하러 가기
-          </BoxButton>
+          <Button></Button>
         </div>
       </header>
       <div className={styles.titleArea}>

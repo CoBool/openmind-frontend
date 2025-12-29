@@ -32,7 +32,11 @@ function Pagination({ totalCount, page, setPage, limit }) {
     setPage(targetPage);
   };
 
-  // 2
+  // 페이지 번호 버튼
+  const pages = Array.from(
+    { length: endPage - startPage + 1 },
+    (_, i) => startPage + i
+  );
 
   return (
     <div className={styles.pagination}>
@@ -44,11 +48,7 @@ function Pagination({ totalCount, page, setPage, limit }) {
         <img src={ArrowLeft} alt="이전 페이지" />
       </button>
 
-      {/* 페이지 번호 버튼들 */}
-      {Array.from(
-        { length: endPage - startPage + 1 },
-        (_, i) => startPage + i
-      ).map(p => (
+      {pages.map(p => (
         <button
           key={p}
           className={`${styles.pageButton} ${p === page ? styles.active : ''}`}
