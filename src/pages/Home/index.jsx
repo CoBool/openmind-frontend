@@ -46,8 +46,8 @@ function Home() {
   const handleNameChange = e => setName(e.target.value);
 
   return (
-    <div className={styles.background}>
-      <Container>
+    <Container>
+      <div className={styles.background}>
         <div className={styles.contentsWrap}>
           <div className={styles.logoWrap}>
             <img src={Logo} className={styles.logo} alt="logo" />
@@ -71,8 +71,8 @@ function Home() {
             </form>
           </div>
         </div>
-      </Container>
-    </div>
+      </div>
+    </Container>
   );
 }
 
