@@ -1,7 +1,10 @@
 import { useMemo } from 'react';
 
+<<<<<<< HEAD
 import { toast } from '@/components/Toast';
 
+=======
+>>>>>>> af1af78 (refactor: 공유버튼 공통 쉐어 컴포넌트로 승격)
 import { useClipboard } from '@/hooks/share';
 import { useKakaoShare } from '@/hooks/share';
 import { useFacebookShare } from '@/hooks/share';
@@ -18,6 +21,7 @@ function ShareButtons({ url, title, description, imageUrl }) {
   const { shareKakao } = useKakaoShare();
   const { shareFacebook } = useFacebookShare();
 
+<<<<<<< HEAD
   const copyAction = useShareAction(() => {
     copy(url);
     toast({
@@ -39,6 +43,13 @@ function ShareButtons({ url, title, description, imageUrl }) {
       description: '페이스북에서 공유되었습니다.',
     });
   });
+=======
+  const copyAction = useShareAction(() => copy(url));
+  const kakaoAction = useShareAction(() =>
+    shareKakao({ url, title, description, imageUrl })
+  );
+  const facebookAction = useShareAction(() => shareFacebook({ url }));
+>>>>>>> af1af78 (refactor: 공유버튼 공통 쉐어 컴포넌트로 승격)
 
   // 버튼 정의는 데이터로 고정 (렌더마다 새 배열 생성 방지)
   const buttons = useMemo(
