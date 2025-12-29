@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import Input from '@/components/common/Input/Input';
 import BoxButton from '../../components/Button/BoxButton';
 import { createSubject } from '../../services/subjectsApi';
 import styles from './index.module.css';
@@ -46,13 +47,7 @@ function Home() {
 
         <div className={styles.formBox}>
           <form className={styles.formWrap} onSubmit={handleSubmit}>
-            <input
-              type="text"
-              placeholder="이름을 입력하세요"
-              className={styles.nameInput}
-              value={name}
-              onChange={handleNameChange}
-            />
+            <Input label="이름" required value={name} onChange={handleNameChange} placeholder="이름을 입력해주세요" />
             <BoxButton variant="brown" size="mdFixed">
               질문받기
             </BoxButton>
