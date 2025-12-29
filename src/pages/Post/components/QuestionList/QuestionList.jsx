@@ -31,7 +31,7 @@ export default function QuestionList({
             onReaction={handleReaction}
             // 트리거 포인트에만 ref 연결
             ref={isTriggerPoint ? triggerRef : null}
-            reaction={reaction ? reaction.type : null}
+            reaction={reaction}
           >
             {question.answer && (
               <QuestionAnswer answer={question.answer} subject={subject} />
