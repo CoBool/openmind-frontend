@@ -3,6 +3,7 @@ import { useParams } from 'react-router';
 import { useSubject } from './hooks/useSubject';
 import { useQuestionList } from './hooks/useQuestionList';
 
+import { Avatar } from '@/components/Avatar';
 import { Card, CardContent } from '@/components/Card';
 import { ShareButtons } from '@/components/ShareButtons';
 import { QuestionHeader, QuestionList, PostDetailError } from './components';
@@ -38,11 +39,25 @@ export default function PostDetail() {
 
   return (
     <main>
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '10px',
+          flexDirection: 'column',
+        }}
+      >
+        <Avatar>
+          <Avatar.Image src={subject.imageSource} alt={subject.name} />
+          <Avatar.Fallback>{subject.name}</Avatar.Fallback>
+        </Avatar>
+        <span>{subject.name}</span>
+      </div>
       <ShareButtons
         url={window.location.href}
-        title={subject.title}
-        description={subject.description}
-        imageUrl={subject.imageUrl}
+        title={`${subject.name}에게 무엇이든 물어보세요.`}
+        description={`익명으로 질문하고, 답변을 확인해보세요.`}
+        imageUrl={subject.imageSource}
       />
       <Card className={styles.detailCard}>
         <QuestionHeader questions={questions} />

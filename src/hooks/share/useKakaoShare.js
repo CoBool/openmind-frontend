@@ -3,7 +3,7 @@ import { useEffect, useCallback } from 'react';
 // 실제 배포 시에는 환경변수로 관리
 const KAKAO_KEY = '3f8c14bb5178f8b8a226d25a3f28454b';
 
-const KAKAO_SDK_URL = 'https://t1.kakaocdn.net/kakao_js_sdk/2.7.1/kakao.min.js';
+const KAKAO_SDK_URL = 'https://t1.kakaocdn.net/kakao_js_sdk/2.7.7/kakao.min.js';
 
 function useKakaoShare() {
   // 1. Kakao SDK 로드 + 초기화
@@ -28,6 +28,9 @@ function useKakaoShare() {
     const script = document.createElement('script');
     script.src = KAKAO_SDK_URL;
     script.async = true;
+    script.integrity =
+      'sha384-tJkjbtDbvoxO+diRuDtwRO9JXR7pjWnfjfRn5ePUpl7e7RJCxKCwwnfqUAdXh53p';
+    script.crossOrigin = 'anonymous';
 
     script.onload = () => {
       if (!window.Kakao) {
