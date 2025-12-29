@@ -25,8 +25,6 @@ export default function QuestionCard({
     onReaction(question.id, type);
   };
 
-  console.log(reaction);
-
   return (
     <Card ref={ref}>
       <CardHeader className={styles.header}>
@@ -58,7 +56,6 @@ export default function QuestionCard({
             onClick={() => {
               handleReaction('like');
             }}
-            disabled={reaction}
           >
             <ThumbsUp className={styles.reactionButtonIcon} />
             <span className={styles.reactionButtonText}>
@@ -70,7 +67,6 @@ export default function QuestionCard({
             onClick={() => {
               handleReaction('dislike');
             }}
-            disabled={reaction}
           >
             <ThumbsDown className={styles.reactionButtonIcon} />
             <span className={styles.reactionButtonText}>
