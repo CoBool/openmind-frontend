@@ -4,7 +4,7 @@ import { useSubject } from './hooks/useSubject';
 import { useQuestionList } from './hooks/useQuestionList';
 
 import { Card, CardContent } from '@/components/Card';
-
+import { ShareButtons } from '@/components/ShareButtons';
 import { QuestionHeader, QuestionList, PostDetailError } from './components';
 
 import styles from './Post.shared.module.css';
@@ -38,6 +38,12 @@ export default function PostDetail() {
 
   return (
     <main>
+      <ShareButtons
+        url={window.location.href}
+        title={subject.title}
+        description={subject.description}
+        imageUrl={subject.imageUrl}
+      />
       <Card className={styles.detailCard}>
         <QuestionHeader questions={questions} />
 
