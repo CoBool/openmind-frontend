@@ -13,32 +13,72 @@ const getNextOffset = url => {
   return new URL(url).searchParams.get('offset');
 };
 
-export const useQuestionList = subjectId => {
+const REACTION_STORAGE_PREFIX = 'reaction:';
+
+/**
+ * @description 리액션 저장소를 조회합니다.
+ * @param {number} subjectId - 질문 대상의 고유 식별자
+ * @returns {Object} 리액션 저장소
+ */
+const getReactionStorage = subjectId => {
+  const storage = localStorage.getItem(REACTION_STORAGE_PREFIX + subjectId);
+  return storage ? JSON.parse(storage) : {};
+};
+
+/**
+ * @description 리액션 저장소를 업데이트합니다.
+ * @param {number} subjectId - 질문 대상의 고유 식별자
+ * @param {Object} reaction - 리액션 객체
+ * @param {number} reaction.id - 리액션의 고유 식별자
+ * @param {'like'|'dislike'} reaction.type - 리액션 타입
+ */
+const updateReactionStorage = (subjectId, reaction) => {
+  localStorage.setItem(
+    REACTION_STORAGE_PREFIX + subjectId,
+    JSON.stringify(reaction)
+  );
+};
+
+/**
+ * @description 질문 목록을 조회하는 훅
+ * @param {number} subjectId - 질문 대상의 고유 식별자
+ * @param {Object} options - 옵션 객체
+ * @param {boolean} options.enabled - 질문 목록 조회 여부
+ * @returns {Object} 질문 목록, 오프셋, 에러, 로딩 상태, 트리거 참조, 페칭 상태, 리액션 핸들러
+ */
+export const useQuestionList = (subjectId, options = {}) => {
+  const { enabled = false } = options;
+
   const [questions, setQuestions] = useState({});
   const [offset, setOffset] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const reactionLoading = useRef(false);
+  const reactedQuestionsRef = useRef(new Map());
 
   useEffect(() => {
+    if (!subjectId || !enabled) return;
     const fetchQuestions = async () => {
       setLoading(true);
       try {
         const data = await getSubjectQuestions(subjectId);
         setQuestions(data);
         setOffset(getNextOffset(data?.next));
-      } catch {
-        setError(true);
+
+        const storage = getReactionStorage(subjectId);
+
+        reactedQuestionsRef.current = new Map(
+          Object.entries(storage).map(([key, value]) => [Number(key), value])
+        );
+      } catch (error) {
+        setError(error);
       } finally {
         setLoading(false);
       }
     };
 
-    if (subjectId) {
-      fetchQuestions();
-    }
-  }, [subjectId]);
+    fetchQuestions();
+  }, [subjectId, enabled]);
 
   const fetchMoreQuestions = useCallback(async () => {
     if (!offset) return;
@@ -59,37 +99,56 @@ export const useQuestionList = subjectId => {
 
   const { ref: triggerRef, isFetching } = useInfiniteScroll(fetchMoreQuestions);
 
-  const handleReaction = async (questionId, reactionType) => {
-    // 1. 중복 클릭 방지
-    if (reactionLoading.current) return;
-    reactionLoading.current = true;
-
-    // 2. 롤백을 위해 이전 상태 저장 (Snapshot)
-    const previousQuestions = questions;
-
-    // 3. 낙관적 업데이트 (화면 먼저 변경)
+  const updateReactionCount = (questionId, reactionType, delta) => {
     setQuestions(prev => ({
       ...prev,
-      results: prev.results.map(question => {
-        if (question.id === questionId) {
-          return {
-            ...question,
-            [reactionType]: question[reactionType] + 1,
-          };
-        }
-        return question;
-      }),
+      results: prev.results.map(q =>
+        q.id === questionId
+          ? { ...q, [reactionType]: q[reactionType] + delta }
+          : q
+      ),
     }));
+  };
+
+  const handleReaction = async (questionId, reactionType) => {
+    const id = Number(questionId);
+    // 1. 중복 클릭 방지
+    if (reactedQuestionsRef.current.has(id)) {
+      return;
+    }
+
+    // 2. 메모리(Ref) 업데이트 (중복 방지)
+    const newReaction = {
+      id,
+      type: reactionType,
+      createdAt: new Date().toISOString(),
+    };
+    reactedQuestionsRef.current.set(id, newReaction);
+
+    // 3. 낙관적 업데이트 (화면 먼저 변경)
+    updateReactionCount(id, reactionType, +1);
+    const currentData = Object.fromEntries(reactedQuestionsRef.current);
+    updateReactionStorage(subjectId, currentData);
 
     try {
-      await reactToQuestion(questionId, { type: reactionType });
+      await reactToQuestion(id, { type: reactionType });
     } catch (error) {
       console.error('Failed to react to question:', error);
-      setQuestions(previousQuestions); // Rollback
-    } finally {
-      reactionLoading.current = false;
+      updateReactionCount(id, reactionType, -1);
+      reactedQuestionsRef.current.delete(id);
+
+      const rollbackData = Object.fromEntries(reactedQuestionsRef.current);
+      updateReactionStorage(subjectId, rollbackData);
     }
   };
 
-  return { questions, loading, error, triggerRef, isFetching, handleReaction };
+  return {
+    questions,
+    loading,
+    error,
+    triggerRef,
+    isFetching,
+    reactedQuestions: reactedQuestionsRef.current,
+    handleReaction,
+  };
 };

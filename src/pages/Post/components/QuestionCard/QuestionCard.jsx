@@ -12,12 +12,20 @@ import ThumbsDown from '@/assets/Icon/thumbsDown.svg?react';
 
 import styles from './QuestionCard.module.css';
 
-export default function QuestionCard({ question, onReaction, ref, children }) {
+export default function QuestionCard({
+  question,
+  onReaction,
+  ref,
+  reaction,
+  children,
+}) {
   const isAnswered = question.answer !== null;
 
   const handleReaction = type => {
     onReaction(question.id, type);
   };
+
+  console.log(reaction);
 
   return (
     <Card ref={ref}>
@@ -44,10 +52,11 @@ export default function QuestionCard({ question, onReaction, ref, children }) {
       <CardFooter>
         <div className={styles.reactions}>
           <button
-            className={styles.reactionButton}
+            className={`${styles.reactionButton} ${reaction === 'like' ? styles.active : ''}`}
             onClick={() => {
               handleReaction('like');
             }}
+            disabled={reaction}
           >
             <ThumbsUp className={styles.reactionButtonIcon} />
             <span className={styles.reactionButtonText}>
@@ -55,10 +64,11 @@ export default function QuestionCard({ question, onReaction, ref, children }) {
             </span>
           </button>
           <button
-            className={styles.reactionButton}
+            className={`${styles.reactionButton} ${reaction === 'dislike' ? styles.active : ''}`}
             onClick={() => {
               handleReaction('dislike');
             }}
+            disabled={reaction}
           >
             <ThumbsDown className={styles.reactionButtonIcon} />
             <span className={styles.reactionButtonText}>
