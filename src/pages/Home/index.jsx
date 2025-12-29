@@ -6,7 +6,6 @@ import { useToast } from '@/contexts/Toast/Toast';
 import { useAuth } from '@/provider/AuthPrivder';
 
 import styles from './index.module.css';
-
 import Container from '@/components/Container/Container';
 import Button from '@/components/Button/Button';
 import InputField from '@/components/InputField/InputField';
