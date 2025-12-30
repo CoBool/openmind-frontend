@@ -3,7 +3,6 @@ import { useParams } from 'react-router';
 import { useSubject } from './hooks/useSubject';
 import { useQuestionList } from './hooks/useQuestionList';
 
-import { Avatar } from '@/components/Avatar';
 import { Card, CardContent } from '@/components/Card';
 import { Dialog, DialogTrigger, DialogContent } from '@/components/Dialog';
 import {
@@ -31,7 +30,7 @@ import ThumbsUp from '@/assets/Icon/thumbs-up.svg';
 import ThumbsDown from '@/assets/Icon/thumbs-down.svg';
 import styles from './PostDetail.module.css';
 
-import styles from './Post.shared.module.css';
+import shared from './Post.shared.module.css';
 
 export default function PostDetail() {
   const { subjectId } = useParams();
