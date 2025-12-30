@@ -51,6 +51,13 @@ body {
   width: 100%;
 }
 
+.loginMessage {
+  margin-top: 16px;
+  text-align: center;
+  font-size: 14px;
+  color: var(--gray-70);
+}
+
 @media (min-width: 768px) and (max-width: 885px) {
   .listContainer {
     grid-template-columns: repeat(3, minmax(187px, 220px));
