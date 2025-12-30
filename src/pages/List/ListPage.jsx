@@ -3,7 +3,6 @@ import Dropdown from '../../components/Dropdown/Dropdown';
 import Pagination from './Pagination';
 import styles from './ListPage.module.css';
 import { useNavigate } from 'react-router-dom';
-import BoxButton from '../../components/Button/BoxButton';
 import { useEffect, useMemo, useState } from 'react';
 import ListItem from './ListItems';
 import { useSubjects } from './hooks/subjectApi';
@@ -156,7 +155,6 @@ function List() {
           onClick={() => navigate('/')}
         />
         <div className={styles.listButton}>
-
           <Button onClick={goToAnswer} className={styles.AnsBtn}>
             <span>답변하러 가기</span>
             <img
