@@ -1,15 +1,15 @@
-import { createContext, useContext, useState } from 'react';
-import styles from './ToastCopy.module.css';
+import { createContext, useCallback, useContext, useState } from 'react';
+import styles from './Toast.module.css';
 
 const ToastContext = createContext(null);
 
 export function ToastProvider({ children }) {
   const [toast, setToast] = useState(null);
 
-  const showToast = msg => {
+  const showToast = useCallback(msg => {
     setToast(msg);
     setTimeout(() => setToast(null), 2000);
-  };
+  }, []);
 
   return (
     <ToastContext.Provider value={{ showToast }}>

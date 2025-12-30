@@ -1,0 +1,104 @@
+.wrap {
+  width: min(560px, calc(100vw - 32px));
+  border-radius: 14px;
+  background: #ffffff;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.18);
+  padding: 18px;
+}
+
+.title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 900;
+  color: rgba(17, 24, 39, 0.9);
+}
+
+.toRow {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.toLabel {
+  font-size: 12px;
+  font-weight: 900;
+  color: rgba(17, 24, 39, 0.6);
+}
+
+.toUser {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.toAvatar {
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  background: radial-gradient(circle at 30% 30%, #dbeafe, #93c5fd);
+  display: grid;
+  place-items: center;
+  font-size: 14px;
+}
+
+.toName {
+  font-size: 12px;
+  font-weight: 800;
+  color: rgba(17, 24, 39, 0.85);
+}
+
+.textarea {
+  margin-top: 12px;
+  width: 100%;
+  min-height: 160px;
+  resize: vertical;
+  border-radius: 12px;
+  border: 1px solid rgba(17, 24, 39, 0.14);
+  padding: 12px;
+  font-size: 13px;
+  line-height: 1.5;
+  background: #fff;
+}
+
+.textarea:focus {
+  outline: none;
+  border-color: rgba(75, 46, 31, 0.55);
+  box-shadow: 0 0 0 3px rgba(75, 46, 31, 0.12);
+}
+
+.submitBtn {
+  margin-top: 12px;
+  width: 100%;
+  height: 42px;
+  border-radius: 12px;
+  border: 1px solid rgba(75, 46, 31, 0.85);
+  background: rgba(75, 46, 31, 0.85);
+  color: #fff;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.submitBtn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.hint {
+  margin: 10px 0 0;
+  font-size: 11px;
+  color: rgba(17, 24, 39, 0.55);
+  text-align: center;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
