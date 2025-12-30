@@ -1,6 +1,7 @@
 // src/components/answer/AnswerCard/AnswerCard.jsx
 import { useMemo, useState } from 'react';
 import styles from './AnswerCard.module.css';
+import Input from '@/components/common/Input/Input';
 
 import Editmenu from '@/components/common/Editmenu/Editmenu';
 import { createAnswer, patchAnswer, deleteAnswer } from '@/services/answersApi';
@@ -123,12 +124,7 @@ export default function AnswerCard({ question, onDeletePost }) {
       {/* ✅ write 모드: 답변 작성 */}
       {mode === 'write' && (
         <>
-          <textarea
-            className={styles.textarea}
-            placeholder="답변을 입력해주세요"
-            value={draft}
-            onChange={handleChangeDraft}
-          />
+          <Input as="textarea" label="답변" required value={draft} onChange={handleChangeDraft} placeholder="답변을 입력해주세요" className={styles.textareaWrap} />
           <button
             className={styles.primaryButton}
             type="button"
@@ -150,12 +146,7 @@ export default function AnswerCard({ question, onDeletePost }) {
       {/* ✅ edit 모드: 수정중 */}
       {mode === 'edit' && (
         <>
-          <textarea
-            className={styles.textarea}
-            placeholder="답변을 입력해주세요"
-            value={editDraft}
-            onChange={handleChangeEditDraft}
-          />
+          <Input as="textarea" label="답변" required value={editDraft} onChange={handleChangeEditDraft} placeholder="답변을 입력해주세요" className={styles.textareaWrap} />
           <button
             className={styles.primaryButton}
             type="button"

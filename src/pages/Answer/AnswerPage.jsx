@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 
-import Card from '../../components/Card/Card'
+import { Card } from '../../components/Card/Card'
 import Editmenu from '../../components/Editmenu/Editmenu'
 import UserCard from '../../components/UserCard/UserCard'
 
