@@ -1,3 +1,4 @@
+export { default as PostHeader } from './PostHeader/PostHeader';
 export { default as QuestionHeader } from './QuestionHeader/QuestionHeader';
 export { default as QuestionCard } from './QuestionCard/QuestionCard';
 export { default as QuestionList } from './QuestionList/QuestionList';
