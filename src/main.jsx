@@ -8,6 +8,8 @@ import { Toaster } from './components/Toast/Toaster.jsx';
 
 import { AuthProvider } from './provider/AuthPrivder.jsx';
 
+import { AuthProvider } from './provider/AuthPrivder.jsx';
+
 import Home from './pages/Home/index.jsx';
 import List from './pages/List/ListPage.jsx';
 import PostDetail from './pages/Post/PostDetail.jsx';
@@ -18,13 +20,10 @@ import './index.css';
 const router = createBrowserRouter([
   {
     path: '/',
+    Component: Layout,
     children: [
       { index: true, Component: Home },
       { path: 'list', Component: List },
-      {
-        path: '/ModalTest',
-        element: <ModalTest />,
-      },
       {
         path: 'post',
         children: [
