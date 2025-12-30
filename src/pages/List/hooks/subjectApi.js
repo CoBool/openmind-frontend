@@ -19,10 +19,10 @@ export const useSubjects = ({ page, limit }) => {
           offset: (page - 1) * limit,
         });
 
-        if (!mounted) return;
-
-        setList(data.results);
-        setTotalCount(data.count);
+        if (mounted) {
+          setList(data.results);
+          setTotalCount(data.count);
+        }
       } catch (e) {
         if (mounted) setError(e);
       } finally {

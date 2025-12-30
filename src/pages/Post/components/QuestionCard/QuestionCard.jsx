@@ -12,7 +12,13 @@ import ThumbsDown from '@/assets/Icon/thumbsDown.svg?react';
 
 import styles from './QuestionCard.module.css';
 
-export default function QuestionCard({ question, onReaction, ref, children }) {
+export default function QuestionCard({
+  question,
+  onReaction,
+  ref,
+  reaction,
+  children,
+}) {
   const isAnswered = question.answer !== null;
 
   const handleReaction = type => {
@@ -42,9 +48,11 @@ export default function QuestionCard({ question, onReaction, ref, children }) {
       </CardHeader>
       {children}
       <CardFooter>
-        <div className={styles.reactions}>
+        <div
+          className={`${styles.reactions} ${reaction ? styles.disabled : ''}`}
+        >
           <button
-            className={styles.reactionButton}
+            className={`${styles.reactionButton} ${reaction?.type === 'like' ? styles.active : ''}`}
             onClick={() => {
               handleReaction('like');
             }}
@@ -55,7 +63,7 @@ export default function QuestionCard({ question, onReaction, ref, children }) {
             </span>
           </button>
           <button
-            className={styles.reactionButton}
+            className={`${styles.reactionButton} ${reaction?.type === 'dislike' ? styles.active : ''}`}
             onClick={() => {
               handleReaction('dislike');
             }}

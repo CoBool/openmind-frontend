@@ -35,10 +35,28 @@
   position: relative;
 }
 
-.askBtn {
+.askBtnWrap {
   position: absolute;
   top: 0;
   right: 0;
+}
+
+button.askBtn {
+  background-color: var(--brown-10);
+  border: 1px solid var(--brown-40);
+  color: var(--brown-40);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+button.askBtn:hover {
+  border: 2px solid var(--brown-40);
+}
+
+.arrowIcon {
+  width: 18px;
+  height: 18px;
 }
 
 .logo {
@@ -60,6 +78,10 @@
   gap: 16px;
 }
 
+button.getQuestionBtn {
+  height: 46px;
+}
+
 @media (max-width: 768px) {
   .background {
     padding: 44px 50px 0;
@@ -72,7 +94,7 @@
     padding: 80px 35px 0;
   }
 
-  .askBtn {
+  .askBtnWrap {
     position: static;
   }
 

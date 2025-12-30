@@ -7,6 +7,7 @@ export default function QuestionList({
   questions,
   handleReaction,
   triggerRef,
+  reactedQuestions,
 }) {
   const isEmpty = !questions?.results || questions.results.length === 0;
 
@@ -21,6 +22,8 @@ export default function QuestionList({
         const isTriggerPoint =
           index === questions.results.length - TRIGGER_POINT;
 
+        const reaction = reactedQuestions.get(question.id);
+
         return (
           <QuestionCard
             key={question.id}
@@ -28,6 +31,7 @@ export default function QuestionList({
             onReaction={handleReaction}
             // 트리거 포인트에만 ref 연결
             ref={isTriggerPoint ? triggerRef : null}
+            reaction={reaction}
           >
             {question.answer && (
               <QuestionAnswer answer={question.answer} subject={subject} />

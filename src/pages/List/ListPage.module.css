@@ -51,15 +51,6 @@ body {
   width: 100%;
 }
 
-.answerButton {
-  background-color: var(--brown-10);
-  border: 1px solid var(--brown-40);
-  color: var(--brown-40);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
 @media (min-width: 768px) and (max-width: 885px) {
   .listContainer {
     grid-template-columns: repeat(3, minmax(187px, 220px));

@@ -6,7 +6,7 @@ const sizeVariants = {
 };
 /**
  * 플로팅 버튼 컴포넌트
- * 화면에 떠있는 둥근 버튼 (질문 작성, 삭제 등)
+ * 둥근 버튼 (질문 작성, 삭제 등)
  *
  * @param {React.ReactNode} children - 버튼 안에 표시될 내용
  * @param {'sm' | 'md'} size - 버튼 크기 (기본: md)
