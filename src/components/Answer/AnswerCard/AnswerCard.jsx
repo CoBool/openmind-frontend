@@ -19,10 +19,13 @@ export default function AnswerCard({ question, onDeletePost }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const canSubmit = useMemo(() => draft.trim().length > 0, [draft]);
-  const canConfirmEdit = useMemo(() => editDraft.trim().length > 0, [editDraft]);
+  const canConfirmEdit = useMemo(
+    () => editDraft.trim().length > 0,
+    [editDraft]
+  );
 
-  const handleChangeDraft = (e) => setDraft(e.target.value);
-  const handleChangeEditDraft = (e) => setEditDraft(e.target.value);
+  const handleChangeDraft = e => setDraft(e.target.value);
+  const handleChangeEditDraft = e => setEditDraft(e.target.value);
 
   const handleSubmitAnswer = async () => {
     if (!canSubmit || isSubmitting) return;
@@ -142,9 +145,7 @@ export default function AnswerCard({ question, onDeletePost }) {
 
       {/* ✅ view 모드: 답변 텍스트 표시 */}
       {mode === 'view' && answer && (
-        <div className={styles.answerText}>
-          {answer.content}
-        </div>
+        <div className={styles.answerText}>{answer.content}</div>
       )}
 
       {/* ✅ edit 모드: 수정중 */}
