@@ -61,7 +61,7 @@ function ShareButtons({ url, title, description, imageUrl }) {
   );
 
   return (
-    <ul>
+    <ul className={styles.shareButtons}>
       {buttons.map(button => (
         <ShareButton
           key={button.key}
@@ -78,7 +78,7 @@ function ShareButtons({ url, title, description, imageUrl }) {
 
 function ShareButton({ className = '', icon, label, action, disabled }) {
   return (
-    <li>
+    <li className={`${styles.shareButton} ${className}`}>
       <button
         type="button"
         onClick={action}
