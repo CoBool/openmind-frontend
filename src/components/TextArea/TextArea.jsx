@@ -17,6 +17,7 @@ function TextArea({
   onChange,
   disabled = false,
   className = '',
+  autoFocus = false,
 }) {
   return (
     <textarea
@@ -26,6 +27,7 @@ function TextArea({
       onChange={onChange}
       disabled={disabled}
       spellCheck={false} /* 맞춤법 검사 비활성화 */
+      autoFocus={autoFocus}
     />
   );
 }

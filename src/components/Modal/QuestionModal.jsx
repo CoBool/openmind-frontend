@@ -61,6 +61,7 @@ function QuestionModal({ isOpen, onClose, recipient, onSuccess }) {
           onChange={e => setContent(e.target.value)}
           disabled={isSubmitting}
           className={styles.textarea}
+          autoFocus
         />
 
         {/* 제출 버튼 */}
