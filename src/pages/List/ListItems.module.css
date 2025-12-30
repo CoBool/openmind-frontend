@@ -8,6 +8,7 @@
   background-color: #ffffff;
   box-sizing: border-box;
   height: 187px;
+  cursor: pointer;
 }
 
 .profile {

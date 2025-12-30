@@ -44,6 +44,7 @@
 
 .questionIcon {
   margin-bottom: 2px;
+  color: var(--gray-40);
 }
 
 @media (max-width: 375px) {

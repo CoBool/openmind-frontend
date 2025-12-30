@@ -1,0 +1,68 @@
+.wrap {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  gap: 10px;
+  margin: 8px auto 18px;
+}
+
+.avatar {
+  width: 92px;
+  height: 92px;
+  border-radius: 999px;
+  background: radial-gradient(circle at 30% 30%, #dbeafe, #93c5fd);
+  display: grid;
+  place-items: center;
+  font-size: 34px;
+  box-shadow: 0 10px 20px rgba(17, 24, 39, 0.08);
+}
+
+.name {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.iconBtn {
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  border: 1px solid rgba(17, 24, 39, 0.12);
+  background: #fff;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+}
+
+.askBtn {
+  margin-left: 10px;
+  height: 28px;
+  padding: 0 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(17, 24, 39, 0.12);
+  background: #fff;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.countRow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(17, 24, 39, 0.7);
+  font-size: 12px;
+}
+
+.mail {
+  opacity: 0.85;
+}

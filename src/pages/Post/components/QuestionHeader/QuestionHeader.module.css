@@ -1,0 +1,12 @@
+.questionHeader {
+  padding: 16px;
+}
+
+.questionHeaderTitle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  text-align: center;
+  gap: 8px;
+}

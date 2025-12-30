@@ -1,12 +1,13 @@
 import { Outlet } from 'react-router-dom';
 import styles from './Layout.module.css';
+import { ToastProvider } from '@/contexts/Toast/Toast.jsx';
 
 export default function Layout() {
   return (
-    <div className={styles.page}>
-      <div className={styles.container}>
+    <ToastProvider>
+      <div className={styles.page}>
         <Outlet />
       </div>
-    </div>
+    </ToastProvider>
   );
 }

@@ -1,0 +1,22 @@
+/* Dialog.module.css */
+
+/* 배경 (Overlay) */
+.overlay {
+  position: fixed;
+  inset: 0; /* top, right, bottom, left: 0 */
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 50; /* Content보다 낮아야 함 */
+}
+
+/* 컨텐츠 (Content) */
+.content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 51; /* Overlay보다 높아야 클릭 가능 */
+}
