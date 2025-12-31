@@ -1,0 +1,98 @@
+/* 모달 내용 전체 */
+.content {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ========================================
+  헤더 영역 (제목 + X버튼)
+   ======================================== */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* 제목 래퍼  */
+.titleWrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* 메시지 아이콘 */
+.icon {
+  width: 28px;
+  height: 28px;
+}
+
+/* 모달 제목 */
+.title {
+  font-size: 24px;
+  line-height: 30px;
+  margin: 0;
+  color: var(--gray-60);
+  font-family: 'Actor', sans-serif;
+  font-weight: 400;
+}
+
+/* X 닫기 버튼 */
+.closeButton {
+  width: 28px;
+  height: 28px;
+  background: none; /* 배경색 없음 */
+  cursor: pointer; /* 손가락 커서 */
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gray-60);
+  border: none;
+  transition: opacity 0.2s; /* 부드러운 효과 */
+}
+.closeButton:hover {
+  opacity: 0.7;
+}
+
+/* ==================
+  받는 사람 정보 영역
+   ================== */
+.target {
+  display: flex;
+  align-items: center;
+  gap: 4px; /* 각 요소 사이 8px */
+  margin-bottom: 12px;
+  margin-top: 40px;
+}
+
+/* To. 텍스트 */
+.toLabel {
+  font-size: 18px;
+  line-height: 24px;
+  color: #000;
+  font-weight: 400;
+}
+
+/* 프로필 이미지 */
+.profileImg {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover; /* 이미지 비율 유지하며 채우기 */
+}
+
+/* 받는 사람 이름 */
+.targetName {
+  font-size: 16px;
+  line-height: 22px;
+  color: var(--gray-60);
+  font-weight: 400;
+}
+
+/* ==============
+  제출 버튼
+   ============== */
+.submitButton {
+  width: 100%;
+  margin-top: 8px;
+}

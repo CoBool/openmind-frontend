@@ -18,9 +18,9 @@
 아래 확장 프로그램은 **팀원 전원 필수 설치**입니다.  
 미설치 시 코드 포맷팅 및 린트 자동화가 정상 동작하지 않습니다.
 
-1. **ESLint**  
+1. **ESLint**
    - 패키지 ID: `dbaeumer.vscode-eslint`
-2. **Prettier**  
+2. **Prettier**
    - 패키지 ID: `esbenp.prettier-vscode`
 
 ---
@@ -62,31 +62,46 @@ npm run dev
 
 ```bash
 src/
-├── components/          # 전역 공통 UI 컴포넌트 (Button, Modal, Layout 등)
-├── contexts/            # 전역 상태 관리(Context API)
-├── hooks/               # 공통 비즈니스 로직(Custom Hooks)
-├── services/            # API 통신 로직 (fetch 래퍼, 상태 없음)
-├── styles/              # 전역 스타일 (reset.css, variables.css 등)
-├── utils/               # 순수 유틸 함수 (React 의존성 없음)
+├── assets/                 # 정적 리소스 모음 (한 곳에 몰아둠)
+│   ├── images/             # 공용 이미지 (로고, 기본 썸네일 등)
+│   ├── icons/              # svg 아이콘
+│   ├── fonts/              # 웹폰트 파일
+│   └── styles/             # 전역 스타일 리소스
+│       ├── reset.css
+│       ├── variables.css
+│       └── global.css
 │
-├── pages/               # 페이지 및 도메인 단위 구성
-│   ├── Home/            # 홈 도메인
-│   │   └── Index.jsx
-│   │
-│   ├── Post/            # 게시글 도메인
-│   │   ├── components/  # Post 도메인 전용 컴포넌트
-│   │   ├── PostList.jsx     # 게시글 목록 페이지
-│   │   ├── PostDetail.jsx   # 게시글 상세 페이지
-│   │   └── PostEdit.jsx     # 게시글 수정 페이지
-│   │
-│   └── User/            # 유저 도메인
+├── components/             # 전역 공통 UI 컴포넌트
+│   ├── Button/
+│   ├── Modal/
+│   └── Layout/
 │
-└── App.jsx              # 라우팅 설정 진입점
+├── contexts/               # 전역 상태 관리 (Context API)
+├── hooks/                  # 공통 비즈니스 로직 (Custom Hooks)
+├── services/               # API 통신 로직 (fetch / axios wrapper)
+├── utils/                  # 순수 유틸 함수 (React 의존성 없음)
+│
+├── pages/                  # 페이지 / 도메인 단위
+│   ├── Home/
+│   │   └── Home.jsx
+│   │
+│   ├── Post/
+│   │   ├── components/     # Post 전용 컴포넌트
+│   │   ├── PostList.jsx
+│   │   ├── PostDetail.jsx
+│   │   └── PostEdit.jsx
+│   │
+│   └── User/
+│
+├── App.jsx                 # 라우팅 진입점
+└── main.jsx                # 엔트리 포인트
+
 ```
 
 ---
 
 > 📌 **구조 설계 원칙**
+>
 > - 전역 재사용 컴포넌트 → `components/`
 > - 특정 도메인 전용 → `pages/도메인/components/`
 > - 라우트와 1:1 대응되는 화면 → `pages/도메인/*.jsx`
@@ -104,13 +119,14 @@ src/
 
 컴포넌트는 **재사용 범위**에 따라 아래 3단계 중 하나에 위치합니다.
 
-| 레벨 | 위치 | 설명 | 예시 |
-| --- | --- | --- | --- |
-| **Global** | `src/components/` | 앱 전체에서 재사용되는 공통 UI | Button, Input, Modal |
-| **Domain** | `src/pages/Post/components/` | 특정 도메인 내부에서만 사용 | PostCard, AuthorBadge |
-| **Page** | `src/pages/Post/` | 라우터와 직접 연결된 페이지 | PostList.jsx |
+| 레벨       | 위치                         | 설명                           | 예시                  |
+| ---------- | ---------------------------- | ------------------------------ | --------------------- |
+| **Global** | `src/components/`            | 앱 전체에서 재사용되는 공통 UI | Button, Input, Modal  |
+| **Domain** | `src/pages/Post/components/` | 특정 도메인 내부에서만 사용    | PostCard, AuthorBadge |
+| **Page**   | `src/pages/Post/`            | 라우터와 직접 연결된 페이지    | PostList.jsx          |
 
 #### 판단 기준
+
 - 두 개 이상의 도메인에서 사용 → **Global**
 - 하나의 도메인에서만 사용 → **Domain**
 - URL과 1:1 매칭되는 화면 → **Page**
@@ -127,18 +143,19 @@ src/
 
 Service → Hook → Component
 
-
 #### 1. `services/`
+
 - 역할: 서버 API 통신
 - 책임: `fetch` 호출, 요청/응답 처리
 - 규칙:
   - React 코드 사용 ❌
   - 상태 관리 ❌
   - Promise 반환 ⭕
-  
+
 > ❌ 컴포넌트나 훅에서 직접 `fetch` 호출 금지
 
 **구현 방법**
+
 - 도메인별로 서비스 파일을 생성합니다 (예: `postService.js`, `userService.js`)
 - 각 API 엔드포인트에 대응하는 함수를 작성합니다
 - 함수는 `async/await`를 사용하여 `fetch`를 호출하고 Promise를 반환합니다
@@ -149,6 +166,7 @@ Service → Hook → Component
 ---
 
 #### 2. `hooks/`
+
 - 역할: 비즈니스 로직과 상태 관리
 - 책임:
   - `services` 호출
@@ -157,6 +175,7 @@ Service → Hook → Component
   - 화면 렌더링 코드 ❌
 
 **구현 방법**
+
 - `useState`로 `data`, `loading`, `error` 상태를 관리합니다
 - `useEffect`에서 컴포넌트 마운트 시 또는 의존성 변경 시 서비스를 호출합니다
 - 서비스 호출 전 `loading`을 `true`로, `error`를 `null`로 초기화합니다
@@ -166,6 +185,7 @@ Service → Hook → Component
 - Hook은 `{ data, loading, error, refetch }` 형태의 객체를 반환합니다
 
 **에러 처리 규칙**
+
 - Hook에서 에러를 상태로 관리하고, 컴포넌트에서 UI로 표시합니다
 - 네트워크 에러와 비즈니스 에러를 구분하여 적절한 메시지를 제공합니다
 - 에러 발생 시 사용자에게 명확한 피드백을 제공해야 합니다
@@ -173,6 +193,7 @@ Service → Hook → Component
 ---
 
 #### 3. `components / pages`
+
 - 역할: UI 렌더링
 - 책임:
   - Hook에서 받은 데이터 출력
@@ -181,6 +202,7 @@ Service → Hook → Component
   - API 호출 ❌
 
 **구현 방법**
+
 - 컴포넌트에서 필요한 Hook을 import하여 사용합니다
 - Hook에서 반환된 `data`, `loading`, `error`를 구조 분해 할당으로 받습니다
 - `loading`이 `true`일 때는 로딩 UI를 표시합니다
@@ -198,16 +220,19 @@ Service → Hook → Component
 **여러 컴포넌트에서 공유해야 하는 상태**일 때만 사용합니다.
 
 #### 사용 시점 판단
+
 - Props Drilling이 3단계 이상 깊어질 때
 - 여러 페이지에서 동일한 상태를 공유해야 할 때
 - 예: 사용자 인증 정보, 테마 설정, 알림 상태
 
 #### 사용하지 않는 경우
+
 - 단일 컴포넌트 내부 상태 → `useState` 사용
 - 부모-자식 간 전달 → Props 사용
 - 형제 컴포넌트 간 전달 → 공통 부모로 상태 끌어올리기
 
 **구현 방법**
+
 - `contexts/` 폴더에 도메인별로 Context 파일을 생성합니다 (예: `AuthContext.js`, `ThemeContext.js`)
 - `createContext`로 Context를 생성하고, Provider 컴포넌트를 만듭니다
 - Provider에서 `useState`나 `useReducer`로 상태를 관리합니다
@@ -229,21 +254,24 @@ Service → Hook → Component
 **CSS Modules 사용을 필수**로 합니다.
 
 #### 파일명 규칙
+
 - `컴포넌트명.module.css`
 
 #### 사용 예시
+
 ```js
 import styles from './PostCard.module.css';
-
-<div className={styles.cardWrapper} />
+<div className={styles.cardWrapper} />;
 ```
 
 #### 금지 사항
+
 - ❌ **전역 클래스명 사용 금지**
 - ❌ **의미 없는 축약 클래스명 사용 금지**
   - 예: `box`, `wrap`, `container`, `item`
 
 #### 권장 사항
+
 - 클래스명은 **역할과 의미가 드러나도록** 작성합니다.
   - 예: `cardWrapper`, `titleArea`, `actionButton`
 
@@ -255,6 +283,7 @@ TypeScript를 사용하지 않으므로,
 **런타임 에러를 사전에 방지하는 코드 작성**을 기본 원칙으로 합니다.
 
 #### Optional Chaining (`?.`)
+
 - 중첩 객체 접근 시 **필수 사용**
 
 ```js
@@ -266,6 +295,7 @@ user?.profile?.name;
 ```
 
 #### Default Value 처리
+
 - 배열을 렌더링할 때는 **기본값 처리 필수**
 
 ```js
@@ -287,41 +317,44 @@ list.map(item => item.name);
 
 #### 1. 파일명 규칙
 
-| 파일 타입 | 네이밍 규칙 | 예시 |
-| --- | --- | --- |
-| 컴포넌트 | `PascalCase` | `PostCard.jsx`, `UserProfile.jsx` |
-| 서비스 | `camelCase` | `postService.js`, `userService.js` |
-| Hook | `camelCase` | `usePostList.js`, `useAuth.js` |
-| 유틸 함수 | `camelCase` | `formatDate.js`, `validateEmail.js` |
-| Context | `PascalCase` | `AuthContext.js`, `ThemeContext.js` |
-| 상수 파일 | `camelCase` | `constants.js`, `apiConstants.js` |
+| 파일 타입 | 네이밍 규칙  | 예시                                |
+| --------- | ------------ | ----------------------------------- |
+| 컴포넌트  | `PascalCase` | `PostCard.jsx`, `UserProfile.jsx`   |
+| 서비스    | `camelCase`  | `postService.js`, `userService.js`  |
+| Hook      | `camelCase`  | `usePostList.js`, `useAuth.js`      |
+| 유틸 함수 | `camelCase`  | `formatDate.js`, `validateEmail.js` |
+| Context   | `PascalCase` | `AuthContext.js`, `ThemeContext.js` |
+| 상수 파일 | `camelCase`  | `constants.js`, `apiConstants.js`   |
 
 #### 2. 변수 / 함수
+
 - `camelCase`
 
 ```js
-getUserData
-fetchPostList
+getUserData;
+fetchPostList;
 ```
 
 #### 3. 이벤트 핸들러
+
 - **함수 정의:** `handle + 동사`
 - **props:** `on + 동사`
 
 ```js
 const handleSubmit = () => {};
 
-<Form onSubmit={handleSubmit} />
+<Form onSubmit={handleSubmit} />;
 ```
 
 #### 4. Boolean 값
+
 의미에 따라 접두사를 구분합니다.
 
-- `is` : 상태  
+- `is` : 상태
   - 예: `isLoading`, `isOpen`
-- `has` : 존재 여부  
+- `has` : 존재 여부
   - 예: `hasError`, `hasPermission`
-- `should` : 조건 판단  
+- `should` : 조건 판단
   - 예: `shouldRender`, `shouldFetch`
 
 ---
@@ -331,16 +364,19 @@ const handleSubmit = () => {};
 반복 사용되는 값이나 설정값은 상수로 관리합니다.
 
 #### 관리 위치
+
 - **도메인별 상수**: 각 서비스 파일 상단에 정의
 - **전역 상수**: `utils/constants.js` 또는 `src/constants/` 폴더에 정의
 
 #### 관리 대상
+
 - API 엔드포인트 URL
 - 에러 메시지
 - 기본 설정값 (페이지 크기, 제한 시간 등)
 - 매직 넘버/문자열
 
 **구현 방법**
+
 - 상수는 `UPPER_SNAKE_CASE`로 네이밍합니다
 - 관련된 상수는 객체로 그룹화하여 관리합니다
 - 서비스 파일에서만 사용되는 상수는 해당 파일 상단에 정의합니다
@@ -370,6 +406,7 @@ const handleSubmit = () => {};
    - CSS Modules
 
 **구현 방법**
+
 - 각 그룹 사이에 빈 줄을 하나 추가합니다
 - 같은 그룹 내에서는 알파벳 순으로 정렬합니다 (선택)
 - 절대 경로(`@/`)와 상대 경로(`./, ../`)를 구분합니다
@@ -428,37 +465,39 @@ PR 생성 시 반드시 아래 내용을 포함합니다.
   - 직접 확인한 항목이 있다면 간단히 명시
 
 #### 승인 규칙
+
 - 최소 **팀원 1명 이상 Approve** 필수
 - 승인 없이 Merge 금지
 
 #### 코드 리뷰 체크리스트
+
 리뷰어는 아래 항목을 확인합니다.
 
-- [ ] **컨벤션 준수**
+- [v] **컨벤션 준수**
   - 네이밍 규칙 준수 여부 (PascalCase, camelCase 등)
   - 파일명 규칙 준수 여부 (컴포넌트, 서비스, 훅 등)
   - CSS Modules 사용 여부
   - 파일 위치가 3-Layer Rule에 맞는지
   - Import 순서 규칙 준수 여부
 
-- [ ] **아키텍처 준수**
+- [v] **아키텍처 준수**
   - Service → Hook → Component 흐름 준수
   - 컴포넌트에서 직접 API 호출하지 않았는지
   - 비즈니스 로직이 Hook에 있는지
   - Context API 사용이 적절한지 (Props Drilling vs Context)
   - 상수 관리 위치가 적절한지
 
-- [ ] **방어적 코딩**
+- [v] **방어적 코딩**
   - Optional Chaining (`?.`) 사용 여부
   - 배열/객체 기본값 처리 여부
   - 에러 처리 로직 포함 여부
 
-- [ ] **코드 품질**
+- [v] **코드 품질**
   - 중복 코드 없음
   - 의미 있는 변수/함수명 사용
   - 불필요한 주석 제거
 
-- [ ] **기능 검증**
+- [v] **기능 검증**
   - 요구사항대로 동작하는지
   - 예외 상황 처리 여부
 
@@ -487,6 +526,7 @@ PR 생성 시 반드시 아래 내용을 포함합니다.
 ---
 
 #### `feat:`
+
 사용자 또는 시스템 관점에서 **새로운 기능이 추가**되었을 때 사용합니다.  
 **기능의 시작점**을 남기는 커밋입니다.
 
@@ -496,6 +536,7 @@ PR 생성 시 반드시 아래 내용을 포함합니다.
 ---
 
 #### `fix:`
+
 기존 기능의 **버그를 수정**했을 때 사용합니다.  
 동작 오류, 예외 상황, 잘못된 로직 수정이 해당됩니다.
 
@@ -505,6 +546,7 @@ PR 생성 시 반드시 아래 내용을 포함합니다.
 ---
 
 #### `design:`
+
 **CSS, 레이아웃, 스타일 등 UI/UX 변경**이 있을 때 사용합니다.  
 기능 변화 없이 화면 표현만 달라지는 경우에 사용합니다.
 
@@ -514,6 +556,7 @@ PR 생성 시 반드시 아래 내용을 포함합니다.
 ---
 
 #### `refactor:`
+
 기능 변화 없이 **코드 구조 개선, 중복 제거, 가독성 향상**을 목적으로 할 때 사용합니다.
 
 - 예시  
@@ -522,6 +565,7 @@ PR 생성 시 반드시 아래 내용을 포함합니다.
 ---
 
 #### `chore:`
+
 빌드 설정, 패키지 관리, 설정 파일 등  
 **기능과 직접적인 관련이 없는 작업**에 사용합니다.
 

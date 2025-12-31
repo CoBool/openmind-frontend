@@ -1,0 +1,48 @@
+/* 버튼 공통 스타일 */
+.button {
+  background-color: var(--brown-40);
+  color: var(--gray-10);
+  border-radius: 200px;
+  border: none;
+  font-weight: 400px;
+  line-height: 25px;
+  font-size: 20px;
+  box-shadow: var(--shadow-2);
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 마우스 올렸을 때 (disabled 아닐 때만) */
+.button:hover:not(:disabled) {
+  border: 2px solid var(--brown-50);
+}
+/* 클릭했을 때 (disabled 아닐 때만) */
+.button:active:not(:disabled) {
+  background-color: var(--brown-50);
+}
+
+/* ========================================
+  크기: sm (작은 버튼)
+  삭제하기 버튼에 사용
+   ======================================== */
+.sm {
+  padding: 5px 24px;
+  font-size: 15px;
+}
+.md {
+  padding: 14.5px 49.5px;
+}
+
+/* ========================================
+  반응형: 모바일 (375px 이하)
+   ======================================== */
+@media (max-width: 375px) {
+  .sm {
+    padding: 0 17.5px;
+    font-size: 10px;
+  }
+  .md {
+    padding: 14.5px 24px;
+  }
+}

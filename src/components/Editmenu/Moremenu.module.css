@@ -1,0 +1,21 @@
+.moreMenuWrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.moreButton {
+  padding: 4px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.moreIcon {
+  width: 24px;
+  height: 24px;
+  color: #000000;
+}
+
+.moreButton:hover .moreIcon {
+  color: #333;
+}

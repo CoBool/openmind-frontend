@@ -1,0 +1,27 @@
+.nameInputLabel {
+  border: 1px solid var(--gray-40);
+  border-radius: 8px;
+  padding: 12px 16px;
+  height: 46px;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 5px;
+}
+
+.personIcon {
+  width: 20px;
+  height: 20px;
+  color: var(--gray-40);
+}
+
+.nameInput {
+  border: none;
+}
+
+.nameInput:focus {
+  outline: none;
+  box-shadow: none;
+}

@@ -1,0 +1,55 @@
+.listItem {
+  border: 1px solid var(--gray-40);
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background-color: #ffffff;
+  box-sizing: border-box;
+  height: 187px;
+  cursor: pointer;
+}
+
+.listItem:hover {
+  border-color: 1px solid var(--gray-60);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+.profile {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.name {
+  font-family: 'pretendard';
+  font-size: 20px;
+  font-weight: 400;
+  color: #000000;
+}
+
+.question {
+  font-family: 'pretendard';
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 16px;
+  color: var(--gray-40);
+  width: 100%;
+}
+
+.messagesIcon {
+  width: 18px;
+  height: 18px;
+}
+
+.questionCount {
+  font-family: 'pretendard';
+  font-size: 16px;
+  color: var(--gray-40);
+  margin-left: auto;
+}
