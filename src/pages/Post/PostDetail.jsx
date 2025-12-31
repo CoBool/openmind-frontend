@@ -18,12 +18,12 @@ import shared from './Post.shared.module.css';
 import { getSubjects } from '@/services/subjects_api'
 
 import { Card, CardContent } from '@/components/Card';
-import { Dialog, DialogTrigger, DialogContent } from '@/components/Dialog';
 import {
   QuestionHeader,
   QuestionList,
   PostDetailError,
   PostHeader,
+  CreateModal,
 } from './components';
 
 import Messages from '@/assets/Icon/Messages.svg';
@@ -50,6 +50,7 @@ export default function PostDetail() {
     triggerRef,
     handleReaction,
     reactedQuestions,
+    handleCreateQuestion,
   } = useQuestionList(subjectId, { enabled: isQuestionListEnabled });
 
   if (subjectError) {
@@ -84,12 +85,7 @@ export default function PostDetail() {
           />
         </CardContent>
       </Card>
-      <Dialog>
-        <DialogTrigger>잠시 테스트중...</DialogTrigger>
-        <DialogContent>
-          <div>잠시 테스트중...</div>
-        </DialogContent>
-      </Dialog>
+      <CreateModal subject={subject} onSuccess={handleCreateQuestion} />
     </main>
   );
 }
