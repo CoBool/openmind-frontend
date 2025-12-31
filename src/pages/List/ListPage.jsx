@@ -12,6 +12,7 @@ import arrowImg from '../../assets/Icon/arrowRightBrown.svg';
 // 한 페이지에 표시할 아이템 갯수
 const LIMIT = 8
 function List() {
+  const { currentUser } = useAuth();
   const navigate = useNavigate();
 
   const [page, setPage] = useState(1);
@@ -68,14 +69,12 @@ function List() {
 
   // 답변하러 가기 버튼 이동
   function goToAnswer() {
-    const id = localStorage.getItem('questionId');
-
-    if (!id) {
+    if (!currentUser?.id) {
       navigate('/');
       return;
     }
 
-    navigate(`/post/${id}/answer`);
+    navigate(`/post/${currentUser?.id}/answer`);
   }
 
   const [list, setList] = useState([])
