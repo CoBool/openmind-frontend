@@ -79,3 +79,14 @@
   color: var(--blue);
   font-weight: 500;
 }
+
+.selected {
+  color: var(--blue);
+  font-weight: 500;
+  background-color: #f5f8ff;
+}
+
+.dropdownMenu li:hover:not(.selected) {
+  background: #f5f5f5;
+  color: var(--blue);
+}
