@@ -23,14 +23,10 @@ const router = createBrowserRouter([
       { path: 'list', Component: List },
       {
         path: 'post',
-       children: [
-  { path: ':subjectId', Component: PostDetail },
-  { path: ':subjectId/answer', Component: Answer },
-  { path: ':subjectId/question', Component: PostAnswer },
-],
-          
-        
-          },
+        children: [
+          { path: ':subjectId', Component: PostDetail },
+          { path: ':subjectId/answer', Component: Answer },
+          { path: ':subjectId/question', Component: PostAnswer },
         ],
       },
     ],
