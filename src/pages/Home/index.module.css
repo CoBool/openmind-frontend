@@ -95,7 +95,7 @@ button.askBtn {
 }
 
 button.askBtn:hover {
-  border: 2px solid var(--brown-40);
+  outline: 1px solid var(--brown-50);
 }
 
 .arrowIcon {
