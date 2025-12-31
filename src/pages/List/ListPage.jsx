@@ -8,9 +8,11 @@ import ListItem from './ListItems';
 import { useSubjects } from './hooks/subjectApi';
 import Button from '../../components/Button/Button';
 import arrowImg from '../../assets/Icon/arrowRightBrown.svg';
+import { useAuth } from '@/provider/AuthPrivder';
 
 function List() {
   const navigate = useNavigate();
+  const { user } = useAuth();
 
   const [page, setPage] = useState(1);
 
@@ -65,16 +67,14 @@ function List() {
   }, [list, safePage, sortType, limit]);
 
   // 답변하러 가기 버튼 이동
-  function goToAnswer() {
-    const id = localStorage.getItem('questionId');
-
-    if (!id) {
+  const goToAnswer = () => {
+    if (!user?.id) {
       navigate('/');
       return;
     }
 
-    navigate(`/post/${id}/answer`);
-  }
+    navigate(`/post/${user.id}/answer`);
+  };
 
   return (
     <div className={styles.listPage}>
