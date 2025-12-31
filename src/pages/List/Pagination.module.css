@@ -68,3 +68,15 @@
   border-radius: 50%;
   color: var(--gray-60);
 }
+
+.doubleArrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media screen and ((min-width: 375px) and (max-width: 767px)) {
+  .edgeButton {
+    display: none;
+  }
+}

@@ -2,6 +2,8 @@ import ArrowLeft from '../../assets/Icon/Pagination-left.svg';
 import ArrowRight from '../../assets/Icon/Pagination-right.svg';
 import { getPagination } from './hooks/pagination';
 import styles from './Pagination.module.css';
+import ArrowFirst from '../../assets/Icon/pagenation-first.svg';
+import ArrowLast from '../../assets/Icon/pagenation-Last.svg';
 
 // 한 그룹당 페이지 수
 function Pagination({ totalCount, page, setPage, limit }) {
@@ -26,6 +28,18 @@ function Pagination({ totalCount, page, setPage, limit }) {
     setPage(prev => prev + 1);
   };
 
+  // 첫 페이지 이동
+  const handleFirst = () => {
+    if (isFirstPage) return;
+    setPage(1);
+  };
+
+  // 마지막 페이지 이동
+  const handleLast = () => {
+    if (isLastPage) return;
+    setPage(totalPage);
+  };
+
   // 특정 페이지 이동
   const handleMove = targetPage => {
     if (targetPage === page) return;
@@ -40,6 +54,16 @@ function Pagination({ totalCount, page, setPage, limit }) {
 
   return (
     <div className={styles.pagination}>
+      <button
+        className={`${styles.pageButtonLeft} ${styles.edgeButton}`}
+        onClick={handleFirst}
+        disabled={isFirstPage}
+      >
+        <span className={styles.doubleArrow}>
+          <img src={ArrowFirst} alt="첫 페이지" />
+        </span>
+      </button>
+
       <button
         className={styles.pageButtonLeft}
         onClick={handlePrev}
@@ -64,6 +88,16 @@ function Pagination({ totalCount, page, setPage, limit }) {
         disabled={isLastPage}
       >
         <img src={ArrowRight} alt="다음 페이지" />
+      </button>
+
+      <button
+        className={`${styles.pageButtonRight} ${styles.edgeButton}`}
+        onClick={handleLast}
+        disabled={isLastPage}
+      >
+        <span className={styles.doubleArrow}>
+          <img src={ArrowLast} alt="마지막 페이지" />
+        </span>
       </button>
     </div>
   );
