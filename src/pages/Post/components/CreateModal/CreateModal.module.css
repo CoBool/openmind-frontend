@@ -1,0 +1,77 @@
+.trigger {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: var(--brown-40);
+  color: var(--gray-10);
+  border: none;
+  border-radius: 9999px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.content {
+  max-width: 90%;
+  width: 612px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.headerWrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.close {
+  width: 28px;
+  height: 28px;
+  background: none; /* 배경색 없음 */
+  cursor: pointer; /* 손가락 커서 */
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gray-60);
+  border: none;
+  transition: opacity 0.2s; /* 부드러운 효과 */
+}
+
+.close:hover {
+  opacity: 0.7;
+}
+
+.QuestionTarget {
+  display: flex;
+  align-items: center;
+  gap: 4px; /* 각 요소 사이 8px */
+  margin-bottom: 12px;
+  margin-top: 40px;
+}
+
+.toLabel {
+  font-size: 18px;
+  line-height: 24px;
+  color: #000;
+  font-weight: 400;
+}
+
+.profileImg {
+  width: 28px;
+  height: 28px;
+}
+
+.targetName {
+  font-size: 16px;
+  line-height: 22px;
+  color: var(--gray-60);
+  font-weight: 400;
+}
+

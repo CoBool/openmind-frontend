@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { useInfiniteScroll } from '@/hooks/useInfiniteScroll';
 
-import { getSubjectQuestions, reactToQuestion } from '@/services/questionsApi';
+import { getSubjectQuestions, createQuestion, reactToQuestion } from '@/services/questionsApi';
 
 /**
  * @description URL에서 offset 파라미터를 추출합니다.
@@ -142,6 +142,29 @@ export const useQuestionList = (subjectId, options = {}) => {
     }
   };
 
+  const handleCreateQuestion = async (content) => {
+    try {
+      const result =await createQuestion(subjectId, { content });
+
+      const newQuestion = {
+        id: result.id,
+        subjectId: result.subjectId,
+        content: result.content,
+        like: result.like,
+        dislike: result.dislike,
+        createdAt: result.createdAt,
+        answer: result.answer
+      }
+
+      setQuestions(prev => ({
+        ...prev,
+        results: [newQuestion, ...prev.results],
+      }));
+    } catch (error) {
+      console.error('Failed to create question:', error);
+    }
+  }
+
   return {
     questions,
     loading,
@@ -150,5 +173,6 @@ export const useQuestionList = (subjectId, options = {}) => {
     isFetching,
     reactedQuestions: reactedQuestionsRef.current,
     handleReaction,
+    handleCreateQuestion,
   };
 };
