@@ -4,12 +4,12 @@ import { useSubject } from './hooks/useSubject';
 import { useQuestionList } from './hooks/useQuestionList';
 
 import { Card, CardContent } from '@/components/Card';
+import { Dialog, DialogTrigger, DialogContent } from '@/components/Dialog';
 import {
   QuestionHeader,
   QuestionList,
   PostDetailError,
   PostHeader,
-  CreateModal,
 } from './components';
 
 import shared from './Post.shared.module.css';
@@ -31,7 +31,6 @@ export default function PostDetail() {
     triggerRef,
     handleReaction,
     reactedQuestions,
-    handleCreateQuestion,
   } = useQuestionList(subjectId, { enabled: isQuestionListEnabled });
 
   if (subjectError) {
@@ -58,7 +57,12 @@ export default function PostDetail() {
           />
         </CardContent>
       </Card>
-      <CreateModal subject={subject} onSuccess={handleCreateQuestion} />
+      <Dialog>
+        <DialogTrigger>잠시 테스트중...</DialogTrigger>
+        <DialogContent>
+          <div>잠시 테스트중...</div>
+        </DialogContent>
+      </Dialog>
     </main>
   );
 }
