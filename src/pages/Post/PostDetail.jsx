@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useParams } from 'react-router';
 
 import { useSubject } from './hooks/useSubject';
@@ -15,7 +16,7 @@ import {
 import shared from './Post.shared.module.css';
 
 export default function PostDetail() {
-  const { subjectId } = useParams();
+  const { subjectId } = useParams();  
 
   const {
     subject,
