@@ -144,7 +144,7 @@ export const useQuestionList = (subjectId, options = {}) => {
 
   const handleCreateQuestion = async (content) => {
     try {
-      const result =await createQuestion(subjectId, { content });
+      const result = await createQuestion(subjectId, { content });
 
       const newQuestion = {
         id: result.id,

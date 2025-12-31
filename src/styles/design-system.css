@@ -96,3 +96,6 @@ body {
 .font-bold {
   font-weight: 600;
 }
+
+/* FONT IMPORT */
+@import url('https://fonts.googleapis.com/css2?family=Actor&display=swap');
