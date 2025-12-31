@@ -2,8 +2,8 @@ import ArrowLeft from '../../assets/Icon/Pagination-left.svg';
 import ArrowRight from '../../assets/Icon/Pagination-right.svg';
 import { getPagination } from './hooks/pagination';
 import styles from './Pagination.module.css';
-import ArrowFirst from '../../assets/Icon/pagenation-first.svg';
-import ArrowLast from '../../assets/Icon/pagenation-Last.svg';
+import ArrowFirst from '../../assets/Icon/Pagenation-First.svg';
+import ArrowLast from '../../assets/Icon/Pagenation-Last.svg';
 
 // 한 그룹당 페이지 수
 function Pagination({ totalCount, page, setPage, limit }) {
