@@ -8,6 +8,13 @@
   background-color: #ffffff;
   box-sizing: border-box;
   height: 187px;
+  cursor: pointer;
+}
+
+.listItem:hover {
+  border-color: 1px solid var(--gray-60);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
 }
 
 .profile {

@@ -1,0 +1,96 @@
+.header {
+  gap: 32px;
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.badge {
+  display: inline-flex;
+  border-radius: 8px;
+  padding: 4px 12px;
+  width: fit-content;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.badgePending {
+  border: 1px solid var(--gray-40);
+  color: var(--gray-40);
+}
+
+.badgeComplete {
+  border: 1px solid var(--brown-40);
+  color: var(--brown-40);
+}
+
+.description {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.createdAt {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--gray-40);
+}
+
+.question {
+  font-size: 18px;
+  line-height: 24px;
+  color: var(--gray-60);
+}
+
+.reactions {
+  display: flex;
+  width: 100%;
+  padding-top: 16px;
+  gap: 32px;
+  border-top: 1px solid var(--brown-30);
+}
+
+.reactions.disabled {
+  pointer-events: none;
+}
+
+.reactionButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  padding: 0;
+  font-size: 16px;
+  color: var(--gray-40);
+  cursor: pointer;
+  gap: 6px;
+}
+
+.reactionButton:hover:not(.active) {
+  color: var(--blue);
+}
+
+.reactionButton:hover:not(.active) .reactionButtonIcon {
+  filter: brightness(0) saturate(100%) invert(39%) sepia(96%) saturate(2416%)
+    hue-rotate(203deg) brightness(95%) contrast(101%);
+}
+
+.reactionButtonText {
+  font-size: 16px;
+}
+
+.reactionButton.active {
+  color: var(--blue);
+}
+
+.reactionButton.active .reactionButtonIcon {
+  filter: brightness(0) saturate(100%) invert(39%) sepia(96%) saturate(2416%)
+    hue-rotate(203deg) brightness(95%) contrast(101%);
+}

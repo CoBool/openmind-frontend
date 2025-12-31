@@ -1,4 +1,4 @@
-import { instance } from './instance'
+import { instance } from './instance';
 
 /**
  * @description 질문을 받을 새로운 질문 대상(Subject)을 생성합니다.
@@ -19,14 +19,14 @@ export const createSubject = async subject => {
   const response = await instance('subjects/', {
     method: 'POST',
     body: JSON.stringify(subject),
-  })
+  });
 
   if (!response.ok) {
-    throw new Error('Failed to create subject')
+    throw new Error('Failed to create subject');
   }
 
-  return response.json()
-}
+  return response.json();
+};
 
 /**
  * @description 질문 대상 목록을 조회합니다.
@@ -54,14 +54,14 @@ export const getSubjects = async ({
     {
       method: 'GET',
     }
-  )
+  );
 
   if (!response.ok) {
-    throw new Error('Failed to fetch subjects')
+    throw new Error('Failed to fetch subjects');
   }
 
-  return response.json()
-}
+  return response.json();
+};
 
 /**
  * @description URL 파라미터 `subjectId`에 해당하는 질문 대상 정보를 조회합니다.
@@ -80,14 +80,14 @@ export const getSubjects = async ({
 export const getSubject = async subjectId => {
   const response = await instance(`subjects/${subjectId}/`, {
     method: 'GET',
-  })
+  });
 
   if (!response.ok) {
-    throw new Error('Failed to fetch subject')
+    throw new Error('Failed to fetch subject');
   }
 
-  return response.json()
-}
+  return response.json();
+};
 
 /**
  * @description URL 파라미터 `subjectId`에 해당하는 질문 대상 객체를 삭제합니다.
@@ -101,11 +101,11 @@ export const getSubject = async subjectId => {
 export const deleteSubject = async subjectId => {
   const response = await instance(`subjects/${subjectId}/`, {
     method: 'DELETE',
-  })
+  });
 
   if (!response.ok) {
-    throw new Error('Failed to delete subject')
+    throw new Error('Failed to delete subject');
   }
 
-  return null
-}
+  return null;
+};
