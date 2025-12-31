@@ -1,217 +1,172 @@
-.page{
+.page {
+  width: 100%;
   min-height: 100vh;
-  padding: 40px 24px 80px;
+  background: var(--color-gray-10);
+  color: var(--color-gray-60);
+  font-family: Pretendard, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+}
+
+/* ===== Header (PC: 1200 x 234) ===== */
+.header {
+  width: 1200px;
+  height: 234px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: #ffffff;
+  justify-content: flex-start;
+  padding-top: 129px; /* avatar top = 129px */
+  box-sizing: border-box;
 }
 
-.pageFallback{
-  padding: 40px 24px;
-}
-
-.header{
-  width: 100%;
-  max-width: 716px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
-  position: relative;
-}
-
-.askButton{
-  position: absolute;
-  right: 0;
-  top: 0;
-  padding: 10px 16px;
-  border: 1px solid #542f1a;
-  border-radius: 8px;
-  background: #542f1a;
-  color: #ffffff;
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: 600;
-}
-
-.countRow{
-  width: 100%;
-  max-width: 716px;
-  margin-top: 18px;
-  display: flex;
-  justify-content: center;
-}
-
-.countText{
-  font-size: 14px;
-  color: #6b7280;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.list{
-  width: 100%;
-  max-width: 716px;
-  margin-top: 18px;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
-.cardTopRow{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 14px;
-}
-
-.badge{
-  display: inline-flex;
-  align-items: center;
-  padding: 4px 10px;
-  border-radius: 999px;
-  font-size: 12px;
-  font-weight: 600;
-  border: 1px solid #e5e7eb;
-  background: #f9fafb;
-  color: #374151;
-}
-
-.badgeDone{
-  border-color: #b99a86;
-  background: #fff7f2;
-  color: #542f1a;
-}
-
-.badgeTodo{
-  border-color: #e5e7eb;
-  background: #fafafa;
-  color: #6b7280;
-}
-
-.questionBlock{
-  margin-bottom: 14px;
-}
-
-.questionMeta{
-  font-size: 12px;
-  color: #9ca3af;
-  margin-bottom: 6px;
-}
-
-.questionTitle{
-  font-size: 16px;
-  font-weight: 700;
-  color: #111827;
-  line-height: 1.4;
-}
-
-.answerBlock{
-  border-top: 1px solid #e5e7eb;
-  padding-top: 14px;
-}
-
-.answerAuthorRow{
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 10px;
-}
-
-.avatar{
-  width: 32px;
-  height: 32px;
-  border-radius: 999px;
+.profileImage {
+  width: 136px;
+  height: 136px;
+  border-radius: 50%;
   object-fit: cover;
 }
 
-.answerAuthorName{
-  font-size: 14px;
-  font-weight: 700;
-  color: #111827;
+.profileName {
+  margin-top: 8px;
+  font-family: Actor, Pretendard, sans-serif;
+  font-size: 32px;
+  line-height: 40px;
+  font-weight: 400;
+  color: #000000;
 }
 
-.answerText{
-  font-size: 14px;
-  line-height: 1.7;
-  color: #111827;
-  white-space: pre-wrap;
-}
-
-.textarea{
-  width: 100%;
-  min-height: 120px;
-  resize: vertical;
-  border-radius: 10px;
-  border: 1px solid #b99a86;
-  padding: 12px;
-  font-size: 14px;
-  line-height: 1.6;
-  outline: none;
-}
-
-.primaryButton{
-  width: 100%;
-  margin-top: 12px;
-  padding: 12px 14px;
-  border-radius: 10px;
-  border: none;
-  background: #542f1a;
-  color: #ffffff;
-  font-size: 14px;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.secondaryButton{
-  width: 100%;
-  margin-top: 10px;
-  padding: 10px 14px;
-  border-radius: 10px;
-  border: 1px solid #e5e7eb;
-  background: #ffffff;
-  color: #374151;
-  font-size: 14px;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.disabled{
-  opacity: 0.45;
-  cursor: not-allowed;
-}
-
-.reactionRow{
-  border-top: 1px solid #f3f4f6;
-  margin-top: 14px;
-  padding-top: 12px;
+/* badges row (Frame 64) */
+.badges {
+  margin-top: 8px;
   display: flex;
-  gap: 18px;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  height: 40px;
 }
 
-.reactionBtn{
-  background: transparent;
-  border: none;
-  color: #6b7280;
-  font-size: 13px;
-  cursor: pointer;
-  padding: 6px 0;
+/* ===== Main list container (Frame 42) ===== */
+.list {
+  width: 716px;
+  margin: 60px auto 80px; /* visually matches figma top spacing */
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  border-radius: 16px;
+  border: 1px solid var(--color-brown-20, #E4D5C9);
+  background: #F5F1EE; /* Brown/10 */
+  box-sizing: border-box;
 }
 
-@media (max-width: 767px){
-  .page{
-    padding: 24px 16px 60px;
-  }
+/* card wrapper: each answer item */
+.card {
+  width: 100%;
+  border-radius: 16px;
+  background: #FFFFFF;
+  box-sizing: border-box;
+}
 
-  .askButton{
-    position: static;
+/* Edit answer card spec */
+.answerBlock {
+  width: 684px;            /* fixed */
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+
+  border-radius: 16px;
+  background: #FFFFFF;
+  box-shadow: 0 4px 4px rgba(140, 140, 140, 0.25);
+  box-sizing: border-box;
+}
+
+.questionList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Empty/Loading/NotFound states */
+.status {
+  width: 716px;
+  margin: 60px auto;
+  padding: 24px 16px;
+  border-radius: 16px;
+  border: 1px solid var(--color-brown-20, #E4D5C9);
+  background: #F5F1EE;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.smallText {
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 500;
+  color: var(--color-gray-40);
+}
+
+/* ===== Responsive ===== */
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .header {
     width: 100%;
-    text-align: center;
+    max-width: 768px;
+    height: auto;
+    padding-top: 88px;
   }
 
-  .header{
-    gap: 10px;
+  .list {
+    width: 100%;
+    max-width: 680px;
+    margin: 40px auto 60px;
+    padding: 16px; /* tablet padding 16 */
+    gap: 16px;
+    border-color: var(--color-brown-30, #C7BBB5);
+  }
+
+  .status {
+    width: 100%;
+    max-width: 680px;
+  }
+
+  .answerBlock {
+    width: 100%;
+    padding: 24px;
+    gap: 24px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .header {
+    max-width: 100%;
+    padding-top: 64px;
+  }
+
+  .profileName {
+    font-size: 24px;
+    line-height: 32px;
+  }
+
+  .list {
+    max-width: 100%;
+    margin: 24px 24px 48px; /* left 24 */
+    padding: 16px;
+    gap: 16px;
+    border-color: #E4D5C9; /* Brown/20 */
+  }
+
+  .status {
+    margin: 24px 24px;
+  }
+
+  .answerBlock {
+    padding: 16px;
+    gap: 16px;
   }
 }

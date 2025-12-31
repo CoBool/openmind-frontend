@@ -3,12 +3,11 @@ import Dropdown from '../../components/Dropdown/Dropdown';
 import Pagination from './Pagination';
 import styles from './ListPage.module.css';
 import { useNavigate } from 'react-router-dom';
-import BoxButton from '../../components/Button/BoxButton';
 import { useEffect, useMemo, useState } from 'react';
-import { instance } from '../../services/instance';
 import ListItem from './ListItems';
-import MoreMenu from '../../components/Editmenu/Moremenu';
-import Reaction from '../../components/Reaction/Reaction';
+import { useSubjects } from './hooks/subjectApi';
+import Button from '../../components/Button/Button';
+import arrowImg from '../../assets/Icon/arrowRightBrown.svg';
 
 // 한 페이지에 표시할 아이템 갯수
 const LIMIT = 8
@@ -199,5 +198,3 @@ function List() {
 }
 
 export default List;
-
-// 데이터 클릭시 개별피드 데이터로 이동

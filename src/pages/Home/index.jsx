@@ -21,7 +21,7 @@ function Home() {
   const { showToast } = useToast();
   const { onLogin } = useAuth();
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!name.trim()) {
