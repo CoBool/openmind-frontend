@@ -3,18 +3,18 @@ import ArrowDown from '../../assets/Icon/Arrow-down.svg';
 import ArrowUp from '../../assets/Icon/Arrow-up.svg';
 import styles from '../Dropdown/Dropdown.module.css';
 
+// 옵션 목록
+const DROPDOWN_OPTIONS = [
+  { label: '최신순', value: 'latest' },
+  { label: '이름순', value: 'name' },
+];
+
 function Dropdown({ value, onChange, disabled = false }) {
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef(null);
 
-  // 옵션 목록
-  const options = [
-    { label: '최신순', value: 'latest' },
-    { label: '이름순', value: 'name' },
-  ];
-
   // 현재 선택한 옵션 표시
-  const selectedOption = options.find(opt => opt.value === value);
+  const selectedOption = DROPDOWN_OPTIONS.find(opt => opt.value === value);
 
   // 드롭다운 외부 클릭 시 닫기
   useEffect(() => {
@@ -67,14 +67,19 @@ function Dropdown({ value, onChange, disabled = false }) {
       {/* 드롭다운 메뉴 */}
       {open && !disabled && (
         <ul className={styles.dropdownMenu}>
-          {options.map(option => (
-            <li
-              key={option.value}
-              onClick={() => handleOptionClick(option.value)}
-            >
-              {option.label}
-            </li>
-          ))}
+          {DROPDOWN_OPTIONS.map(option => {
+            const isSelected = option.value === value;
+
+            return (
+              <li
+                key={option.value}
+                onClick={() => handleOptionClick(option.value)}
+                className={isSelected ? styles.selected : ''}
+              >
+                {option.label}
+              </li>
+            );
+          })}
         </ul>
       )}
     </div>
