@@ -1,0 +1,44 @@
+.header {
+  gap: 32px;
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.badge {
+  border-radius: 8px;
+}
+
+.description {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.createdAt {
+  border-radius: 4px;
+}
+
+.questionLine1,
+.questionLine2 {
+  border-radius: 4px;
+}
+
+.reactions {
+  display: flex;
+  width: 100%;
+  padding-top: 16px;
+  gap: 32px;
+  border-top: 1px solid var(--brown-30);
+}
+
+.reactionButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+

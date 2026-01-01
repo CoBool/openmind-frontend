@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import { getSubject } from '@/services/subjectsApi';
+import { getSubject, deleteSubject } from '@/services/subjectsApi';
 
 /**
  * @description 질문 대상을 조회하는 훅
@@ -27,5 +27,13 @@ export const useSubject = subjectId => {
     fetchSubject();
   }, [subjectId]);
 
-  return { subject, loading, error };
+  const handleDeleteSubject = async () => {
+    try {
+      await deleteSubject(subjectId);
+    } catch (error) {
+      console.error('Failed to delete subject:', error);
+    }
+  }
+
+  return { subject, loading, error, handleDeleteSubject };
 };

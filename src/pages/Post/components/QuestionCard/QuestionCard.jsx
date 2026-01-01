@@ -16,6 +16,7 @@ export default function QuestionCard({
   onReaction,
   ref,
   reaction,
+  actionSlot,
   children,
 }) {
   const isAnswered = question.answer !== null;
@@ -36,6 +37,7 @@ export default function QuestionCard({
           >
             {isAnswered ? '답변 완료' : '미답변'}
           </span>
+          { actionSlot && <div className={styles.actions}>{actionSlot}</div>}
         </div>
 
         <CardDescription className={styles.description}>

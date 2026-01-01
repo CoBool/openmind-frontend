@@ -1,7 +1,13 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { useInfiniteScroll } from '@/hooks/useInfiniteScroll';
 
-import { getSubjectQuestions, createQuestion, reactToQuestion } from '@/services/questionsApi';
+import {
+  getSubjectQuestions,
+  createQuestion,
+  deleteQuestion,
+  reactToQuestion,
+} from '@/services/questionsApi';
+import { createAnswer } from '@/services/answersApi';
 
 /**
  * @description URL에서 offset 파라미터를 추출합니다.
@@ -142,7 +148,7 @@ export const useQuestionList = (subjectId, options = {}) => {
     }
   };
 
-  const handleCreateQuestion = async (content) => {
+  const handleCreateQuestion = async content => {
     try {
       const result = await createQuestion(subjectId, { content });
 
@@ -153,8 +159,8 @@ export const useQuestionList = (subjectId, options = {}) => {
         like: result.like,
         dislike: result.dislike,
         createdAt: result.createdAt,
-        answer: result.answer
-      }
+        answer: result.answer,
+      };
 
       setQuestions(prev => ({
         ...prev,
@@ -162,6 +168,29 @@ export const useQuestionList = (subjectId, options = {}) => {
       }));
     } catch (error) {
       console.error('Failed to create question:', error);
+    }
+  };
+
+  const createAnswerForQuestion = async (
+    questionId,
+    { content = null, isRejected }
+  ) => {
+    const payload = isRejected
+      ? { content: '거절된 답변입니다.', isRejected: true }
+      : { content, isRejected: false };
+
+    try {
+      const result = await createAnswer(questionId, payload);
+    } catch (error) {
+      console.error('Failed to create answer:', error);
+    }
+  };
+
+  const deleteAnswerForQuestion = async (questionId) => {
+    try {
+      await deleteQuestion(questionId);
+    } catch (error) {
+      console.error('Failed to delete answer:', error);
     }
   }
 
@@ -174,5 +203,7 @@ export const useQuestionList = (subjectId, options = {}) => {
     reactedQuestions: reactedQuestionsRef.current,
     handleReaction,
     handleCreateQuestion,
+    createAnswerForQuestion,
+    deleteAnswerForQuestion
   };
 };
