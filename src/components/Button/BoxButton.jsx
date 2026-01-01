@@ -1,5 +1,5 @@
 import styles from './BoxButton.module.css';
-import arrowBrown from '../../assets/Icon/arrowRightBrown.svg';
+import { Icon } from '@/components/Icon';
 
 const buttonVariants = {
   // 색상종류
@@ -48,7 +48,7 @@ function BoxButton({
     >
       {children}
       {isArrow && (
-        <img src={arrowBrown} alt="화살표 이미지" className={styles.icon} />
+        <Icon name="arrowRight" className={styles.icon} />
       )}
     </button>
   );

@@ -1,4 +1,4 @@
-import MessagesIcon from '../../assets/Icon/Messages.svg';
+import { Icon } from '@/components/Icon';
 import ProfileImg from '../../assets/images/profile.png';
 import { Avatar } from '../../components/Avatar';
 import styles from './ListItems.module.css';
@@ -28,11 +28,7 @@ function ListItem({ item }) {
       </Tootip>
 
       <div className={styles.question}>
-        <img
-          src={MessagesIcon}
-          alt="메시지 아이콘"
-          className={styles.messagesIcon}
-        />
+        <Icon name="messages" className={styles.messagesIcon} />
         <span>받은 질문</span>
         <span className={styles.questionCount}>{item.questionCount}개</span>
       </div>

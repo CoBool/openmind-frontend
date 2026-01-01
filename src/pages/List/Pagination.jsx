@@ -1,9 +1,6 @@
-import ArrowLeft from '../../assets/Icon/Pagination-left.svg';
-import ArrowRight from '../../assets/Icon/Pagination-right.svg';
 import { getPagination } from './hooks/pagination';
 import styles from './Pagination.module.css';
-import ArrowFirst from '../../assets/Icon/Pagenation-First.svg';
-import ArrowLast from '../../assets/Icon/Pagenation-Last.svg';
+import { Icon } from '@/components/Icon';
 
 // 한 그룹당 페이지 수
 function Pagination({ totalCount, page, setPage, limit }) {
@@ -60,7 +57,7 @@ function Pagination({ totalCount, page, setPage, limit }) {
         disabled={isFirstPage}
       >
         <span className={styles.doubleArrow}>
-          <img src={ArrowFirst} alt="첫 페이지" />
+          <Icon name="paginationFirst" />
         </span>
       </button>
 
@@ -69,7 +66,7 @@ function Pagination({ totalCount, page, setPage, limit }) {
         onClick={handlePrev}
         disabled={isFirstPage}
       >
-        <img src={ArrowLeft} alt="이전 페이지" />
+        <Icon name="paginationPrev" />
       </button>
 
       {pages.map(p => (
@@ -87,7 +84,7 @@ function Pagination({ totalCount, page, setPage, limit }) {
         onClick={handleNext}
         disabled={isLastPage}
       >
-        <img src={ArrowRight} alt="다음 페이지" />
+        <Icon name="paginationNext" />
       </button>
 
       <button
@@ -96,7 +93,7 @@ function Pagination({ totalCount, page, setPage, limit }) {
         disabled={isLastPage}
       >
         <span className={styles.doubleArrow}>
-          <img src={ArrowLast} alt="마지막 페이지" />
+          <Icon name="paginationLast" />
         </span>
       </button>
     </div>

@@ -11,7 +11,7 @@ function InputField({
 }) {
   return (
     <label htmlFor={id} className={styles.nameInputLabel}>
-      {Icon && <Icon className={`font-body3 ${styles.personIcon}`} />}
+      {/* {Icon && <Icon/>} */}
       <input
         id={id}
         type={type}

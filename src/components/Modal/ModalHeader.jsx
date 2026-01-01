@@ -1,6 +1,5 @@
 import styles from './QuestionModal.module.css';
-import Messages from '@/assets/Icon/Messages.svg';
-import Close from '@/assets/Icon/Close.svg';
+import { Icon } from '@/components/Icon';
 
 /**
  * 모달 헤더 컴포넌트
@@ -14,7 +13,7 @@ function ModalHeader({ onClose }) {
   return (
     <div className={styles.header}>
       <div className={styles.titleWrapper}>
-        <img className={styles.icon} src={Messages} alt="메시지 아이콘" />
+        <Icon name="messages" className={styles.icon} />
         <h2 className={styles.title}>질문을 작성하세요</h2>
       </div>
 
@@ -25,7 +24,7 @@ function ModalHeader({ onClose }) {
         type="button"
         aria-label="모달 닫기"
       >
-        <img src={Close} alt="닫기" />
+        <Icon name="close" />
       </button>
     </div>
   );

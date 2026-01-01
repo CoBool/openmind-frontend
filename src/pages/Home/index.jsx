@@ -12,8 +12,8 @@ import Button from '@/components/Button/Button';
 import InputField from '@/components/InputField/InputField';
 
 import Logo from '@/assets/images/logo.png';
-import PersonIcon from '@/assets/Icon/Person.svg?react';
-import ArrowRight from '@/assets/Icon/Arrow-right.svg?react';
+
+import { Icon } from '@/components/Icon';
 
 function Home() {
   const [name, setName] = useState('');
@@ -54,7 +54,7 @@ function Home() {
           <div className={styles.askBtnWrap}>
             <Button onClick={goToAsk} className={styles.askBtn}>
               질문하러 가기
-              <ArrowRight className={styles.arrowIcon} />
+              <Icon name="arrowRight" className={styles.arrowIcon} />
             </Button>
           </div>
         </header>
@@ -69,7 +69,7 @@ function Home() {
                 placeholder="이름을 입력하세요."
                 value={name}
                 onChange={handleNameChange}
-                icon={PersonIcon}
+                icon={<Icon name="user" className="font-body3 personIcon" />}
               />
               <Button className={styles.getQuestionBtn}>질문 받기</Button>
             </form>
