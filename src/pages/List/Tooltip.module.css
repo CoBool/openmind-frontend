@@ -1,0 +1,9 @@
+.tooltip {
+    display: inline-block;
+    position: relative;
+}
+
+.tooltiptext {
+    position: absolute;
+    font-size: 18px;
+}

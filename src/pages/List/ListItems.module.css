@@ -29,6 +29,11 @@
   font-size: 20px;
   font-weight: 400;
   color: #000000;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
 }
 
 .question {
