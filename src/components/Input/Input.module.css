@@ -1,0 +1,23 @@
+.input {
+  width: 100%;
+  min-width: 0;
+
+  border: none;
+  outline: none;
+  box-shadow: none;
+
+  font: inherit;
+  color: inherit;
+  background: transparent;
+
+  box-sizing: border-box;
+}
+
+.input::placeholder {
+  color: var(--gray-50);
+}
+
+.input:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}

@@ -6,3 +6,4 @@ export { default as QuestionEmpty } from './QuestionEmpty/QuestionEmpty';
 export { default as QuestionAnswer } from './QuestionAnswer/QuestionAnswer';
 export { default as PostDetailError } from './PostDetailError/PostDetailError';
 export { default as CreateModal } from './CreateModal/CreateModal';
+export { default as UnauthorizedFallback } from './UnauthorizedFallback/UnauthorizedFallback';

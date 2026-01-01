@@ -9,4 +9,4 @@ function Label({ className = '', ...props }) {
   );
 }
 
-export default Label;
+export { Label };
