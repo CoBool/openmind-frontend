@@ -1,172 +1,190 @@
+
 .page {
   width: 100%;
   min-height: 100vh;
-  background: var(--color-gray-10);
-  color: var(--color-gray-60);
-  font-family: Pretendard, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  background: #ffffff;
 }
 
-/* ===== Header (PC: 1200 x 234) ===== */
-.header {
+/* ===== Top section (Figma 기준) ===== */
+.topSection {
   width: 1200px;
-  height: 234px;
   margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  padding-top: 129px; /* avatar top = 129px */
-  box-sizing: border-box;
+  padding-top: 24px;
+}
+
+.bannerWrap {
+  position: relative;
+  width: 100%;
+  height: 234px;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.banner {
+  width: 100%;
+  height: 234px;
+  object-fit: cover;
+  display: block;
 }
 
 .profileImage {
+  position: absolute;
   width: 136px;
   height: 136px;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -68px;
   border-radius: 50%;
   object-fit: cover;
+  border: 4px solid #ffffff;
+  background: #ffffff;
 }
 
-.profileName {
-  margin-top: 8px;
-  font-family: Actor, Pretendard, sans-serif;
-  font-size: 32px;
-  line-height: 40px;
-  font-weight: 400;
-  color: #000000;
-}
-
-/* badges row (Frame 64) */
-.badges {
-  margin-top: 8px;
+.profileMeta {
+  width: 1200px;
+  margin: 0 auto;
+  padding-top: 84px; /* avatar overlap 보정 */
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 12px;
-  height: 40px;
+  justify-content: space-between;
+  gap: 16px;
 }
 
-/* ===== Main list container (Frame 42) ===== */
-.list {
+.nameBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.subjectName {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #111827;
+}
+
+.questionCount {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.countBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  min-width: 32px;
+  padding: 0 12px;
+  border-radius: 999px;
+  border: 1px solid #E4D5C9; /* Brown/20 */
+  background: #F5F1EE;      /* Brown/10 */
+  color: #6b4f3a;
+  font-weight: 600;
+}
+
+.deleteAllButton {
+  height: 40px;
+  padding: 0 24px;
+  border-radius: 999px;
+  border: 1px solid #E4D5C9;
+  background: #ffffff;
+  color: #6b4f3a;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.deleteAllButton:hover {
+  background: #F5F1EE;
+}
+
+/* ===== List section (Frame 42 느낌) ===== */
+.listSection {
+  width: 1200px;
+  margin: 0 auto;
+  padding: 24px 0 80px;
+}
+
+.cardList {
   width: 716px;
-  margin: 60px auto 80px; /* visually matches figma top spacing */
+  background: #F5F1EE; /* Brown/10 */
+  border: 1px solid #E4D5C9; /* Brown/20 */
+  border-radius: 16px;
   padding: 16px;
   display: flex;
   flex-direction: column;
   gap: 16px;
-
-  border-radius: 16px;
-  border: 1px solid var(--color-brown-20, #E4D5C9);
-  background: #F5F1EE; /* Brown/10 */
-  box-sizing: border-box;
 }
 
-/* card wrapper: each answer item */
-.card {
-  width: 100%;
-  border-radius: 16px;
-  background: #FFFFFF;
-  box-sizing: border-box;
-}
-
-/* Edit answer card spec */
-.answerBlock {
-  width: 684px;            /* fixed */
-  max-width: 100%;
-  margin: 0 auto;
-  padding: 32px;
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-
-  border-radius: 16px;
-  background: #FFFFFF;
-  box-shadow: 0 4px 4px rgba(140, 140, 140, 0.25);
-  box-sizing: border-box;
-}
-
-.questionList {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-/* Empty/Loading/NotFound states */
-.status {
+.emptyState {
   width: 716px;
-  margin: 60px auto;
-  padding: 24px 16px;
-  border-radius: 16px;
-  border: 1px solid var(--color-brown-20, #E4D5C9);
   background: #F5F1EE;
+  border: 1px solid #E4D5C9;
+  border-radius: 16px;
+  padding: 32px;
   text-align: center;
-  box-sizing: border-box;
 }
 
-.smallText {
+.emptyTitle {
+  font-size: 18px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 8px;
+}
+
+.emptyDesc {
   font-size: 14px;
-  line-height: 18px;
-  font-weight: 500;
-  color: var(--color-gray-40);
+  color: #6b7280;
 }
 
 /* ===== Responsive ===== */
-
-/* Tablet */
-@media (max-width: 1024px) {
-  .header {
+@media (max-width: 1240px) {
+  .topSection,
+  .profileMeta,
+  .listSection {
     width: 100%;
-    max-width: 768px;
-    height: auto;
-    padding-top: 88px;
+    padding-left: 32px;
+    padding-right: 32px;
   }
 
-  .list {
+  .cardList,
+  .emptyState {
     width: 100%;
-    max-width: 680px;
-    margin: 40px auto 60px;
-    padding: 16px; /* tablet padding 16 */
-    gap: 16px;
-    border-color: var(--color-brown-30, #C7BBB5);
-  }
-
-  .status {
-    width: 100%;
-    max-width: 680px;
-  }
-
-  .answerBlock {
-    width: 100%;
-    padding: 24px;
-    gap: 24px;
   }
 }
 
-/* Mobile */
+@media (max-width: 768px) {
+  .topSection,
+  .profileMeta,
+  .listSection {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .profileMeta {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .deleteAllButton {
+    align-self: flex-end;
+  }
+
+  .cardList,
+  .emptyState {
+    border-color: #C7BBB5; /* Brown/30 (tablet) */
+  }
+}
+
 @media (max-width: 480px) {
-  .header {
-    max-width: 100%;
-    padding-top: 64px;
+  .topSection {
+    padding-top: 16px;
   }
 
-  .profileName {
-    font-size: 24px;
-    line-height: 32px;
-  }
-
-  .list {
-    max-width: 100%;
-    margin: 24px 24px 48px; /* left 24 */
-    padding: 16px;
-    gap: 16px;
-    border-color: #E4D5C9; /* Brown/20 */
-  }
-
-  .status {
-    margin: 24px 24px;
-  }
-
-  .answerBlock {
-    padding: 16px;
-    gap: 16px;
+  .cardList,
+  .emptyState {
+    border-color: #E4D5C9; /* Brown/20 (mobile) */
   }
 }

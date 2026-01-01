@@ -1,11 +1,13 @@
-import { useEffect } from 'react';
-import { useParams } from 'react-router';
+import { useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 import { useSubject } from './hooks/useSubject';
 import { useQuestionList } from './hooks/useQuestionList';
 
 import { Card, CardContent } from '@/components/Card';
-import { Dialog, DialogTrigger, DialogContent } from '@/components/Dialog';
+import FloatingButton from '@/components/Button/FloatingButton';
+import QuestionModal from '@/components/Modal/QuestionModal';
+import { createQuestion } from '@/services/questionsApi';
 import {
   QuestionHeader,
   QuestionList,
@@ -16,7 +18,9 @@ import {
 import shared from './Post.shared.module.css';
 
 export default function PostDetail() {
-  const { subjectId } = useParams();  
+  const { subjectId } = useParams();
+
+  const [isQuestionModalOpen, setIsQuestionModalOpen] = useState(false);
 
   const {
     subject,
@@ -32,6 +36,7 @@ export default function PostDetail() {
     triggerRef,
     handleReaction,
     reactedQuestions,
+    refetch,
   } = useQuestionList(subjectId, { enabled: isQuestionListEnabled });
 
   if (subjectError) {
@@ -58,12 +63,17 @@ export default function PostDetail() {
           />
         </CardContent>
       </Card>
-      <Dialog>
-        <DialogTrigger>잠시 테스트중...</DialogTrigger>
-        <DialogContent>
-          <div>잠시 테스트중...</div>
-        </DialogContent>
-      </Dialog>
+
+      {/* ✅ 시안: 우측 하단 "질문 작성하기" 버튼 + 모달 */}
+      <FloatingButton onClick={() => setIsQuestionModalOpen(true)} />
+      <QuestionModal
+        isOpen={isQuestionModalOpen}
+        onClose={() => setIsQuestionModalOpen(false)}
+        onSuccess={async (content) => {
+          await createQuestion(subjectId, { content });
+          await refetch();
+        }}
+      />
     </main>
   );
 }

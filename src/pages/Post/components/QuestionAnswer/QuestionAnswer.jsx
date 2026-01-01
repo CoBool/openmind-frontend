@@ -6,9 +6,6 @@ import { getTimeAgo } from '@/utils/date';
 import styles from './QuestionAnswer.module.css';
 
 export default function QuestionAnswer({ answer, subject }) {
-
-  console.log(answer);
-
   return (
     <CardContent className={styles.answerCard}>
       <Avatar className={styles.avatar}>

@@ -1,65 +1,135 @@
-import { useMemo } from "react";
-import { AnswerHeader } from "../../components/answer/AnswerHeader/AnswerHeader.jsx";
-import { AnswerCard } from "../../components/answer/AnswerCard/AnswerCard.jsx";
-import { OpenmindHeader } from "../../components/layout/OpenmindHeader/OpenmindHeader.jsx";
-import styles from "./AnswerPage.module.css";
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 
-const MOCK = [
-  {
-    id: "c1",
-    status: "unanswered",
-    question: "좋아하는 동물은?",
-    fromName: "아초는고양이",
-    createdAt: "2일전",
-    initialAnswer: "",
-  },
-  {
-    id: "c2",
-    status: "answering",
-    question: "좋아하는 동물은?",
-    fromName: "아초는고양이",
-    createdAt: "2일전",
-    initialAnswer: "답변 입력하면 버튼 활성화!",
-  },
-  {
-    id: "c3",
-    status: "answered",
-    question: "좋아하는 동물(들) 중에 정말 좋아하는 동물은? 좋아하는 이유는?",
-    fromName: "아초는고양이",
-    createdAt: "2일전",
-    initialAnswer:
-      "좋아하는 동물은 여러가지 있지만, 고양이가 제일 좋아요. 고양이의 눈빛과 털, 작은 발자국…",
-  },
-];
+import styles from './AnswerPage.module.css';
+import AnswerCard from '@/components/answer/AnswerCard/AnswerCard.jsx';
 
-export default function AnswerPage() {
-  const profileName = useMemo(() => localStorage.getItem("openmind:name") || "아초는고양이", []);
+import bannerImage1 from '@/assets/images/bannerImage1.png';
+import fallbackProfile from '@/assets/images/profile.png';
+
+import { getAnswerSubject, getAnswerQuestions } from './answerApi';
+import { deleteSubject } from '@/services/subjectsApi';
+import { deleteQuestion } from '@/services/questionsApi';
+
+function AnswerPage() {
+  const { subjectId } = useParams();
+  const navigate = useNavigate();
+
+  const [subject, setSubject] = useState(null);
+  const [questions, setQuestions] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const fetchData = useCallback(async () => {
+    try {
+      setIsLoading(true);
+      setError(null);
+
+      const [subjectRes, questionsRes] = await Promise.all([
+        getAnswerSubject(subjectId),
+        getAnswerQuestions(subjectId, { limit: 10, offset: 0 }),
+      ]);
+
+      setSubject(subjectRes);
+      setQuestions(questionsRes?.results ?? []);
+    } catch (e) {
+      setError(e);
+    } finally {
+      setIsLoading(false);
+    }
+  }, [subjectId]);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
+
+  const questionCount = useMemo(() => questions.length, [questions]);
+
+  // ✅ 상단 "삭제하기" = Subject 삭제
+  const handleDeleteAll = useCallback(async () => {
+    const ok = window.confirm('피드와 질문을 모두 삭제할까요?');
+    if (!ok) return;
+
+    try {
+      await deleteSubject(subjectId);
+      navigate('/', { replace: true });
+    } catch (e) {
+      alert('삭제에 실패했습니다.');
+    }
+  }, [navigate, subjectId]);
+
+  // ✅ 질문 1개 삭제 (AnswerCard 케밥용)
+  const handleDeleteQuestion = useCallback(async questionId => {
+    const ok = window.confirm('이 질문을 삭제할까요?');
+    if (!ok) return;
+
+    try {
+      await deleteQuestion(questionId);
+      setQuestions(prev => prev.filter(q => q.id !== questionId));
+    } catch (e) {
+      alert('질문 삭제에 실패했습니다.');
+    }
+  }, []);
+
+  const profileSrc =
+    subject?.imageSource || subject?.imageUrl || fallbackProfile;
 
   return (
     <div className={styles.page}>
-      <OpenmindHeader />
+      <section className={styles.topSection}>
+        <div className={styles.bannerWrap}>
+          <img className={styles.banner} src={bannerImage1} alt="banner" />
+          <img
+            className={styles.profileImage}
+            src={profileSrc}
+            alt="profile"
+            onError={e => {
+              e.currentTarget.src = fallbackProfile;
+            }}
+          />
+        </div>
+      </section>
 
-      <main className={styles.main}>
-        <AnswerHeader
-          name={profileName}
-          questionCount={MOCK.length}
-          onAskClick={() => alert("질문하러 가기 (라우팅은 다른 분이 구현)")}
-        />
+      <div className={styles.profileMeta}>
+        <div className={styles.nameBlock}>
+          <h1 className={styles.subjectName}>{subject?.name ?? 'OPENMIND'}</h1>
+          <div className={styles.questionCount}>
+            <span className={styles.countBadge}>{questionCount}</span>
+            <span>개의 질문이 있습니다</span>
+          </div>
+        </div>
 
-        <section className={styles.list} aria-label="질문 카드 리스트">
-          {MOCK.map((item) => (
-            <AnswerCard
-              key={item.id}
-              status={item.status}
-              question={item.question}
-              fromName={item.fromName}
-              createdAt={item.createdAt}
-              initialAnswer={item.initialAnswer}
-              onSubmit={() => alert("답변 완료 (API/상태는 다른 분이 구현)")}
-            />
-          ))}
-        </section>
-      </main>
+        <button
+          type="button"
+          className={styles.deleteAllButton}
+          onClick={handleDeleteAll}
+          disabled={isLoading}
+        >
+          삭제하기
+        </button>
+      </div>
+
+      <section className={styles.listSection}>
+        {isLoading ? (
+          <div className={styles.emptyState}>불러오는 중...</div>
+        ) : error ? (
+          <div className={styles.emptyState}>문제가 발생했어요</div>
+        ) : questions.length === 0 ? (
+          <div className={styles.emptyState}>아직 질문이 없습니다.</div>
+        ) : (
+          <div className={styles.cardList}>
+            {questions.map(question => (
+              <AnswerCard
+                key={question.id}
+                question={question}
+                onDeletePost={() => handleDeleteQuestion(question.id)}
+              />
+            ))}
+          </div>
+        )}
+      </section>
     </div>
   );
 }
+
+export default AnswerPage;

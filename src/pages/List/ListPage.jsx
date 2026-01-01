@@ -9,10 +9,7 @@ import { useSubjects } from './hooks/subjectApi';
 import Button from '../../components/Button/Button';
 import arrowImg from '../../assets/Icon/arrowRightBrown.svg';
 
-import { useAuth } from '@/provider/AuthPrivder';
-
 function List() {
-  const { currentUser } = useAuth();
   const navigate = useNavigate();
 
   const [page, setPage] = useState(1);
@@ -69,12 +66,14 @@ function List() {
 
   // 답변하러 가기 버튼 이동
   function goToAnswer() {
-    if (!currentUser?.id) {
+    const id = localStorage.getItem('questionId');
+
+    if (!id) {
       navigate('/');
       return;
     }
 
-    navigate(`/post/${currentUser?.id}/answer`);
+    navigate(`/post/${id}/answer`);
   }
 
   return (

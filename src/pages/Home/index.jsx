@@ -21,7 +21,7 @@ function Home() {
   const { showToast } = useToast();
   const { onLogin } = useAuth();
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!name.trim()) {
@@ -45,23 +45,23 @@ function Home() {
   };
 
   const goToAsk = () => navigate('/list');
-  const handleNameChange = e => setName(e.target.value);
+  const handleNameChange = (e) => setName(e.target.value);
 
   return (
     <Container>
       <div className={styles.background}>
-        <header className={styles.header}>
+        <div className={styles.contentsWrap}>
+          <div className={styles.logoWrap}>
+            <img src={Logo} className={styles.logo} alt="logo" />
+          </div>
+
           <div className={styles.askBtnWrap}>
             <Button onClick={goToAsk} className={styles.askBtn}>
               질문하러 가기
               <ArrowRight className={styles.arrowIcon} />
             </Button>
           </div>
-        </header>
-        <div className={styles.contentsWrap}>
-          <div className={styles.logoWrap}>
-            <img src={Logo} className={styles.logo} alt="logo" />
-          </div>
+
           <div className={styles.formBox}>
             <form className={styles.formWrap} onSubmit={handleSubmit}>
               <InputField
