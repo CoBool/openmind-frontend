@@ -1,0 +1,14 @@
+.deleteButtonContainer {
+  position: relative;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  text-align: right;
+  max-width: 750px;
+  width: 100%;
+}
+
+.deleteButton {
+  max-width: 100px;
+  border-radius: 9999px;
+  text-wrap: nowrap;
+}

@@ -136,9 +136,3 @@ export const patchAnswer = async (answerId, answer) => {
 
   return response.json()
 }
-
-/**
- * @param {Object} props
- * @param {Object} props.post - API로 받아온 post 객체 (post.questions 포함)
- * @param {Function} [props.onDeletePost] - 포스트 전체 삭제 핸들러(선택)
- */

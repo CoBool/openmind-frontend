@@ -18,16 +18,18 @@ function TextArea({
   disabled = false,
   className = '',
   autoFocus = false,
+  ref,
 }) {
   return (
     <textarea
       className={`${styles.textarea} ${className}`}
       placeholder={placeholder}
       value={value}
-      onChange={onChange}
+      onChange={onChange} 
       disabled={disabled}
       spellCheck={false} /* 맞춤법 검사 비활성화 */
       autoFocus={autoFocus}
+      ref={ref}
     />
   );
 }

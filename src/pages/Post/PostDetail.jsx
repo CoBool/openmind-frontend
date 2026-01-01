@@ -11,6 +11,7 @@ import {
   PostDetailError,
   PostHeader,
   CreateModal,
+  PostDetailSkeleton,
 } from './components';
 
 import shared from './Post.shared.module.css';
@@ -54,11 +55,11 @@ export default function PostDetail() {
   } = useQuestionList(subjectId, { enabled: isQuestionListEnabled });
 
   if (subjectError) {
-    return <PostDetailError />;
+    return <Container className={shared.unauthorizedContainer}><PostDetailError /></Container>;
   }
 
   if (subjectLoading || questionListLoading) {
-    return <div className={shared.pageFallback}>로딩 중...</div>;
+    return <PostDetailSkeleton />;
   }
 
   if (subjectError) {
