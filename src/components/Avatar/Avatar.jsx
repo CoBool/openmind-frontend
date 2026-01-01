@@ -70,29 +70,6 @@ function AvatarImage({ className = '', src, alt, ...props }) {
     return null;
   }
 
-  useEffect(() => {
-    let cancelled = false;
-    const img = new Image();
-
-    img.onload = () => {
-      if (!cancelled) setStatus(AVATAR_STATUS.LOADED);
-    };
-
-    img.onerror = () => {
-      if (!cancelled) setStatus(AVATAR_STATUS.ERROR);
-    };
-
-    img.src = src;
-
-    return () => {
-      cancelled = true;
-    };
-  }, [src, setStatus]);
-
-  if (status !== AVATAR_STATUS.LOADED) {
-    return null;
-  }
-
   return (
     <img
       className={`${styles.avatarImage} ${className}`}

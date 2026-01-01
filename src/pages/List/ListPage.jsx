@@ -9,8 +9,8 @@ import { useSubjects } from './hooks/subjectApi';
 import Button from '../../components/Button/Button';
 import { Icon } from '@/components/Icon';
 
-// 한 페이지에 표시할 아이템 갯수
-const LIMIT = 8
+import { useAuth } from '@/provider/AuthPrivder';
+
 function List() {
   const { currentUser } = useAuth();
   const navigate = useNavigate();
@@ -77,73 +77,6 @@ function List() {
     navigate(`/post/${currentUser?.id}/answer`);
   }
 
-  const [list, setList] = useState([])
-  const [page, setPage] = useState(1)
-
-  const [limit, setLimit] = useState(getLimitWidth());
-
-  // 기본 정렬 타입 -> 최신순
-  const [sortType, setSortType] = useState('latest');
-
-  // 반응형 변경에 따른 데이터 갯수
-  function getLimitWidth() {
-    if (typeof window === 'undefined') return 8;
-    const width = window.innerWidth;
-    if (width >= 885) return 8;
-    if (width >= 768) return 6;
-    return 6;
-  }
-
-  // 창 크기 변경시 limit 재설정
-  useEffect(() => {
-    const handleResize = () => {
-      const newlimit = getLimitWidth();
-      setLimit(prev => (prev === newlimit ? prev : newlimit));
-    };
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  // 아이템 불러오기 함수
-  useEffect(() => {
-    const fetchAllItems = async () => {
-      try {
-        // 전체 아이템 요청 100개 한도
-        // 추후 변동 가능
-        const response = await instance(`subjects/?limit=100`, {
-          method: 'GET',
-        })
-
-        const data = await response.json()
-        setList(data.results)
-      } catch (e) {
-        console.error(e)
-      }
-    }
-
-    fetchAllItems()
-  }, [])
-
-  const totalPage = Math.ceil(list.length / limit);
-
-  // page 계산
-  const safePage = Math.min(page, totalPage || 1);
-
-  // 현재 페이지에 표시할 아이템 계산 (정렬 + 페이징)
-  const visibleList = useMemo(() => {
-    const sorted = [...list].sort((a, b) => {
-      if (sortType === 'name') {
-        return a.name.localeCompare(b.name, 'en', { numeric: true })
-      }
-      return new Date(b.createdAt) - new Date(a.createdAt)
-    })
-
-    // 페이징 처리
-    const start = (safePage - 1) * limit;
-    // 잘라서 반환
-    return sorted.slice(start, start + limit);
-  }, [list, safePage, sortType, limit]);
-
   return (
     <div className={styles.listPage}>
       <header className={styles.listheader}>
@@ -158,9 +91,6 @@ function List() {
             <span>답변하러 가기</span>
             <Icon name="arrowRight" className={styles.ButtonImg} />
           </Button>
-          <BoxButton isArrow variant="beige" onClick={goToAnswer}>
-            답변하러 가기
-          </BoxButton>
         </div>
       </header>
       <div className={styles.titleArea}>
@@ -181,13 +111,6 @@ function List() {
       <Pagination
         totalCount={totalCount}
         page={page}
-        setPage={setPage}
-        limit={limit}
-      />
-      <Pagination totalCount={list.length} page={page} setPage={setPage} />
-      <Pagination
-        totalCount={list.length}
-        page={safePage}
         setPage={setPage}
         limit={limit}
       />

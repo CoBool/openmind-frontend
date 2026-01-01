@@ -6,11 +6,6 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { AuthProvider } from './provider/AuthPrivder.jsx';
 import { Toaster } from './components/Toast/Toaster.jsx';
 
-import { AuthProvider } from './provider/AuthPrivder.jsx';
-
-import { AuthProvider } from './provider/AuthPrivder.jsx';
-import { Toaster } from './components/Toast/Toaster.jsx';
-
 import Home from './pages/Home/index.jsx';
 import List from './pages/List/ListPage.jsx';
 import PostDetail from './pages/Post/PostDetail.jsx';

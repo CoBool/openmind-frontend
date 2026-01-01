@@ -18,6 +18,7 @@ function TextArea({
   disabled = false,
   className = '',
   autoFocus = false,
+  defaultValue = '',
   ref,
 }) {
   return (
@@ -25,6 +26,7 @@ function TextArea({
       className={`${styles.textarea} ${className}`}
       placeholder={placeholder}
       value={value}
+      defaultValue={defaultValue}
       onChange={onChange} 
       disabled={disabled}
       spellCheck={false} /* 맞춤법 검사 비활성화 */

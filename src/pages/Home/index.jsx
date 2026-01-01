@@ -16,8 +16,6 @@ import Logo from '@/assets/images/logo.png';
 
 import { Icon } from '@/components/Icon';
 
-import { useAuth } from '@/provider/AuthPrivder';
-
 function Home() {
   const [name, setName] = useState('');
   const navigate = useNavigate();

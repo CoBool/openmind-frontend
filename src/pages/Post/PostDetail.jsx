@@ -3,7 +3,7 @@ import { useParams } from 'react-router';
 import { useSubject } from './hooks/useSubject';
 import { useQuestionList } from './hooks/useQuestionList';
 
-import { Avatar } from '@/components/Avatar';
+import Container from '@/components/Container/Container';
 import { Card, CardContent } from '@/components/Card';
 import {
   QuestionHeader,
@@ -13,24 +13,6 @@ import {
   CreateModal,
   PostDetailSkeleton,
 } from './components';
-
-import shared from './Post.shared.module.css';
-
-import { getSubjects } from '@/services/subjects_api';
-
-import { Card, CardContent } from '@/components/Card';
-import {
-  QuestionHeader,
-  QuestionList,
-  PostDetailError,
-  PostHeader,
-  CreateModal,
-} from './components';
-
-import Messages from '@/assets/Icon/Messages.svg';
-import ThumbsUp from '@/assets/Icon/thumbs-up.svg';
-import ThumbsDown from '@/assets/Icon/thumbs-down.svg';
-import styles from './PostDetail.module.css';
 
 import shared from './Post.shared.module.css';
 
