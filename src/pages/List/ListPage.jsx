@@ -7,7 +7,7 @@ import { useEffect, useMemo, useState } from 'react';
 import ListItem from './ListItems';
 import { useSubjects } from './hooks/subjectApi';
 import Button from '../../components/Button/Button';
-import arrowImg from '../../assets/Icon/arrowRightBrown.svg';
+import { Icon } from '@/components/Icon';
 
 // 한 페이지에 표시할 아이템 갯수
 const LIMIT = 8
@@ -156,11 +156,7 @@ function List() {
         <div className={styles.listButton}>
           <Button onClick={goToAnswer} className={styles.AnsBtn}>
             <span>답변하러 가기</span>
-            <img
-              src={arrowImg}
-              alt="화살표 이미지"
-              className={styles.ButtonImg}
-            />
+            <Icon name="arrowRight" className={styles.ButtonImg} />
           </Button>
           <BoxButton isArrow variant="beige" onClick={goToAnswer}>
             답변하러 가기

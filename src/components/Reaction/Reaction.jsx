@@ -1,6 +1,5 @@
 import { useState } from 'react'
-import ThumbsUp from '../../assets/Icon/thumbs-up.svg'
-import ThumbsDown from '../../assets/Icon/thumbs-down.svg'
+import { Icon } from '@/components/Icon';
 import styles from './Reaction.module.css'
 
 function Reaction() {
@@ -29,7 +28,7 @@ function Reaction() {
           .join(' ')}
         onClick={handleDislike}
       >
-        <img src={ThumbsDown} className={styles.icon} />
+        <Icon name="thumbsDown" className={styles.icon} />
         <span>싫어요</span>
       </button>
 
@@ -44,7 +43,7 @@ function Reaction() {
           .join(' ')}
         onClick={handleLike}
       >
-        <img src={ThumbsUp} className={styles.icon} />
+        <Icon name="thumbsUp" className={styles.icon} />
         <span>좋아요</span>
       </button>
     </div>

@@ -1,5 +1,5 @@
 import styles from './UserCard.module.css';
-import QuestionIcon from '../../assets/Icon/Messages.svg?react';
+import { Icon } from '@/components/Icon';
 
 function UserCard({ name = '이름 없음', questionCount = 0 }) {
   return (
@@ -13,7 +13,7 @@ function UserCard({ name = '이름 없음', questionCount = 0 }) {
           <div
             className={`${styles.receivedQuestion} font-body3 ${styles.body3Mobile}`}
           >
-            <QuestionIcon className={styles.questionIcon} />
+            <Icon name="messages" className={styles.questionIcon} />
             받은 질문
           </div>
           <div className={`font-body3 ${styles.body3Mobile}`}>
