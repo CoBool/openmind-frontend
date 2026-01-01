@@ -14,7 +14,7 @@ function Field({ className = '', ...props }) {
 function FieldLabel({ className = '', ...props }) {
   return (
     <Label
-      className={`${styles.label} ${className}`}
+      className={`${className}`}
       {...props}
     />
   );

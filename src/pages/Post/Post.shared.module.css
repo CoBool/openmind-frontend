@@ -43,3 +43,10 @@
   top: 50px;
   left: 0;
 }
+
+.unauthorizedContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
