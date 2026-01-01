@@ -7,9 +7,7 @@ import { useKakaoShare } from '@/hooks/share';
 import { useFacebookShare } from '@/hooks/share';
 import { useShareAction } from '@/hooks/share';
 
-import LinkIcon from '@/assets/Icon/Link.svg';
-import KakaoIcon from '@/assets/Icon/kakao.svg';
-import FacebookIcon from '@/assets/Icon/facebook.svg';
+import { Icon } from '@/components/Icon';
 
 import styles from './ShareButtons.module.css';
 
@@ -45,7 +43,7 @@ function ShareButtons({ url, title, description, imageUrl }) {
     () => [
       {
         key: 'copy',
-        icon: LinkIcon,
+        icon: 'link',
         label: 'URL 복사',
         action: copyAction.execute,
         loading: copyAction.isLoading,
@@ -53,7 +51,7 @@ function ShareButtons({ url, title, description, imageUrl }) {
       },
       {
         key: 'kakao',
-        icon: KakaoIcon,
+        icon: 'kakao',
         label: '카카오톡 공유',
         action: kakaoAction.execute,
         loading: kakaoAction.isLoading,
@@ -61,7 +59,7 @@ function ShareButtons({ url, title, description, imageUrl }) {
       },
       {
         key: 'facebook',
-        icon: FacebookIcon,
+        icon: 'facebook',
         label: '페이스북 공유',
         action: facebookAction.execute,
         loading: facebookAction.isLoading,
@@ -104,7 +102,7 @@ function ShareButton({ className = '', icon, label, action, disabled }) {
         aria-label={label}
         className={className}
       >
-        <img src={icon} alt={label} aria-hidden="true" />
+        <Icon name={icon} />
       </button>
     </li>
   );

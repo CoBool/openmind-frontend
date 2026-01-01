@@ -1,7 +1,13 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { useInfiniteScroll } from '@/hooks/useInfiniteScroll';
 
-import { getSubjectQuestions, createQuestion, reactToQuestion } from '@/services/questionsApi';
+import {
+  getSubjectQuestions,
+  createQuestion,
+  deleteQuestion,
+  reactToQuestion,
+} from '@/services/questionsApi';
+import { createAnswer, patchAnswer } from '@/services/answersApi';
 
 /**
  * @description URL에서 offset 파라미터를 추출합니다.
@@ -142,7 +148,16 @@ export const useQuestionList = (subjectId, options = {}) => {
     }
   };
 
-  const handleCreateQuestion = async (content) => {
+  const updateQuestionAnswerState = (questionId, newAnswer) => {
+    setQuestions(prev => ({
+      ...prev,
+      results: prev.results.map(q =>
+        q.id === questionId ? { ...q, answer: newAnswer } : q
+      ),
+    }));
+  };
+
+  const handleCreateQuestion = async content => {
     try {
       const result = await createQuestion(subjectId, { content });
 
@@ -153,8 +168,8 @@ export const useQuestionList = (subjectId, options = {}) => {
         like: result.like,
         dislike: result.dislike,
         createdAt: result.createdAt,
-        answer: result.answer
-      }
+        answer: result.answer,
+      };
 
       setQuestions(prev => ({
         ...prev,
@@ -163,7 +178,72 @@ export const useQuestionList = (subjectId, options = {}) => {
     } catch (error) {
       console.error('Failed to create question:', error);
     }
-  }
+  };
+
+  const createAnswerForQuestion = async (
+    questionId,
+    { content = null, isRejected }
+  ) => {
+    const payload = isRejected
+      ? { content: '거절된 답변입니다.', isRejected: true }
+      : { content, isRejected: false };
+
+    try {
+      const result = await createAnswer(questionId, payload);
+      // 헬퍼 함수 재사용으로 코드가 깔끔해짐
+      updateQuestionAnswerState(questionId, result);
+    } catch (error) {
+      console.error('Failed to create answer:', error);
+    }
+  };
+
+  const updateAnswerForQuestion = async (
+    questionId,
+    { content, isRejected }
+  ) => {
+    // 1. 대상 찾기 & ID 추출
+    const targetQuestion = questions.results.find(q => q.id === questionId);
+    if (!targetQuestion || !targetQuestion.answer) return;
+
+    const answerId = targetQuestion.answer.id;
+    const previousAnswer = targetQuestion.answer; // 롤백용 스냅샷
+
+    const payload = isRejected
+      ? { content: '거절된 답변입니다.', isRejected: true }
+      : { content, isRejected: false };
+
+    // 2. ⚡️ 낙관적 업데이트 (헬퍼 함수 사용)
+    // 기존 객체에 payload를 덮어씌워 즉시 화면 반영
+    updateQuestionAnswerState(questionId, { ...previousAnswer, ...payload });
+
+    try {
+      // 3. 📡 API 호출
+      const result = await patchAnswer(answerId, payload);
+
+      // 4. ✅ 성공 시 동기화 (서버 데이터로 교체)
+      updateQuestionAnswerState(questionId, result);
+    } catch (error) {
+      console.error('Failed to patch answer:', error);
+
+      // 5. ↩️ 실패 시 롤백 (이전 상태로 복구)
+      updateQuestionAnswerState(questionId, previousAnswer);
+
+      throw error;
+    }
+  };
+
+  const deleteAnswerForQuestion = async questionId => {
+    try {
+      await deleteQuestion(questionId);
+
+      setQuestions(prev => ({
+        ...prev,
+        results: prev.results.filter(question => question.id !== questionId),
+      }));
+    } catch (error) {
+      console.error('Failed to delete answer:', error);
+    }
+  };
 
   return {
     questions,
@@ -174,5 +254,8 @@ export const useQuestionList = (subjectId, options = {}) => {
     reactedQuestions: reactedQuestionsRef.current,
     handleReaction,
     handleCreateQuestion,
+    createAnswerForQuestion,
+    updateAnswerForQuestion,
+    deleteAnswerForQuestion,
   };
 };
