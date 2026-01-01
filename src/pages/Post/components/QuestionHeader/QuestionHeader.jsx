@@ -7,8 +7,8 @@ export default function QuestionHeader({ questions }) {
     <CardHeader className={styles.questionHeader}>
       <CardTitle className={styles.questionHeaderTitle}>
         <Icon name="messages" />
-        {questions?.count
-          ? `${questions?.count}개의 질문이 있습니다`
+        {questions?.results?.length
+          ? `${questions?.results?.length}개의 질문이 있습니다`
           : '아직 질문이 없습니다'}
       </CardTitle>
     </CardHeader>

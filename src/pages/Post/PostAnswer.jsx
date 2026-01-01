@@ -14,6 +14,7 @@ import {
   PostDetailError,
   PostHeader,
   UnauthorizedFallback,
+  PostDetailSkeleton,
 } from './components';
 import Button from '@/components/Button/Button';
 
@@ -37,7 +38,7 @@ export default function PostAnswer() {
 
   const handleGoToList = () => {
     navigate('/list');
-  }
+  };
 
   const {
     questions,
@@ -50,15 +51,25 @@ export default function PostAnswer() {
   } = useQuestionList(subjectId, { enabled: isQuestionListEnabled });
 
   if (subjectError) {
-    return <Container className={shared.unauthorizedContainer}><PostDetailError /></Container>;
-  }  
+    return (
+      <Container className={shared.unauthorizedContainer}>
+        <PostDetailError />
+      </Container>
+    );
+  }
 
   if (subjectLoading || questionListLoading) {
-    return <div className={shared.pageFallback}>로딩 중...</div>;
+    return <PostDetailSkeleton />;
   }
 
   if (!isOwner) {
-    return <Container className={shared.unauthorizedContainer}><UnauthorizedFallback action={<Button onClick={handleGoToList}>목록으로 돌아가기</Button>}/></Container>;
+    return (
+      <Container className={shared.unauthorizedContainer}>
+        <UnauthorizedFallback
+          action={<Button onClick={handleGoToList}>목록으로 돌아가기</Button>}
+        />
+      </Container>
+    );
   }
 
   const handleDelete = async () => {
@@ -77,16 +88,18 @@ export default function PostAnswer() {
         description: '주제 삭제에 실패했습니다',
       });
     }
-  }
+  };
 
   return (
     <main>
       <PostHeader subject={subject} />
       <Container>
-      <div className={styles.deleteButtonContainer}>
-      <Button className={styles.deleteButton} onClick={handleDelete}>삭제하기</Button>
-      </div>
-      
+        <div className={styles.deleteButtonContainer}>
+          <Button className={styles.deleteButton} onClick={handleDelete}>
+            삭제하기
+          </Button>
+        </div>
+
         <Card className={shared.detailCard}>
           <QuestionHeader questions={questions} />
           <CardContent className={shared.detailCardContent}>
