@@ -181,6 +181,15 @@ export const useQuestionList = (subjectId, options = {}) => {
 
     try {
       const result = await createAnswer(questionId, payload);
+
+      setQuestions(prev => ({
+        ...prev,
+        results: prev.results.map(question =>
+          question.id === questionId
+            ? { ...question, answer: result } // 받아온 답변 객체로 교체
+            : question
+        ),
+      }));
     } catch (error) {
       console.error('Failed to create answer:', error);
     }
@@ -189,6 +198,11 @@ export const useQuestionList = (subjectId, options = {}) => {
   const deleteAnswerForQuestion = async (questionId) => {
     try {
       await deleteQuestion(questionId);
+
+      setQuestions(prev => ({
+        ...prev,
+        results: prev.results.filter(question => question.id !== questionId),
+      }));
     } catch (error) {
       console.error('Failed to delete answer:', error);
     }
