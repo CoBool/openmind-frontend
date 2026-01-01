@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import {
   Dialog,
@@ -21,6 +21,13 @@ export default function CreateModal({ subject, onSuccess }) {
   const [open, setOpen] = useState(false);
   const [content, setContent] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  useEffect(() => {
+    if (open) {
+      setContent('');
+    }
+  }, [open]);
+
   const handleSubmit = async () => {
     setIsSubmitting(true);
     try {

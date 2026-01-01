@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { useSubject } from './hooks/useSubject';
 import { useQuestionList } from './hooks/useQuestionList';
 
+import Container from '@/components/Container/Container';
 import { Card, CardContent } from '@/components/Card';
 import FloatingButton from '@/components/Button/FloatingButton';
 import QuestionModal from '@/components/Modal/QuestionModal';
@@ -13,6 +14,7 @@ import {
   QuestionList,
   PostDetailError,
   PostHeader,
+  CreateModal,
 } from './components';
 
 import shared from './Post.shared.module.css';
@@ -50,8 +52,9 @@ export default function PostDetail() {
   return (
     <main>
       <PostHeader subject={subject} />
-      <Card className={shared.detailCard}>
-        <QuestionHeader questions={questions} />
+      <Container>
+        <Card className={shared.detailCard}>
+          <QuestionHeader questions={questions} />
 
         <CardContent className={shared.detailCardContent}>
           <QuestionList

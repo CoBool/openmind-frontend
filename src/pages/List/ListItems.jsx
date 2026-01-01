@@ -4,6 +4,7 @@ import { Avatar } from '../../components/Avatar';
 import styles from './ListItems.module.css';
 
 import { useNavigate } from 'react-router-dom';
+import { Tootip } from './Tooltip';
 
 // 리스트 아이템 컴포넌트
 function ListItem({ item }) {
@@ -12,6 +13,8 @@ function ListItem({ item }) {
   const handleClick = () => {
     navigate(`/post/${item.id}`);
   };
+  
+  const showTooltip = item.name.length >= 10;
 
   return (
     <div className={styles.listItem} onClick={handleClick}>
@@ -20,7 +23,10 @@ function ListItem({ item }) {
         <Avatar.Fallback />
       </Avatar>
 
-      <div className={styles.name}>{item.name}</div>
+      <Tootip text={showTooltip ? item.name : ''}>
+        <div className={styles.name}>{item.name}</div>
+      </Tootip>
+
       <div className={styles.question}>
         <img
           src={MessagesIcon}

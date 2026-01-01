@@ -12,7 +12,7 @@ import PostDetail from './pages/Post/PostDetail.jsx';
 import PostAnswer from './pages/Post/PostAnswer.jsx';
 import Layout from './components/layout/Layout.jsx';
 import './index.css';
-import Answer from './pages/Answer/index.jsx';
+import Answer from './pages/Answer/AnswerPage.jsx';
 
 const router = createBrowserRouter([
   {
