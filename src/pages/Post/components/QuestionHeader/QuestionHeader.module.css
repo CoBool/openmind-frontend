@@ -9,4 +9,5 @@
   position: relative;
   text-align: center;
   gap: 8px;
+  color: var(--brown-40);
 }
