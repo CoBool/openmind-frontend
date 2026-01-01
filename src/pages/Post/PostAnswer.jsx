@@ -47,6 +47,7 @@ export default function PostAnswer() {
     handleReaction,
     reactedQuestions,
     createAnswerForQuestion,
+    updateAnswerForQuestion,
     deleteAnswerForQuestion,
   } = useQuestionList(subjectId, { enabled: isQuestionListEnabled });
 
@@ -77,7 +78,6 @@ export default function PostAnswer() {
       await handleDeleteSubject();
       toast({
         title: '주제가 삭제되었습니다',
-        description: '주제가 삭제되었습니다',
       });
       onLogout();
       navigate('/list', { replace: true });
@@ -85,7 +85,6 @@ export default function PostAnswer() {
       console.error('Failed to delete subject:', error);
       toast({
         title: '주제 삭제에 실패했습니다',
-        description: '주제 삭제에 실패했습니다',
       });
     }
   };
@@ -110,6 +109,7 @@ export default function PostAnswer() {
               reactedQuestions={reactedQuestions}
               triggerRef={triggerRef}
               createAnswerForQuestion={createAnswerForQuestion}
+              updateAnswerForQuestion={updateAnswerForQuestion}
               deleteAnswerForQuestion={deleteAnswerForQuestion}
             />
           </CardContent>

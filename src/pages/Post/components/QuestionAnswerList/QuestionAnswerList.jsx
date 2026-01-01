@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Button from '@/components/Button/Button';
 
 import { toast } from '@/components/Toast';
@@ -33,45 +34,59 @@ export default function QuestionAnswerList({
   triggerRef,
   reactedQuestions,
   createAnswerForQuestion,
+  updateAnswerForQuestion,
   deleteAnswerForQuestion,
 }) {
   const isEmpty = !questions?.results || questions.results.length === 0;
+  const [editingQuestionId, setEditingQuestionId] = useState(null);
 
   if (isEmpty) {
     return <QuestionEmpty />;
   }
 
-  const handleRejectAnswer = async (questionId) => {
+  const handleRejectAnswer = async questionId => {
     try {
-      await createAnswerForQuestion(questionId, { content: '거절된 답변입니다.', isRejected: true });
+      await createAnswerForQuestion(questionId, {
+        content: '거절된 답변입니다.',
+        isRejected: true,
+      });
       toast({
         title: '답변이 거절되었습니다',
-        description: '답변이 거절되었습니다',
       });
     } catch (error) {
       console.error('Failed to reject answer:', error);
       toast({
         title: '답변 거절에 실패했습니다',
-        description: '답변 거절에 실패했습니다',
       });
     }
-  }
+  };
 
-  const handleDeleteAnswer = async (questionId) => {
+  const handleUpdateSubmit = async (questionId, { content, isRejected }) => {
+    try {
+        await updateAnswerForQuestion(questionId, { content, isRejected });
+        
+        setEditingQuestionId(null); 
+        
+        toast({ title: '답변이 수정되었습니다' });
+    } catch (error) {
+        console.error(error);
+        toast({ title: '수정에 실패했습니다' });
+    }
+};
+
+  const handleDeleteAnswer = async questionId => {
     try {
       await deleteAnswerForQuestion(questionId);
       toast({
         title: '답변이 삭제되었습니다',
-        description: '답변이 삭제되었습니다',
       });
     } catch (error) {
       console.error('Failed to delete answer:', error);
       toast({
         title: '답변 삭제에 실패했습니다',
-        description: '답변 삭제에 실패했습니다',
       });
     }
-  }
+  };
 
   return (
     <>
@@ -81,6 +96,9 @@ export default function QuestionAnswerList({
           index === questions.results.length - TRIGGER_POINT;
 
         const reaction = reactedQuestions.get(question.id);
+
+        const isEditing = editingQuestionId === question.id;
+        const isAnswered = question.answer !== null;
 
         const actions = [
           {
@@ -93,9 +111,7 @@ export default function QuestionAnswerList({
             visible: question.answer,
             key: 'update',
             label: '수정',
-            onClick: () => {
-              console.log('수정');
-            },
+            onClick: () => setEditingQuestionId(question.id),
           },
           {
             visible: true,
@@ -115,14 +131,28 @@ export default function QuestionAnswerList({
             reaction={reaction}
             actionSlot={<AnswerActionSlot actions={actions} />}
           >
-            {question.answer ? (
-              <QuestionAnswer answer={question.answer} subject={subject} />
-            ) : (
-              <AnswerInputForm
-                questionId={question.id}
-                onSubmit={createAnswerForQuestion}
-              />
-            )}
+            {(() => {
+              if (isEditing) {
+                return (
+                  <AnswerInputForm
+                    questionId={question.id}
+                    initialContent={question.answer?.content || ''}
+                    onSubmit={handleUpdateSubmit}
+                  />
+                );
+              }
+              if (isAnswered) {
+                return (
+                  <QuestionAnswer answer={question.answer} subject={subject} />
+                );
+              }
+              return (
+                <AnswerInputForm
+                  questionId={question.id}
+                  onSubmit={createAnswerForQuestion}
+                />
+              );
+            })()}
           </QuestionCard>
         );
       })}

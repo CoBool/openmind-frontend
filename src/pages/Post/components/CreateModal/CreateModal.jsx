@@ -35,13 +35,11 @@ export default function CreateModal({ subject, onSuccess }) {
       setOpen(false);
       toast({
         title: '질문이 등록되었습니다',
-        description: '질문이 등록되었습니다',
       });
     } catch (error) {
       console.error('Failed to create question:', error);
       toast({
         title: '질문 등록에 실패했습니다',
-        description: '질문 등록에 실패했습니다',
       });
     } finally {
       setIsSubmitting(false);
