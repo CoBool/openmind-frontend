@@ -25,13 +25,16 @@
   border: 1px solid var(--gray-30);
   border-radius: 12px;
   box-shadow: var(--shadow-1);
-  padding: 4px 0;
+  overflow: hidden;
   z-index: 20;
   align-items: center;
 }
 
 /* 기본 메뉴 아이템 */
 .item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   width: 100%;
   background: transparent;
   border: none;
@@ -57,4 +60,10 @@
 
 .itemDanger:hover {
   background: rgba(255, 0, 0, 0.05);
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+  color: var(--gray-50);
 }
