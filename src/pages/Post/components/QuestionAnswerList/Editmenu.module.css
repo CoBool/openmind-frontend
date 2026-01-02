@@ -27,6 +27,7 @@
   box-shadow: var(--shadow-1);
   padding: 4px 0;
   z-index: 20;
+  align-items: center;
 }
 
 /* 기본 메뉴 아이템 */
@@ -35,7 +36,7 @@
   background: transparent;
   border: none;
   padding: 8px 16px;
-  text-align: left;
+  text-align: center;
   font-size: 14px;
   color: var(--gray-50);
   cursor: pointer;
