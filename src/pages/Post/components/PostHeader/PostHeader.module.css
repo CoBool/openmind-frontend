@@ -28,6 +28,7 @@
 
 .logoImage {
   width: 124px;
+  cursor: pointer;
 }
 
 .profileContent {
