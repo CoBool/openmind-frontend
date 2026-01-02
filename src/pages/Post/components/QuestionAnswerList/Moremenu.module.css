@@ -1,0 +1,30 @@
+.moreMenuWrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* 더보기 버튼 */
+.moreButton {
+  padding: 4px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+/* 비활성화 */
+.moreButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+/* 아이콘 */
+.moreIcon {
+  width: 24px;
+  height: 24px;
+  color: var(--gray-50);
+}
+
+.moreButton:hover .moreIcon {
+  color: var(--gray-70);
+}
