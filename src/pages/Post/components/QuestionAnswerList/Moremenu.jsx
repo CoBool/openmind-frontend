@@ -37,7 +37,7 @@ function MoreMenu({
         disabled={disabled}
         onClick={handleToggle}
       >
-        <Icon name="more" className={styles.moreIcon} width={24} height={24} />
+        <Icon name="more" className={styles.moreIcon} />
       </button>
 
       {open && (
