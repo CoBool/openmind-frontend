@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import {
   Dialog,
@@ -12,8 +12,7 @@ import Button from '@/components/Button/Button';
 
 import { toast } from '@/components/Toast';
 
-import Messages from '@/assets/Icon/Messages.svg';
-import Close from '@/assets/Icon/Close.svg';
+import { Icon } from '@/components/Icon';
 
 import styles from './CreateModal.module.css';
 
@@ -21,6 +20,13 @@ export default function CreateModal({ subject, onSuccess }) {
   const [open, setOpen] = useState(false);
   const [content, setContent] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  useEffect(() => {
+    if (open) {
+      setContent('');
+    }
+  }, [open]);
+
   const handleSubmit = async () => {
     setIsSubmitting(true);
     try {
@@ -29,13 +35,11 @@ export default function CreateModal({ subject, onSuccess }) {
       setOpen(false);
       toast({
         title: '질문이 등록되었습니다',
-        description: '질문이 등록되었습니다',
       });
     } catch (error) {
       console.error('Failed to create question:', error);
       toast({
         title: '질문 등록에 실패했습니다',
-        description: '질문 등록에 실패했습니다',
       });
     } finally {
       setIsSubmitting(false);
@@ -47,16 +51,12 @@ export default function CreateModal({ subject, onSuccess }) {
       <DialogContent className={styles.content}>
         <div className={styles.header}>
           <div className={styles.headerWrapper}>
-            <img
-              className={styles.headerIcon}
-              src={Messages}
-              alt="메시지 아이콘"
-            />
+            <Icon name="messages" className={styles.headerIcon} />
             <h2 className={styles.headerTitle}>질문을 작성하세요</h2>
           </div>
 
           <DialogClose className={styles.close}>
-            <img className={styles.closeIcon} src={Close} alt="닫기" />
+            <Icon name="close" className={styles.closeIcon} />
           </DialogClose>
         </div>
         <div className={styles.QuestionTarget}>

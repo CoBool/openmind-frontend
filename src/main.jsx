@@ -1,8 +1,7 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 
-import { createBrowserRouter } from 'react-router-dom';
-import { RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import { AuthProvider } from './provider/AuthPrivder.jsx';
 import { Toaster } from './components/Toast/Toaster.jsx';
@@ -13,7 +12,6 @@ import PostDetail from './pages/Post/PostDetail.jsx';
 import PostAnswer from './pages/Post/PostAnswer.jsx';
 import Layout from './components/layout/Layout.jsx';
 import './index.css';
-import Answer from './pages/Answer/index.jsx';
 
 const router = createBrowserRouter([
   {
@@ -26,8 +24,7 @@ const router = createBrowserRouter([
         path: 'post',
         children: [
           { path: ':subjectId', Component: PostDetail },
-          { path: ':subjectId/answer', Component: Answer },
-          { path: ':subjectId/question', Component: PostAnswer },
+          { path: ':subjectId/answer', Component: PostAnswer },
         ],
       },
     ],

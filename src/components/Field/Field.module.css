@@ -1,0 +1,16 @@
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px; 
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+}
+
+.description {
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--gray-60);
+}

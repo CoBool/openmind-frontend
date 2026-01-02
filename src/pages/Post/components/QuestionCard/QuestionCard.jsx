@@ -7,8 +7,7 @@ import {
   CardFooter,
 } from '@/components/Card';
 
-import ThumbsUp from '@/assets/Icon/thumbsUp.svg?react';
-import ThumbsDown from '@/assets/Icon/thumbsDown.svg?react';
+import { Icon } from '@/components/Icon';
 
 import styles from './QuestionCard.module.css';
 
@@ -17,6 +16,7 @@ export default function QuestionCard({
   onReaction,
   ref,
   reaction,
+  actionSlot,
   children,
 }) {
   const isAnswered = question.answer !== null;
@@ -37,6 +37,7 @@ export default function QuestionCard({
           >
             {isAnswered ? '답변 완료' : '미답변'}
           </span>
+          { actionSlot && <div className={styles.actions}>{actionSlot}</div>}
         </div>
 
         <CardDescription className={styles.description}>
@@ -57,7 +58,7 @@ export default function QuestionCard({
               handleReaction('like');
             }}
           >
-            <ThumbsUp className={styles.reactionButtonIcon} />
+            <Icon name="thumbsUp" className={styles.reactionButtonIcon} />
             <span className={styles.reactionButtonText}>
               좋아요 {question.like ?? 0}
             </span>
@@ -68,7 +69,7 @@ export default function QuestionCard({
               handleReaction('dislike');
             }}
           >
-            <ThumbsDown className={styles.reactionButtonIcon} />
+            <Icon name="thumbsDown" className={styles.reactionButtonIcon} />
             <span className={styles.reactionButtonText}>
               싫어요 {question.dislike ?? 0}
             </span>

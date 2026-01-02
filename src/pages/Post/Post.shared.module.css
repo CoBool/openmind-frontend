@@ -1,4 +1,5 @@
 .detailCard {
+  position: relative;
   display: flex;
   max-width: 750px;
   margin: 0 auto;
@@ -8,6 +9,7 @@
   border: 1px solid var(--brown-30);
   padding-bottom: 16px;
   box-sizing: border-box;
+  margin-bottom: 16px;
 }
 
 .detailCardHeader {
@@ -41,4 +43,11 @@
   position: fixed;
   top: 50px;
   left: 0;
+}
+
+.unauthorizedContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
 }
