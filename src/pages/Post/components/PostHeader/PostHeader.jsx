@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom';
+
 import { Avatar } from '@/components/Avatar';
 import { ShareButtons } from '@/components/ShareButtons';
 
@@ -6,11 +8,22 @@ import Logo from '@/assets/images/logo.png';
 import styles from './PostHeader.module.css';
 
 function PostHeader({ subject }) {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate('/');
+  };
+
   return (
     <header className={styles.header}>
       <div className={styles.heroBackground}>
         <div className={styles.logoWrapper}>
-          <img className={styles.logoImage} src={Logo} alt="logo" />
+          <img
+            className={styles.logoImage}
+            src={Logo}
+            alt="logo"
+            onClick={handleClick}
+          />
         </div>
       </div>
       <div className={styles.profileContent}>
