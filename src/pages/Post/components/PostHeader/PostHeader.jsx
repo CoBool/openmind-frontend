@@ -4,13 +4,16 @@ import { ShareButtons } from '@/components/ShareButtons';
 import Logo from '@/assets/images/logo.png';
 
 import styles from './PostHeader.module.css';
+import { Link } from 'react-router';
 
 function PostHeader({ subject }) {
   return (
     <header className={styles.header}>
       <div className={styles.heroBackground}>
         <div className={styles.logoWrapper}>
-          <img className={styles.logoImage} src={Logo} alt="logo" />
+          <Link to="/">
+            <img className={styles.logoImage} src={Logo} alt="logo" />
+          </Link>
         </div>
       </div>
       <div className={styles.profileContent}>
