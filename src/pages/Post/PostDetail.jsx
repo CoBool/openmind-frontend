@@ -62,7 +62,6 @@ export default function PostDetail() {
           </CardContent>
         </Card>
       </Container>
-
       <CreateModal subject={subject} onSuccess={handleCreateQuestion} />
     </main>
   );

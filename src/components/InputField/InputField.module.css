@@ -1,5 +1,4 @@
 .nameInputLabel {
-  border: 1px solid var(--gray-40);
   border-radius: 8px;
   padding: 12px 16px;
   height: 46px;
@@ -11,14 +10,30 @@
   gap: 5px;
 }
 
+.nameInputBasic {
+  outline: 1px solid var(--gray-40);
+}
+.nameInputFocus {
+  outline: 1.5px solid var(--brown-50);
+}
+
 .personIcon {
   width: 20px;
   height: 20px;
   color: var(--gray-40);
 }
 
+.colorFocus {
+  color: var(--brown-50);
+}
+
+.colorBasic {
+  color: var(--gray-40);
+}
+
 .nameInput {
   border: none;
+  width: 100%;
 }
 
 .nameInput:focus {
