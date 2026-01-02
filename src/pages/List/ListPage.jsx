@@ -69,14 +69,12 @@ function List() {
 
   // 답변하러 가기 버튼 이동
   function goToAnswer() {
-    const subjectId = localStorage.getItem('subjectId');
-
-    if (!subjectId) {
+    if (!currentUser?.id) {
       navigate('/');
       return;
     }
 
-    navigate(`/post/${subjectId}/answer`);
+    navigate(`/post/${currentUser?.id}/answer`);
   }
 
   return (
