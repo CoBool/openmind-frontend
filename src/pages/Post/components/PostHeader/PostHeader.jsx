@@ -4,7 +4,7 @@ import { ShareButtons } from '@/components/ShareButtons';
 import Logo from '@/assets/images/logo.png';
 
 import styles from './PostHeader.module.css';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 
 function PostHeader({ subject }) {
   return (
