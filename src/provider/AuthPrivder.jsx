@@ -21,11 +21,17 @@ export function AuthProvider({ children }) {
     setCurrentUser(userData);
   };
 
+  const onLogout = () => {
+    localStorage.removeItem(USER_KEY);
+    setCurrentUser(null);
+  };
+
   const value = {
     currentUser,
     isAuthenticated: !!currentUser,
     isAuthLoading,
     onLogin,
+    onLogout,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

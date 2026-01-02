@@ -1,0 +1,18 @@
+.shareButtons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.shareButton {
+  display: inline-flex;
+}
+
+.shareButton > button {
+  display: block;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+}

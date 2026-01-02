@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Actor&display=swap');
-
 .pagination {
   display: flex;
   align-items: center;
@@ -57,6 +55,47 @@
 .pageButtonLeft:hover:not(:disabled),
 .pageButtonRight:hover:not(:disabled) {
   background-color: var(--brown-40);
+  border-radius: 50%;
+}
+
+/* 화살표 아이콘 hover 시 살짝 강조 */
+.pageButtonLeft:hover:not(:disabled) img,
+.pageButtonRight:hover:not(:disabled) img {
+  filter: brightness(0.8);
+  background-color: var(--gray-20);
+  border-radius: 50%;
+  color: var(--gray-60);
+}
+
+.doubleArrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media screen and ((min-width: 375px) and (max-width: 767px)) {
+  .edgeButton {
+    display: none;
+  }
+}
+
+.pageButtonLeft:disabled,
+.pageButtonRight:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* 페이지 번호 hover */
+.pageButton:hover:not(.active) {
+  background-color: var(--gray-30);
+  color: var(--gray-60);
+  border-radius: 50%;
+}
+
+/* 화살표 hover (활성 상태만) */
+.pageButtonLeft:hover:not(:disabled),
+.pageButtonRight:hover:not(:disabled) {
+  background-color: var(--gray-10);
   border-radius: 50%;
 }
 

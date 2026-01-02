@@ -2,8 +2,6 @@
 .content {
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  font-weight: 400;
 }
 
 /* ========================================
@@ -34,6 +32,8 @@
   line-height: 30px;
   margin: 0;
   color: var(--gray-60);
+  font-family: 'Actor', sans-serif;
+  font-weight: 400;
 }
 
 /* X 닫기 버튼 */
@@ -60,8 +60,9 @@
 .target {
   display: flex;
   align-items: center;
-  gap: 8px; /* 각 요소 사이 8px */
-  height: 28px;
+  gap: 4px; /* 각 요소 사이 8px */
+  margin-bottom: 12px;
+  margin-top: 40px;
 }
 
 /* To. 텍스트 */
@@ -69,6 +70,7 @@
   font-size: 18px;
   line-height: 24px;
   color: #000;
+  font-weight: 400;
 }
 
 /* 프로필 이미지 */
@@ -84,6 +86,7 @@
   font-size: 16px;
   line-height: 22px;
   color: var(--gray-60);
+  font-weight: 400;
 }
 
 /* ==============
@@ -91,4 +94,5 @@
    ============== */
 .submitButton {
   width: 100%;
+  margin-top: 8px;
 }

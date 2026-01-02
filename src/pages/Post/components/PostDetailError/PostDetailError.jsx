@@ -1,16 +1,34 @@
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-import { Card, CardContent } from '@/components/Card/Card';
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+} from '@/components/Card';
+
+import Button from '@/components/Button/Button';
+
+import styles from './PostDetailError.module.css';
 
 export default function PostDetailError() {
+  const navigate = useNavigate();
+
+  const handleGoToList = () => {
+    navigate('/list');
+  }
+
   return (
-    <main>
-      <Card>
-        <CardContent>
-          음.. 뭔가 잘못되었어요.
-          <Link to="/list">목록으로 돌아가기</Link>
-        </CardContent>
-      </Card>
-    </main>
+    <Card className={styles.card}>
+      <CardHeader>
+        <CardTitle>오류가 발생했습니다</CardTitle>
+        <CardDescription>오류가 발생했습니다. 다시 시도해주세요.</CardDescription>
+      </CardHeader>
+
+      <CardContent>
+        <Button onClick={handleGoToList}>목록으로 돌아가기</Button>
+      </CardContent>
+    </Card>
   );
 }

@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import ArrowDown from '../../assets/Icon/Arrow-down.svg';
-import ArrowUp from '../../assets/Icon/Arrow-up.svg';
+import { Icon } from '@/components/Icon';
 import styles from '../Dropdown/Dropdown.module.css';
 
 // 옵션 목록
@@ -57,11 +56,7 @@ function Dropdown({ value, onChange, disabled = false }) {
         onClick={handleClick}
       >
         <span>{selectedOption?.label}</span>
-        <img
-          src={open ? ArrowUp : ArrowDown}
-          alt="화살표"
-          className={styles.dropdownArrow}
-        />
+        <Icon name={open ? 'arrowUp' : 'arrowDown'} className={styles.dropdownArrow} />
       </button>
 
       {/* 드롭다운 메뉴 */}

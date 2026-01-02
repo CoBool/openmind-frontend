@@ -1,0 +1,81 @@
+.header {
+  position: relative;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.heroBackground {
+  position: relative;
+  width: 100%;
+  height: 177px;
+
+  background-image: url('@/assets/images/hero.svg');
+  background-color: #fff;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.logoWrapper {
+  position: absolute;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+.logoImage {
+  width: 124px;
+}
+
+.profileContent {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-top: -76px;
+  margin-bottom: 12px;
+}
+
+.avatarWrapper {
+  position: relative;
+  width: 104px;
+  height: 104px;
+}
+
+.username {
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 30px;
+}
+
+@media (min-width: 768px) {
+  .heroBackground {
+    height: 234px;
+  }
+
+  .logoWrapper {
+    top: 50px;
+  }
+
+  .logoImage {
+    width: 170px;
+  }
+
+  .profileContent {
+    margin-top: -105px;
+  }
+
+  .avatarWrapper {
+    width: 136px;
+    height: 136px;
+  }
+
+  .username {
+    font-size: 32px;
+    line-height: 40px;
+  }
+}
