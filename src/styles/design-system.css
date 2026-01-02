@@ -35,6 +35,7 @@
 body {
   font-family:
     'Pretendard',
+    'Actor',
     -apple-system,
     BlinkMacSystemFont,
     system-ui,
@@ -44,7 +45,7 @@ body {
     'Apple SD Gothic Neo',
     'Noto Sans KR',
     'Malgun Gothic',
-    sans-serif;
+    'sans-serif';
   color: var(--gray-60);
 }
 
