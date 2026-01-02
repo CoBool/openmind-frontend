@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import MoreIcon from '../../../../assets/Icon/rename/More.svg';
+import { Icon } from '@/components/Icon';
 import EditMenu from './Editmenu';
 import styles from './Moremenu.module.css';
 
@@ -37,7 +37,7 @@ function MoreMenu({
         disabled={disabled}
         onClick={handleToggle}
       >
-        <img src={MoreIcon} className={styles.moreIcon} />
+        <Icon name="more" className={styles.moreIcon} />
       </button>
 
       {open && (
